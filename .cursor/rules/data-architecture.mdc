@@ -1,0 +1,15 @@
+---
+description: معماری داده mock و روابط موجودیت‌ها
+globs: src/data/**,src/types/**
+alwaysApply: false
+---
+
+# Data Architecture
+
+- هر entity یک منبع حقیقت در `src/data` دارد؛ ارجاع با id/slug
+- تکرار دادهٔ Team/Player/Match در فایل‌های جدا ممنوع
+- selectors در `src/data/index.ts` برای join
+- sport-agnostic: payload آمار بر اساس `sport` typed باشد
+- حداقل حجم mock طبق `docs/data-model.md`
+- نام‌ها واقعی‌حس و منسجم با جهان NOVA/NEXUS
+- بدون `any` مگر ضروری

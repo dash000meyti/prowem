@@ -1,0 +1,168 @@
+import type { VideoItem } from "@/types";
+
+export const videos: VideoItem[] = [
+  {
+    id: "vid-nexus-berlin-goals",
+    slug: "nexus-berlin-united-goals-live",
+    title: "NEXUS FC vs Berlin United — Goals so far",
+    duration: "3:42",
+    views: "184K",
+    publishedAt: "2026-06-20T20:05:00+02:00",
+    category: "Highlights",
+    imageTone: "teal-live",
+    eventId: "evt-nova-cup-2026",
+    teamId: "team-nexus-fc",
+    matchId: "match-nexus-berlin",
+  },
+  {
+    id: "vid-nova-cup-atmosphere",
+    slug: "olympiastadion-semi-atmosphere",
+    title: "Olympiastadion semi-final atmosphere",
+    duration: "2:15",
+    views: "96K",
+    publishedAt: "2026-06-20T19:20:00+02:00",
+    category: "Atmosphere",
+    imageTone: "crowd-orange",
+    eventId: "evt-nova-cup-2026",
+    matchId: "match-nexus-berlin",
+  },
+  {
+    id: "vid-qf-nexus-lisbon",
+    slug: "nexus-lisbon-qf-highlights",
+    title: "NEXUS 3–1 Lisbon Tide — QF highlights",
+    duration: "5:08",
+    views: "142K",
+    publishedAt: "2026-06-19T18:00:00+02:00",
+    category: "Highlights",
+    imageTone: "teal-dark",
+    eventId: "evt-nova-cup-2026",
+    clubId: "club-nexus",
+    teamId: "team-nexus-fc",
+    matchId: "match-qf1-nexus-lisbon",
+  },
+  {
+    id: "vid-munich-warsaw-thriller",
+    slug: "meier-90-munich-warsaw",
+    title: "Meier at 90' — Munich edge Warsaw",
+    duration: "4:21",
+    views: "128K",
+    publishedAt: "2026-06-19T22:50:00+02:00",
+    category: "Highlights",
+    imageTone: "gold-night",
+    eventId: "evt-nova-cup-2026",
+    teamId: "team-munich-stars",
+    matchId: "match-qf5-munich-warsaw",
+  },
+  {
+    id: "vid-munich-paris-goals",
+    slug: "munich-paris-semi-goals",
+    title: "Munich Stars vs Paris Elite — all four goals",
+    duration: "3:55",
+    views: "101K",
+    publishedAt: "2026-06-20T18:00:00+02:00",
+    category: "Highlights",
+    imageTone: "navy-gold",
+    eventId: "evt-nova-cup-2026",
+    matchId: "match-munich-paris",
+  },
+  {
+    id: "vid-wolves-hamburg-live",
+    slug: "wolves-hamburg-playoff-clips",
+    title: "Wolves vs Hamburg — live playoff clips",
+    duration: "2:48",
+    views: "67K",
+    publishedAt: "2026-06-20T19:35:00+02:00",
+    category: "Live",
+    imageTone: "brown-red",
+    eventId: "evt-nova-cup-2026",
+    matchId: "match-wolves-hamburg",
+  },
+  {
+    id: "vid-copenhagen-pens",
+    slug: "copenhagen-zurich-penalty-drama",
+    title: "Penalty drama: Copenhagen Harbor through",
+    duration: "6:12",
+    views: "156K",
+    publishedAt: "2026-06-18T23:15:00+02:00",
+    category: "Highlights",
+    imageTone: "orange-spot",
+    eventId: "evt-nova-cup-2026",
+    teamId: "team-copenhagen-harbor",
+    matchId: "match-qf8-copenhagen-zurich",
+  },
+  {
+    id: "vid-nexus-club-tour",
+    slug: "inside-nexus-multi-sport",
+    title: "Inside NEXUS — three arenas, one club",
+    duration: "8:30",
+    views: "89K",
+    publishedAt: "2026-06-16T12:00:00+02:00",
+    category: "Documentary",
+    imageTone: "teal-lime",
+    clubId: "club-nexus",
+  },
+  {
+    id: "vid-dota-nexus-scrim",
+    slug: "nexus-dota2-scrim-cut",
+    title: "NEXUS Dota 2 — mid-lane aggression cut",
+    duration: "4:05",
+    views: "74K",
+    publishedAt: "2026-06-15T19:00:00+02:00",
+    category: "Esports",
+    imageTone: "lime-black",
+    clubId: "club-nexus",
+    teamId: "team-nexus-dota2",
+  },
+  {
+    id: "vid-socca-vale",
+    slug: "ricardo-vale-socca-skills",
+    title: "Ricardo Vale — cage skills reel",
+    duration: "1:58",
+    views: "52K",
+    publishedAt: "2026-06-14T17:30:00+02:00",
+    category: "Skills",
+    imageTone: "cage-green",
+    clubId: "club-nexus",
+    teamId: "team-nexus-socca",
+  },
+  {
+    id: "vid-nova-open",
+    slug: "nova-cup-opening-ceremony",
+    title: "NOVA CUP 2026 opening ceremony",
+    duration: "7:44",
+    views: "210K",
+    publishedAt: "2026-06-18T11:00:00+02:00",
+    category: "Event",
+    imageTone: "festival-orange",
+    eventId: "evt-nova-cup-2026",
+  },
+  {
+    id: "vid-oke-assist",
+    slug: "samuel-oke-assist-vesa",
+    title: "Build-up: Oke → Vesa at 72'",
+    duration: "0:48",
+    views: "203K",
+    publishedAt: "2026-06-20T20:08:00+02:00",
+    category: "Micro Highlight",
+    imageTone: "teal-flash",
+    eventId: "evt-nova-cup-2026",
+    teamId: "team-nexus-fc",
+    matchId: "match-nexus-berlin",
+  },
+];
+
+export function getVideoById(id: string) {
+  return videos.find((v) => v.id === id);
+}
+
+export function getVideoBySlug(slug: string) {
+  return videos.find((v) => v.slug === slug);
+}
+
+export function getVideosByEventId(eventId: string) {
+  return videos.filter((v) => v.eventId === eventId);
+}
+
+export function getVideosByClubId(clubId: string) {
+  return videos.filter((v) => v.clubId === clubId);
+}

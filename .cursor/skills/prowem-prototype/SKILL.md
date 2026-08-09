@@ -1,0 +1,30 @@
+---
+name: prowem-prototype
+description: Guides building and extending the PROWEM 2.0 sports digital infrastructure prototype. Use when working on PROWEM pages, mock data, design system, event/club/fan/match experiences, or demo interactions.
+---
+
+# PROWEM Prototype Skill
+
+## شروع هر کار
+1. بخوان: `docs/product-architecture.md`, `docs/data-model.md`, `docs/design-system.md`
+2. مسیر و entityهای موجود را از `docs/information-architecture.md` چک کن
+3. داده را از `src/data` بگیر؛ کپی جدید نساز
+
+## جهان دمو (ثابت)
+- NOVA Sports → NOVA CUP 2026 (Berlin, June 18–21)
+- NEXUS: Football, Socca, Dota 2
+- Live match: NEXUS FC 2–1 Berlin United, 72'
+- Fan: Alex Morgan, L18, 12840 XP, SUPER FAN
+
+## تعاملات اجباری
+- **Trigger Goal**: score + timeline + stats + social + notify + fan XP
+- **Complete Mission**: XP + progress + achievement/reward در صورت آستانه
+
+## کیفیت
+- انگلیسی در UI؛ بدون placeholder ضعیف
+- حس sports media premium نه SaaS dashboard
+- بعد از تغییر route: لینک‌ها و entity consistency را چک کن
+
+## ارجاع
+جزئیات جریان ارائه: `docs/demo-flow.md`
+فازها: `docs/implementation-plan.md`
