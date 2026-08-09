@@ -1,6 +1,5 @@
 import { HomeHero } from "@/components/marketing/HomeHero";
 import { AudienceIntro } from "@/components/marketing/AudienceIntro";
-import { ServiceMarquee } from "@/components/marketing/ServiceMarquee";
 import { ServiceFeature } from "@/components/marketing/ServiceFeature";
 import { PlatformCtaBand } from "@/components/marketing/PlatformCtaBand";
 import { mediaCatalog } from "@/data";
@@ -73,7 +72,6 @@ export default function HomePage() {
     <div>
       <HomeHero />
       <div className="marketing-canvas">
-        <ServiceMarquee />
         <AudienceIntro />
         <div className="mx-auto max-w-5xl px-4 pb-4 pt-6 md:px-6">
           <p className="text-center text-[11px] uppercase tracking-[0.28em] text-orange/80">

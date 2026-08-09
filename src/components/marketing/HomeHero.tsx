@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { GlassPanel } from "@/components/media/GlassPanel";
-import { heroMedia } from "@/data";
-
+import { ServiceMarquee } from "@/components/marketing/ServiceMarquee";
 import { TypewriterRotate } from "@/components/marketing/TypewriterRotate";
+import { heroMedia } from "@/data";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -19,7 +19,7 @@ const modules = [
 
 export function HomeHero() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden border-b border-border">
+    <section className="relative flex h-[calc(100svh-4rem)] flex-col overflow-hidden border-b border-border">
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.12 }}
@@ -37,7 +37,7 @@ export function HomeHero() {
       </motion.div>
 
       <div
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,11,0.35)_0%,rgba(8,9,11,0.48)_40%,rgba(8,9,11,0.78)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,11,0.35)_0%,rgba(8,9,11,0.48)_40%,rgba(8,9,11,0.82)_100%)]"
         aria-hidden
       />
       <div
@@ -45,16 +45,14 @@ export function HomeHero() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pb-10 pt-28 md:px-6 md:pb-14">
+      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col justify-center overflow-y-auto px-4 pb-4 pt-6 md:px-6 md:pb-6 md:pt-8">
         <motion.div
+          className="my-auto"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
         >
-          <GlassPanel
-            variant="display"
-            className="relative p-0 md:p-0"
-          >
+          <GlassPanel variant="display" className="relative p-0 md:p-0">
             {/* Display chrome — status bar */}
             <div className="relative z-[1] flex items-center justify-between gap-4 border-b border-white/[0.08] px-5 py-3 md:px-8 md:py-3.5">
               <div className="flex items-center gap-3">
@@ -140,6 +138,26 @@ export function HomeHero() {
                   For clubs
                 </Button>
               </motion.div>
+
+              <motion.div
+                className="mt-7 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-muted"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.1, duration: 0.8 }}
+              >
+                <span className="relative flex h-8 w-px overflow-hidden bg-white/15">
+                  <motion.span
+                    className="absolute inset-x-0 top-0 h-3 bg-orange"
+                    animate={{ y: [0, 20, 0], opacity: [1, 0.2, 1] }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </span>
+                Scroll to explore
+              </motion.div>
             </div>
 
             {/* Display chrome — module strip */}
@@ -167,22 +185,10 @@ export function HomeHero() {
             </motion.div>
           </GlassPanel>
         </motion.div>
+      </div>
 
-        <motion.div
-          className="mt-6 flex items-center gap-3 px-1 text-[10px] uppercase tracking-[0.28em] text-muted"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 0.8 }}
-        >
-          <span className="relative flex h-8 w-px overflow-hidden bg-white/15">
-            <motion.span
-              className="absolute inset-x-0 top-0 h-3 bg-orange"
-              animate={{ y: [0, 20, 0], opacity: [1, 0.2, 1] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </span>
-          Scroll to explore
-        </motion.div>
+      <div className="relative z-10 shrink-0 bg-[#08090b]/90 backdrop-blur-sm">
+        <ServiceMarquee />
       </div>
     </section>
   );
