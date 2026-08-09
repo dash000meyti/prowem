@@ -4,10 +4,14 @@ import { VideoCard } from "@/components/event/VideoCard";
 import { PlayerCard } from "@/components/club/PlayerCard";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Crest } from "@/components/media/Crest";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { PhotoBackground } from "@/components/media/PhotoBackground";
 import {
   getAwardsByClubId,
   getPlayersByTeamId,
   getTeamById,
+  heroMedia,
   matches,
   news,
   videos,
@@ -33,23 +37,33 @@ export default function NexusDota2Page() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(232,255,106,0.16),transparent_38%),radial-gradient(circle_at_80%_40%,rgba(0,194,168,0.12),transparent_40%),linear-gradient(180deg,#0a1214_0%,#08090b_100%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-          <p
-            className="text-xs uppercase tracking-[0.28em]"
-            style={{ color: "#E8FF6A" }}
-          >
-            NEXUS · {sportLabel(team.sport)}
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
-            {team.name}
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-            {team.description}
-          </p>
+      <PhotoBackground
+        src={heroMedia.nexusDota}
+        alt="Esports stage"
+        priority
+        scrim="heavy"
+        className="border-b border-border"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
+          <GlassPanel variant="subtle" className="max-w-3xl p-6 md:p-8">
+            <div className="mb-4 flex items-center gap-3">
+              <Crest slug={team.slug} name={team.name} size={44} />
+              <p
+                className="text-xs uppercase tracking-[0.28em]"
+                style={{ color: "#E8FF6A" }}
+              >
+                NEXUS · {sportLabel(team.sport)}
+              </p>
+            </div>
+            <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
+              {team.name}
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
+              {team.description}
+            </p>
+          </GlassPanel>
         </div>
-      </section>
+      </PhotoBackground>
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
         <section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { GlassPanel } from "@/components/media/GlassPanel";
 import { useDemo } from "@/context/DemoProvider";
 
 export function SocialPostPreview() {
@@ -9,27 +10,30 @@ export function SocialPostPreview() {
 
   if (!post) {
     return (
-      <div className="border border-dashed border-border bg-bg-1/50 p-6 text-sm text-muted">
+      <GlassPanel
+        variant="subtle"
+        className="border-dashed p-6 text-sm text-muted"
+      >
         Trigger a live goal to generate social content from match data.
-      </div>
+      </GlassPanel>
     );
   }
 
   return (
-    <article className="border border-border bg-bg-1 p-5">
+    <GlassPanel as="article" className="p-5">
       <div className="mb-4 flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.16em] text-orange">
           {post.platform} draft
         </span>
         <span className="text-xs text-muted">{post.minute}&apos;</span>
       </div>
-      <div className="border border-border bg-gradient-to-br from-[#2a140e] to-bg-0 p-5">
+      <GlassPanel variant="strong" className="overflow-hidden p-5">
         <p className="text-xs uppercase tracking-[0.18em] text-orange">
           {post.headline}
         </p>
         <p className="mt-3 text-xl font-semibold">{post.body}</p>
         <p className="mt-4 text-sm text-muted">{post.scoreLine}</p>
-      </div>
+      </GlassPanel>
       <div className="mt-4 flex flex-wrap gap-2">
         <Button size="sm" variant="secondary">
           Edit
@@ -39,6 +43,6 @@ export function SocialPostPreview() {
           Schedule
         </Button>
       </div>
-    </article>
+    </GlassPanel>
   );
 }

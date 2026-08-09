@@ -4,11 +4,15 @@ import { XPProgress } from "@/components/fan/XPProgress";
 import { MatchCard } from "@/components/match/MatchCard";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { PhotoBackground } from "@/components/media/PhotoBackground";
+import { Crest } from "@/components/media/Crest";
+import { SectionShell } from "@/components/layout/SectionShell";
 import {
-  getClubById,
   getFeaturedMatch,
   getPrimaryFan,
   getTeamById,
+  heroMedia,
   missions,
 } from "@/data";
 import { sportLabel } from "@/lib/utils";
@@ -33,25 +37,35 @@ export default function FansDashboardPage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,90,31,0.16),transparent_40%),linear-gradient(180deg,#0d0f12_0%,#08090b_100%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
-          <p className="text-xs uppercase tracking-[0.28em] text-orange">
-            Fan dashboard
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
-            {fan.name}
-          </h1>
-          <p className="mt-3 text-sm text-muted">
-            {fan.status} · {fan.city} · Level {fan.level}
-          </p>
+      <PhotoBackground
+        src={heroMedia.fan}
+        alt="Fan community"
+        priority
+        scrim="heavy"
+        className="border-b border-border"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
+          <GlassPanel variant="subtle" className="max-w-2xl p-6 md:p-8">
+            <p className="text-xs uppercase tracking-[0.28em] text-brand">
+              Fan dashboard
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
+              {fan.name}
+            </h1>
+            <p className="mt-3 text-sm text-muted">
+              {fan.status} · {fan.city} · Level {fan.level}
+            </p>
+          </GlassPanel>
         </div>
-      </section>
+      </PhotoBackground>
 
-      <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
+      <SectionShell
+        atmosphere="tint"
+        innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6"
+      >
         <XPProgress />
 
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Navigate"
             title="Your fan world"
@@ -62,13 +76,13 @@ export default function FansDashboardPage() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="border border-border bg-bg-1 px-4 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-orange/40 hover:text-orange"
+                className="glass-panel px-4 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-brand hover:text-brand"
               >
                 {link.label}
               </Link>
             ))}
           </div>
-        </section>
+        </div>
 
         <section>
           <SectionHeader
@@ -77,24 +91,20 @@ export default function FansDashboardPage() {
             description="Clubs and squads you track across sports."
           />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {myTeams.map((team) => {
-              const club = getClubById(team.clubId);
-              return (
-                <div
-                  key={team.id}
-                  className="border border-border bg-bg-1 p-5"
-                >
+            {myTeams.map((team) => (
+              <GlassPanel key={team.id} className="flex items-center gap-3 p-5">
+                <Crest slug={team.slug} name={team.name} size={36} />
+                <div>
                   <p
                     className="text-xs uppercase tracking-[0.14em]"
                     style={{ color: team.color }}
                   >
                     {sportLabel(team.sport)}
                   </p>
-                  <p className="mt-2 text-lg font-semibold">{team.name}</p>
-                  <p className="mt-1 text-xs text-muted">{club?.name}</p>
+                  <p className="mt-1 text-lg font-semibold">{team.name}</p>
                 </div>
-              );
-            })}
+              </GlassPanel>
+            ))}
           </div>
         </section>
 
@@ -134,7 +144,7 @@ export default function FansDashboardPage() {
             ))}
           </div>
         </section>
-      </div>
+      </SectionShell>
     </div>
   );
 }

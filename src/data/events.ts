@@ -19,10 +19,10 @@ export const events: EventEntity[] = [
     tagline: "Sixteen teams. One city. Pure football theatre.",
     theme: {
       primary: "#FF5A1F",
-      secondary: "#0D0F12",
+      secondary: "#0A0B0D",
       accent: "#F5F5F2",
       logo: "NOVA",
-      heroImage: "nova-cup-hero",
+      heroImage: "stadiumLights",
     },
     teamIds: [
       "team-nexus-fc",

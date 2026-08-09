@@ -1,3 +1,5 @@
+import { MediaImage } from "@/components/media/MediaImage";
+import { resolveMedia } from "@/data/media";
 import { cn } from "@/lib/utils";
 
 const tones: Record<string, string> = {
@@ -15,22 +17,37 @@ export function VisualPanel({
   className,
   children,
   label,
+  src,
+  alt = "",
 }: {
   tone?: string;
   className?: string;
   children?: React.ReactNode;
   label?: string;
+  src?: string;
+  alt?: string;
 }) {
+  const imageSrc = src ?? resolveMedia(tone);
+
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-sm border border-border bg-gradient-to-br",
-        tones[tone] ?? tones.default,
+        "relative overflow-hidden rounded-[18px] border border-border",
+        !imageSrc && `bg-gradient-to-br ${tones[tone] ?? tones.default}`,
         className,
       )}
     >
-      <div className="pointer-events-none absolute inset-0 editorial-grid opacity-40" />
-      <div className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-orange/10 blur-3xl" />
+      {imageSrc ? (
+        <>
+          <MediaImage src={imageSrc} alt={alt} className="absolute inset-0" />
+          <div className="absolute inset-0 photo-scrim" aria-hidden />
+        </>
+      ) : (
+        <>
+          <div className="pointer-events-none absolute inset-0 editorial-grid opacity-40" />
+          <div className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-orange/10 blur-3xl" />
+        </>
+      )}
       {label ? (
         <span className="absolute left-4 top-4 z-10 text-[10px] uppercase tracking-[0.2em] text-muted">
           {label}

@@ -20,6 +20,16 @@
 | Engage Your Fans | Fan | پروفایل، XP، مأموریت، پاداش، پاسپورت، جامعه |
 | Experience the Match | همه | Matchday چندبازی + Match Center جزئیات کامل |
 
+## هویت بصری جدا (Brand Scopes)
+
+هر لایه هویت مستقل دارد و نباید کل محصول یک پالت واحد به نظر برسد:
+
+- **Platform (PROWEM):** marketing و chrome پایه
+- **Event:** property برنددار (مثلاً NOVA CUP)
+- **Club:** property برنددار (مثلاً NEXUS teal)
+
+ورود به Event/Club باید حس ورود به digital property جدا روی همان زیرساخت را بدهد. پیاده‌سازی: `BrandScope` + تم از داده.
+
 ## اصل داده‌ای
 
 یک رویداد زندهٔ مسابقه (مثلاً گل) باید از یک هسته داده به خروجی‌های متعدد برود:

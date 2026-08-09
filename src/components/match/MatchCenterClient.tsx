@@ -9,9 +9,11 @@ import { VideoCard } from "@/components/event/VideoCard";
 import { PlayerCard } from "@/components/club/PlayerCard";
 import { LiveIndicator } from "@/components/ui/LiveIndicator";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { VisualPanel } from "@/components/ui/VisualPanel";
+import { Crest } from "@/components/media/Crest";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { useDemo } from "@/context/DemoProvider";
-import { getPlayerById, getTeamById } from "@/data";
+import { getPlayerById, getTeamById, heroMedia } from "@/data";
 import type { NewsArticle, VideoItem } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -34,90 +36,103 @@ export function MatchCenterClient({
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(0,194,168,0.18),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(255,90,31,0.14),transparent_38%),linear-gradient(180deg,#0d0f12_0%,#08090b_100%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
-          <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-orange">
-                NOVA CUP · {match.round}
-              </p>
-              <p className="mt-2 text-sm text-muted">{match.venue}</p>
+      <PhotoBackground
+        src={heroMedia.matchCenter}
+        alt="Match pitch"
+        priority
+        scrim="heavy"
+        className="border-b border-border"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
+          <GlassPanel className="relative overflow-hidden p-6 md:p-10">
+            <div className="pointer-events-none absolute -right-8 top-0 opacity-[0.1]">
+              <Crest slug={home.slug} name={home.name} size={200} />
             </div>
-            <LiveIndicator />
-          </div>
+            <div className="relative mb-8 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-orange">
+                  NOVA CUP · {match.round}
+                </p>
+                <p className="mt-2 text-sm text-muted">{match.venue}</p>
+              </div>
+              <LiveIndicator />
+            </div>
 
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8">
-            <div>
-              <p
-                className="text-2xl font-semibold md:text-4xl"
-                style={{ color: home.color }}
-              >
-                {home.name}
-              </p>
-              <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
-                Home
-              </p>
+            <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8">
+              <div className="flex items-center gap-3">
+                <Crest slug={home.slug} name={home.name} size={52} />
+                <div>
+                  <p className="text-xl font-semibold md:text-4xl">{home.name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
+                    Home
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <p
+                  className={cn(
+                    "inline-block rounded-xl px-3 text-5xl font-semibold tabular-nums text-orange md:text-7xl",
+                    goalTriggered && "score-flash",
+                  )}
+                >
+                  {match.homeScore}
+                  <span className="mx-2 text-muted md:mx-3">—</span>
+                  {match.awayScore}
+                </p>
+                <p className="mt-3 text-sm uppercase tracking-[0.2em] text-orange">
+                  LIVE · {match.minute}&apos; · {match.period}
+                </p>
+              </div>
+              <div className="flex items-center justify-end gap-3">
+                <div className="text-right">
+                  <p className="text-xl font-semibold md:text-4xl">{away.name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
+                    Away
+                  </p>
+                </div>
+                <Crest slug={away.slug} name={away.name} size={52} />
+              </div>
             </div>
-            <div className="text-center">
-              <p
-                className={cn(
-                  "inline-block rounded-sm px-3 text-5xl font-semibold tabular-nums text-orange md:text-7xl",
-                  goalTriggered && "score-flash",
-                )}
-              >
-                {match.homeScore}
-                <span className="mx-2 text-muted md:mx-3">—</span>
-                {match.awayScore}
-              </p>
-              <p className="mt-3 text-sm uppercase tracking-[0.2em] text-orange">
-                LIVE · {match.minute}&apos; · {match.period}
-              </p>
-            </div>
-            <div className="text-right">
-              <p
-                className="text-2xl font-semibold md:text-4xl"
-                style={{ color: away.color }}
-              >
-                {away.name}
-              </p>
-              <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
-                Away
-              </p>
-            </div>
-          </div>
+          </GlassPanel>
         </div>
-      </section>
+      </PhotoBackground>
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20">
         <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+          <GlassPanel className="p-6 atmosphere-tint !bg-[color-mix(in_srgb,var(--glass-bg)_88%,var(--brand-tint))]">
             <SectionHeader
               eyebrow="Match feed"
               title="Timeline"
               description="Every key moment from the same live match data core."
             />
             <Timeline events={match.events} />
-          </div>
+          </GlassPanel>
           <div className="space-y-6">
-            <VisualPanel tone="ember" className="aspect-video p-6 md:p-8">
-              <div className="flex h-full flex-col justify-between">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-muted">
-                  Live stream placeholder
-                </p>
-                <div>
-                  <p className="text-2xl font-semibold">
-                    {home.shortName} {match.homeScore}–{match.awayScore}{" "}
-                    {away.shortName}
+            <GlassPanel className="overflow-hidden p-0">
+              <PhotoBackground
+                src={heroMedia.nightMatch}
+                alt="Live stream"
+                scrim="heavy"
+                className="aspect-video"
+              >
+                <div className="flex h-full flex-col justify-between p-6 md:p-8">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-muted">
+                    Live stream placeholder
                   </p>
-                  <p className="mt-2 text-sm text-muted">
-                    Broadcast feed · synced to match events
-                  </p>
+                  <div>
+                    <p className="text-2xl font-semibold">
+                      {home.shortName} {match.homeScore}–{match.awayScore}{" "}
+                      {away.shortName}
+                    </p>
+                    <p className="mt-2 text-sm text-muted">
+                      Broadcast feed · synced to match events
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </VisualPanel>
+              </PhotoBackground>
+            </GlassPanel>
             {match.footballStats ? (
-              <div className="border border-border bg-bg-1 p-5 md:p-6">
+              <GlassPanel className="p-5 md:p-6">
                 <SectionHeader
                   eyebrow="Live stats"
                   title="Match numbers"
@@ -128,12 +143,12 @@ export function MatchCenterClient({
                   homeName={home.shortName}
                   awayName={away.shortName}
                 />
-              </div>
+              </GlassPanel>
             ) : null}
           </div>
         </section>
 
-        <section>
+        <section className="atmosphere-contrast -mx-4 px-4 py-10 md:-mx-6 md:px-6 md:rounded-[18px]">
           <SectionHeader
             eyebrow="Squads"
             title="Lineups"
@@ -141,7 +156,8 @@ export function MatchCenterClient({
           />
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
-              <p className="mb-4 text-sm font-semibold" style={{ color: home.color }}>
+              <p className="mb-4 flex items-center gap-2 text-sm font-semibold">
+                <Crest slug={home.slug} name={home.name} size={24} />
                 {home.name}
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -151,7 +167,8 @@ export function MatchCenterClient({
               </div>
             </div>
             <div>
-              <p className="mb-4 text-sm font-semibold" style={{ color: away.color }}>
+              <p className="mb-4 flex items-center gap-2 text-sm font-semibold">
+                <Crest slug={away.slug} name={away.name} size={24} />
                 {away.name}
               </p>
               <div className="grid gap-3 sm:grid-cols-2">

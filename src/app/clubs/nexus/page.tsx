@@ -7,6 +7,10 @@ import { TeamCard } from "@/components/club/TeamCard";
 import { MatchCard } from "@/components/match/MatchCard";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Crest } from "@/components/media/Crest";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { PhotoBackground } from "@/components/media/PhotoBackground";
+import { SectionShell } from "@/components/layout/SectionShell";
 import {
   getAchievementById,
   getAwardsByClubId,
@@ -19,6 +23,7 @@ import {
   getTeamsByClubId,
   getVideosByClubId,
   matches,
+  resolveMedia,
 } from "@/data";
 import { notFound } from "next/navigation";
 
@@ -57,31 +62,46 @@ export default function NexusClubPage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(0,194,168,0.22),transparent_42%),radial-gradient(circle_at_85%_10%,rgba(232,255,106,0.08),transparent_35%),linear-gradient(180deg,#0a1214_0%,#08090b_100%)]" />
+      <PhotoBackground
+        src={resolveMedia(
+          club.theme.coverImage ?? club.theme.heroImage,
+          "footballAction",
+        )}
+        alt={`${club.name} cover`}
+        priority
+        scrim="heavy"
+        className="min-h-[68vh] border-b border-border"
+      >
         <div className="relative mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-          <p
-            className="text-xs font-semibold uppercase tracking-[0.32em]"
-            style={{ color: "#00C2A8" }}
-          >
-            Multi-sport club
-          </p>
-          <h1 className="mt-5 text-5xl font-semibold tracking-tight md:text-7xl">
-            {club.name}
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-muted">{club.tagline}</p>
-          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-            {club.description}
-          </p>
-          <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted">
-            Founded {club.founded} · {club.city}, {club.country}
-          </p>
+          <div className="pointer-events-none absolute right-4 top-10 opacity-[0.12] md:right-10">
+            <Crest slug={club.slug} name={club.name} size={220} />
+          </div>
+          <GlassPanel variant="subtle" className="relative max-w-3xl p-6 md:p-8">
+            <div className="mb-4 flex items-center gap-3">
+              <Crest slug={club.slug} name={club.name} size={48} />
+              <p
+                className="text-xs font-semibold uppercase tracking-[0.32em]"
+                style={{ color: "#00C2A8" }}
+              >
+                Multi-sport club
+              </p>
+            </div>
+            <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">
+              {club.name}
+            </h1>
+            <p className="mt-4 max-w-xl text-lg text-muted">{club.tagline}</p>
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
+              {club.description}
+            </p>
+            <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted">
+              Founded {club.founded} · {club.city}, {club.country}
+            </p>
+          </GlassPanel>
         </div>
-      </section>
+      </PhotoBackground>
 
-      <div className="mx-auto max-w-7xl space-y-20 px-4 py-16 md:px-6">
-        <section>
-          <SectionHeader
+      <SectionShell atmosphere="tint" innerClassName="mx-auto max-w-7xl px-4 py-16 md:px-6">
+        <SectionHeader
             eyebrow="Identity"
             title="About NEXUS"
             description="One organisation spanning pitch, cage and stage — shared brand, distinct arenas."
@@ -101,23 +121,18 @@ export default function NexusClubPage() {
                 body: "Disciplined drafts and late-game execution.",
               },
             ].map((item) => (
-              <div
-                key={item.label}
-                className="border border-border bg-bg-1 p-5"
-              >
-                <p
-                  className="text-xs uppercase tracking-[0.16em]"
-                  style={{ color: "#00C2A8" }}
-                >
+              <GlassPanel key={item.label} className="p-5">
+                <p className="text-xs uppercase tracking-[0.16em] text-brand">
                   {item.label}
                 </p>
                 <p className="mt-3 text-sm text-muted">{item.body}</p>
-              </div>
+              </GlassPanel>
             ))}
           </div>
-        </section>
+      </SectionShell>
 
-        <section>
+      <SectionShell atmosphere="contrast" innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-16 md:px-6">
+        <div>
           <SectionHeader
             eyebrow="Departments"
             title="Our teams"
@@ -137,7 +152,7 @@ export default function NexusClubPage() {
               />
             ))}
           </div>
-        </section>
+        </div>
 
         <section className="grid gap-12 lg:grid-cols-2">
           <div>
@@ -316,7 +331,7 @@ export default function NexusClubPage() {
             </div>
           </div>
           <div className="border border-border bg-bg-1 p-8">
-            <p className="text-xs uppercase tracking-[0.2em] text-orange">
+            <p className="text-xs uppercase tracking-[0.2em] text-brand">
               Merch
             </p>
             <h2 className="mt-3 text-3xl font-semibold">Club Shop</h2>
@@ -331,7 +346,7 @@ export default function NexusClubPage() {
             </div>
           </div>
         </section>
-      </div>
+      </SectionShell>
     </div>
   );
 }

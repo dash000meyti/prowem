@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { LiveMatchCard } from "@/components/match/LiveMatchCard";
@@ -10,6 +9,9 @@ import { NewsCard } from "@/components/event/NewsCard";
 import { VideoCard } from "@/components/event/VideoCard";
 import { AwardCard, LegendCard } from "@/components/event/AwardLegendCards";
 import { SponsorGrid } from "@/components/event/SponsorGrid";
+import { PhotoBackground } from "@/components/media/PhotoBackground";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { SectionShell } from "@/components/layout/SectionShell";
 import {
   bracket,
   getAwardsByEventId,
@@ -22,7 +24,9 @@ import {
   getTeamById,
   getTeamsForEvent,
   getVideosByEventId,
+  heroMedia,
   legends,
+  resolveMedia,
 } from "@/data";
 import { notFound } from "next/navigation";
 
@@ -44,6 +48,7 @@ export default function NovaCupHomePage() {
     3,
   );
   const sponsors = getSponsorsByEventId(event.id);
+  const heroSrc = resolveMedia(event.theme.heroImage, "stadiumLights");
 
   const watchlist = [
     ...getPlayersByTeamId("team-nexus-fc"),
@@ -55,40 +60,42 @@ export default function NovaCupHomePage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_15%,rgba(255,90,31,0.22),transparent_40%),radial-gradient(circle_at_85%_10%,rgba(255,90,31,0.08),transparent_32%),linear-gradient(180deg,#0d0f12_0%,#08090b_100%)]" />
-        <div className="absolute inset-0 editorial-grid opacity-25" />
-        <div className="relative mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-orange">
-            June 18–21 · {event.city} · {event.teamCount} Teams
-          </p>
-          <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
-            {event.name}
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-            {event.tagline}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button
-              href="/matches/nova-cup/nexus-vs-berlin-united"
-              size="lg"
-            >
-              Watch Live
-            </Button>
-            <Button
-              href="/events/nova-cup-2026/matches"
-              variant="outline"
-              size="lg"
-            >
-              View Matches
-            </Button>
-          </div>
+      <PhotoBackground
+        src={heroSrc || heroMedia.novaCup}
+        alt="NOVA CUP stadium"
+        priority
+        scrim="heavy"
+        className="min-h-[70vh] border-b border-border"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+          <GlassPanel variant="subtle" className="max-w-3xl p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
+              June 18–21 · {event.city} · {event.teamCount} Teams
+            </p>
+            <h1 className="mt-5 text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
+              {event.name}
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+              {event.tagline}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/matches/nova-cup/nexus-vs-berlin-united" size="lg">
+                Watch Live
+              </Button>
+              <Button
+                href="/events/nova-cup-2026/matches"
+                variant="outline"
+                size="lg"
+              >
+                View Matches
+              </Button>
+            </div>
+          </GlassPanel>
         </div>
-      </section>
+      </PhotoBackground>
 
-      <div className="mx-auto max-w-7xl space-y-20 px-4 py-14 md:px-6 md:py-20">
-        <section>
-          <SectionHeader
+      <SectionShell atmosphere="tint" innerClassName="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-16">
+        <SectionHeader
             eyebrow="Live now"
             title="Semi-final night is live"
             description="NEXUS FC host Berlin United with a place in the final on the line."
@@ -103,9 +110,10 @@ export default function NovaCupHomePage() {
             }
           />
           <LiveMatchCard match={featured} home={home} away={away} />
-        </section>
+      </SectionShell>
 
-        <section>
+      <SectionShell atmosphere="contrast" innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
+        <div>
           <SectionHeader
             eyebrow="Tournament"
             title="Bracket progress"
@@ -120,14 +128,16 @@ export default function NovaCupHomePage() {
               </Button>
             }
           />
-          <Bracket items={bracket} />
-        </section>
+          <GlassPanel className="p-4 md:p-6">
+            <Bracket items={bracket} />
+          </GlassPanel>
+        </div>
 
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Table"
             title="Standings"
-            description="Top of the festival table after group and knockout play."
+            description="Festival form across the knockout field."
             action={
               <Button
                 href="/events/nova-cup-2026/standings"
@@ -138,48 +148,38 @@ export default function NovaCupHomePage() {
               </Button>
             }
           />
-          <StandingsTable rows={standings} />
-        </section>
+          <GlassPanel className="overflow-hidden p-1">
+            <StandingsTable rows={standings} />
+          </GlassPanel>
+        </div>
+      </SectionShell>
 
-        <section>
+      <SectionShell atmosphere="mesh" innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
+        <div>
           <SectionHeader
             eyebrow="Clubs"
             title="Featured teams"
-            description="Sixteen sides. One city. Start with the clubs defining this festival."
+            description="Sixteen identities. One competition layer."
             action={
-              <Button
-                href="/events/nova-cup-2026/teams"
-                variant="ghost"
-                size="sm"
-              >
+              <Button href="/events/nova-cup-2026/teams" variant="ghost" size="sm">
                 All teams
               </Button>
             }
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {teams.slice(0, 8).map((team) => (
-              <TeamCard
-                key={team.id}
-                team={team}
-                href={
-                  team.clubId === "club-nexus" ? "/clubs/nexus" : undefined
-                }
-              />
+              <TeamCard key={team.id} team={team} />
             ))}
           </div>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Editorial"
             title="Latest news"
-            description="Stories from the district, dressing rooms, and knockout nights."
+            description="Stories from the festival floor."
             action={
-              <Button
-                href="/events/nova-cup-2026/news"
-                variant="ghost"
-                size="sm"
-              >
+              <Button href="/events/nova-cup-2026/news" variant="ghost" size="sm">
                 All news
               </Button>
             }
@@ -189,13 +189,13 @@ export default function NovaCupHomePage() {
               <NewsCard key={article.id} article={article} />
             ))}
           </div>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Watch"
             title="Videos"
-            description="Goals, atmospheres, and the moments that travel beyond the stand."
+            description="Highlights, tunnels and matchday atmosphere."
             action={
               <Button
                 href="/events/nova-cup-2026/videos"
@@ -211,13 +211,15 @@ export default function NovaCupHomePage() {
               <VideoCard key={video.id} video={video} />
             ))}
           </div>
-        </section>
+        </div>
+      </SectionShell>
 
-        <section>
+      <SectionShell atmosphere="tint" innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
+        <div>
           <SectionHeader
-            eyebrow="Spotlight"
+            eyebrow="Form"
             title="Players to watch"
-            description="Highest-rated names from NEXUS FC and Berlin United on semi-final night."
+            description="The names shaping semi-final night."
             action={
               <Button
                 href="/events/nova-cup-2026/players"
@@ -233,99 +235,68 @@ export default function NovaCupHomePage() {
               <PlayerCard key={player.id} player={player} />
             ))}
           </div>
-        </section>
+        </div>
 
-        <section>
-          <SectionHeader
-            eyebrow="Honours"
-            title="Awards"
-            description="The trophies and titles that frame NOVA CUP history."
-            action={
-              <Button
-                href="/events/nova-cup-2026/awards"
-                variant="ghost"
-                size="sm"
-              >
-                All awards
-              </Button>
-            }
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {awards.map((award) => (
-              <AwardCard key={award.id} award={award} />
-            ))}
-          </div>
-        </section>
-
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Legacy"
-            title="Legends"
-            description="Names and nights that still shape how this festival feels."
-            action={
-              <Button
-                href="/events/nova-cup-2026/legends"
-                variant="ghost"
-                size="sm"
-              >
-                All legends
-              </Button>
-            }
+            title="Awards & legends"
+            description="Honour the festival — and the names that built it."
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            {displayLegends.map((legend) => (
-              <LegendCard key={legend.id} legend={legend} />
-            ))}
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {awards.map((award) => (
+                <AwardCard key={award.id} award={award} />
+              ))}
+            </div>
+            <div className="grid gap-4">
+              {displayLegends.map((legend) => (
+                <LegendCard key={legend.id} legend={legend} />
+              ))}
+            </div>
           </div>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <SectionHeader
             eyebrow="Partners"
             title="Sponsors"
-            description="The brands powering four days of football theatre in Berlin."
-            action={
-              <Button
-                href="/events/nova-cup-2026/sponsors"
-                variant="ghost"
-                size="sm"
-              >
-                Partner world
-              </Button>
-            }
+            description="Commercial energy woven into the fan layer."
           />
           <SponsorGrid sponsors={sponsors} />
-        </section>
+        </div>
+      </SectionShell>
 
-        <section className="border border-border bg-bg-1 p-8 md:p-10">
-          <SectionHeader
-            className="mb-6 md:mb-6"
-            eyebrow="Community"
-            title="Fan Zone"
-            description="Missions, XP, and live challenges that turn watching into belonging."
-          />
-          <p className="max-w-2xl text-sm leading-relaxed text-muted">
-            Earn XP as Alex Morgan through live watch missions, predictions, and
-            partner challenges — then spend it on rewards that travel with you
-            across the festival.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button href="/events/nova-cup-2026/fan-zone">Enter Fan Zone</Button>
-            <Button href="/fans" variant="outline">
-              Fan experience
-            </Button>
-          </div>
-          <p className="mt-6 text-xs uppercase tracking-[0.16em] text-muted">
-            Or jump straight to{" "}
-            <Link
-              href="/fans/missions"
-              className="text-orange underline-offset-4 hover:underline"
+      <SectionShell atmosphere="band" innerClassName="mx-auto max-w-7xl px-4 py-14 md:px-6">
+          <GlassPanel className="overflow-hidden p-0">
+            <PhotoBackground
+              src={heroMedia.fan}
+              alt="Fan zone"
+              scrim="heavy"
+              className="min-h-[280px] rounded-[18px]"
             >
-              active missions
-            </Link>
-          </p>
-        </section>
-      </div>
+              <div className="p-8 md:p-10">
+                <p className="text-xs uppercase tracking-[0.22em] text-brand">
+                  Fan zone
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold">
+                  Turn visitors into super fans
+                </h2>
+                <p className="mt-3 max-w-lg text-sm text-muted">
+                  Missions, XP and rewards powered by the same match data layer.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Button href="/events/nova-cup-2026/fan-zone">
+                    Enter Fan Zone
+                  </Button>
+                  <Button href="/fans" variant="outline">
+                    Fan dashboard
+                  </Button>
+                </div>
+              </div>
+            </PhotoBackground>
+          </GlassPanel>
+      </SectionShell>
     </div>
   );
 }

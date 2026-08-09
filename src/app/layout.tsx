@@ -3,6 +3,8 @@ import { Space_Grotesk } from "next/font/google";
 import { DemoProvider } from "@/context/DemoProvider";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { BrandScope } from "@/components/theme/BrandScope";
+import { platformTheme } from "@/lib/theme";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -26,17 +28,19 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-bg-0 font-sans text-foreground">
         <DemoProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-orange focus:px-3 focus:py-2 focus:text-bg-0"
-          >
-            Skip to content
-          </a>
-          <SiteHeader />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
+          <BrandScope theme={platformTheme()} className="flex min-h-full flex-1 flex-col">
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-brand focus:px-3 focus:py-2 focus:text-bg-0"
+            >
+              Skip to content
+            </a>
+            <SiteHeader />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </BrandScope>
         </DemoProvider>
       </body>
     </html>

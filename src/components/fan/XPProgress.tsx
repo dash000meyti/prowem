@@ -1,13 +1,14 @@
 "use client";
 
 import { useDemo } from "@/context/DemoProvider";
+import { GlassPanel } from "@/components/media/GlassPanel";
 
 export function XPProgress() {
   const { fanXp, fanLevel, xpToNext, lastUnlockedAchievement } = useDemo();
   const progress = Math.min(100, Math.round((fanXp / xpToNext) * 100));
 
   return (
-    <div className="border border-border bg-bg-1 p-6">
+    <GlassPanel className="p-6">
       <div className="flex items-end justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-orange">
@@ -18,7 +19,9 @@ export function XPProgress() {
             {fanXp.toLocaleString()} / {xpToNext.toLocaleString()} XP
           </p>
         </div>
-        <p className="text-2xl font-semibold tabular-nums text-orange">{progress}%</p>
+        <p className="text-2xl font-semibold tabular-nums text-orange">
+          {progress}%
+        </p>
       </div>
       <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/5">
         <div
@@ -31,6 +34,6 @@ export function XPProgress() {
           Unlocked · {lastUnlockedAchievement}
         </p>
       ) : null}
-    </div>
+    </GlassPanel>
   );
 }

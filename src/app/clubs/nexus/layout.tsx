@@ -1,18 +1,17 @@
 import { ClubNavigation } from "@/components/layout/ContextualNav";
+import { BrandScope } from "@/components/theme/BrandScope";
+import { getClubBySlug } from "@/data";
+import { clubTheme } from "@/lib/theme";
 import type { ReactNode } from "react";
 
 export default function ClubLayout({ children }: { children: ReactNode }) {
+  const club = getClubBySlug("nexus")!;
+  const theme = clubTheme(club);
+
   return (
-    <div
-      style={
-        {
-          "--club-primary": "#00C2A8",
-          "--club-secondary": "#0A1214",
-        } as React.CSSProperties
-      }
-    >
+    <BrandScope theme={theme} className="min-h-full">
       <ClubNavigation multiTeam />
       {children}
-    </div>
+    </BrandScope>
   );
 }

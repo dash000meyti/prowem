@@ -1,16 +1,25 @@
 import type { NewsArticle } from "@/types";
-import { VisualPanel } from "@/components/ui/VisualPanel";
+import { GlassPanel } from "@/components/media/GlassPanel";
+import { MediaImage } from "@/components/media/MediaImage";
+import { resolveMedia } from "@/data/media";
 
 export function NewsCard({ article }: { article: NewsArticle }) {
   return (
-    <article className="group overflow-hidden border border-border bg-bg-1 transition hover:border-border-strong">
-      <VisualPanel tone={article.imageTone} className="h-40 rounded-none border-0">
-        <div className="flex h-full items-end p-4">
-          <span className="text-[10px] uppercase tracking-[0.18em] text-orange">
-            {article.category}
-          </span>
-        </div>
-      </VisualPanel>
+    <GlassPanel
+      as="article"
+      className="group overflow-hidden transition hover:border-[var(--glass-border-strong)]"
+    >
+      <div className="relative h-40">
+        <MediaImage
+          src={resolveMedia(article.imageTone, "crowdOrange")}
+          alt={article.title}
+          sizes="400px"
+        />
+        <div className="absolute inset-0 photo-scrim-light" />
+        <span className="absolute left-4 top-4 z-10 text-[10px] uppercase tracking-[0.18em] text-orange">
+          {article.category}
+        </span>
+      </div>
       <div className="p-5">
         <h3 className="text-lg font-semibold leading-snug group-hover:text-orange">
           {article.title}
@@ -20,6 +29,6 @@ export function NewsCard({ article }: { article: NewsArticle }) {
           {article.author} · {article.publishedAt.slice(0, 10)}
         </p>
       </div>
-    </article>
+    </GlassPanel>
   );
 }

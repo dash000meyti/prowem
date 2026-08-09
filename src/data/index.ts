@@ -43,6 +43,14 @@ export { missions, getMissionById } from "./missions";
 export { rewards, getRewardById } from "./rewards";
 export { products, getProductById, getProductsByClubId } from "./products";
 export { achievements, getAchievementById } from "./achievements";
+export {
+  mediaCatalog,
+  resolveMedia,
+  crestPath,
+  heroMedia,
+  toneToMedia,
+} from "./media";
+
 
 import { clubs } from "./clubs";
 import { events } from "./events";

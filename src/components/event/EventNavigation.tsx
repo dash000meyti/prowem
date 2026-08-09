@@ -26,9 +26,9 @@ export function EventNavigation() {
   const pathname = usePathname();
 
   return (
-    <div className="border-b border-border bg-bg-1/70">
+    <div className="border-b border-border bg-brand-surface/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6">
-        <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-orange">
+        <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-brand">
           NOVA CUP
         </span>
         {eventLinks.map((link) => {
@@ -41,7 +41,7 @@ export function EventNavigation() {
               href={link.href}
               className={cn(
                 "shrink-0 rounded-sm px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-muted transition hover:text-foreground",
-                active && "bg-orange-soft text-orange",
+                active && "bg-brand-tint text-brand",
               )}
             >
               {link.label}

@@ -2,15 +2,18 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline";
+type Variant = "primary" | "brand" | "secondary" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   primary:
     "bg-orange text-bg-0 hover:brightness-110 shadow-[0_0_24px_rgba(255,90,31,0.25)]",
+  brand:
+    "bg-brand text-bg-0 hover:brightness-110 shadow-brand",
   secondary: "bg-white/8 text-foreground hover:bg-white/12",
   ghost: "bg-transparent text-foreground hover:bg-white/5",
-  outline: "border border-border-strong bg-transparent hover:bg-white/5",
+  outline:
+    "border border-border-strong bg-transparent hover:border-brand hover:text-brand",
 };
 
 const sizes: Record<Size, string> = {
@@ -27,7 +30,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({
-  variant = "primary",
+  variant = "brand",
   size = "md",
   href,
   className,

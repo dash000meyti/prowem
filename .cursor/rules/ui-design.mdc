@@ -6,11 +6,10 @@ alwaysApply: false
 
 # UI Design
 
-- پالت: `#08090B` `#0D0F12` `#121417` + `#FF5A1F` + `#F5F5F2` — ۹۰٪ dark / ۱۰٪ orange
-- فونت: Space Grotesk
-- هیرو: یک ترکیب؛ بدون کارت/badge شناور در hero
-- کارت فقط وقتی تعامل را کمک کند؛ ظاهر یکنواخت اجباری نیست
-- تم Event/Club از CSS variables
-- موشن هدفمند و کم (LIVE pulse، score، XP، timeline)
-- semantic HTML، focus، contrast، responsive intentional
-- Server Components پیش‌فرض؛ client فقط برای تعامل
+- هویت جدا: Platform ≠ Event ≠ Club via `BrandScope` + `--brand-*`
+- داخل property از `text-brand` / `bg-brand` / `Button brand` استفاده کن؛ hard-code رنگ brand ممنوع
+- سکشن‌ها: `SectionShell` با atmosphere tint/contrast/mesh/band برای ریتم بصری
+- فونت: Space Grotesk؛ تصویرمحور با PhotoBackground/Crest
+- Glass هدفمند؛ LIVE سراسری می‌تواند orange بماند
+- semantic HTML، focus با brand، responsive intentional
+- Server Components پیش‌فرض
