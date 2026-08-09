@@ -8,11 +8,13 @@
 
 پیام: **RUN SPORTS. BUILD COMMUNITIES. CREATE EXPERIENCES.**
 
-نشان دادن هویت premium و چهار مسیر محصول.
+نشان دادن هویت premium، دو مخاطب B2B (organizers / clubs) و چهار ستون خدمات. بدون ویجت مسابقه زنده یا entity دمو.
+
+ورود به دمو از CTA پایانی **See the platform** یا لینک‌های هدر — نه از کارت‌های هیرو.
 
 ## Step 2 — Run an Event
 
-کلیک **Explore Event Platform** → `/events/bundesliga`
+کلیک **Explore events** → `/events` سپس Bundesliga، یا مستقیم `/events/bundesliga`
 
 ورود به هویت برند Bundesliga (نه داشبورد PROWEM).
 

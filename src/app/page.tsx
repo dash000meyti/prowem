@@ -1,210 +1,87 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { FadeIn } from "@/components/ui/FadeIn";
-import { LiveIndicator } from "@/components/ui/LiveIndicator";
-import { Crest } from "@/components/media/Crest";
-import { GlassPanel } from "@/components/media/GlassPanel";
-import { PhotoBackground } from "@/components/media/PhotoBackground";
-import { MediaImage } from "@/components/media/MediaImage";
-import { SectionShell } from "@/components/layout/SectionShell";
-import { getFeaturedMatch, getTeamById, heroMedia, mediaCatalog } from "@/data";
+import { HomeHero } from "@/components/marketing/HomeHero";
+import { AudienceIntro } from "@/components/marketing/AudienceIntro";
+import { ServiceMarquee } from "@/components/marketing/ServiceMarquee";
+import { ServiceFeature } from "@/components/marketing/ServiceFeature";
+import { PlatformCtaBand } from "@/components/marketing/PlatformCtaBand";
+import { mediaCatalog } from "@/data";
 
-const paths = [
+const services = [
   {
-    title: "Run an Event",
-    subtext: "Create, operate and publish your competition from one platform.",
-    cta: "Explore Event Platform",
-    href: "/events",
+    id: "event-platform",
+    index: "01 — Event infrastructure",
+    indexShort: "01",
+    title: "Stage sports and digital competitions with clarity.",
+    body: "Run tournaments and leagues end to end — publish fixtures, standings, news and live data under a branded event destination fans recognize instantly.",
+    points: [
+      "Operate football, socca, esports and more on one sport-agnostic layer",
+      "Publish schedules, tables, brackets, stats and editorial content",
+      "Own a branded digital home for every competition you run",
+    ],
     image: mediaCatalog.stadiumLights,
+    imageAlt: "Stadium lights over a competition venue",
+    atmosphere: "contrast" as const,
+    reverse: false,
   },
   {
-    title: "Build a Club",
-    subtext: "Build the digital home for your club, teams and players.",
-    cta: "Explore Club Platform",
-    href: "/clubs",
-    image: mediaCatalog.footballAction,
+    id: "club-platform",
+    index: "02 — Club infrastructure",
+    indexShort: "02",
+    title: "Make the club the center of every team and fan.",
+    body: "Give clubs a digital headquarters for multi-sport teams, player stories and a fan club that turns supporters into a lasting community.",
+    points: [
+      "Present club identity, history and multi-team structures in one place",
+      "Surface player profiles, news and team destinations by sport",
+      "Activate a fan club with missions, rewards and belonging",
+    ],
+    image: mediaCatalog.jerseyDetail,
+    imageAlt: "Club jersey detail close-up",
+    atmosphere: "tint" as const,
+    reverse: true,
   },
   {
-    title: "Engage Your Fans",
-    subtext: "Turn followers into an active fan community.",
-    cta: "Explore Fan Experience",
-    href: "/fans",
-    image: mediaCatalog.crowdOrange,
+    id: "matchday-platform",
+    index: "03 — Matchday infrastructure",
+    indexShort: "03",
+    title: "From stream to story — automatically.",
+    body: "Capture the match, push live information, generate match reports as the game unfolds, and ship social stories from the same data the moment the whistle blows.",
+    points: [
+      "Connect filming and streaming with live scores, stats and timelines",
+      "Automate live match reporting from a single data event",
+      "Produce post-match social stories grounded in real match data",
+    ],
+    image: mediaCatalog.nightMatch,
+    imageAlt: "Night match under stadium lights",
+    atmosphere: "mesh" as const,
+    reverse: false,
   },
   {
-    title: "Experience the Match",
-    subtext:
-      "Live scores, stats, video and content — all from one match data layer.",
-    cta: "Enter Match Center",
-    href: "/matches/bundesliga/bayern-vs-dortmund",
-    image: mediaCatalog.pitchAerial,
+    id: "consulting",
+    index: "04 — Consulting & design",
+    indexShort: "04",
+    title: "Shape better sports events from the ground up.",
+    body: "Partner with PROWEM to design formats, digital journeys and operational improvements that make every competition sharper for organizers, clubs and fans.",
+    points: [
+      "Advise on event structure, fan journeys and digital touchpoints",
+      "Design branded experiences that feel premium on every screen",
+      "Improve how competitions run — before, during and after matchday",
+    ],
+    image: mediaCatalog.celebration,
+    imageAlt: "Celebration atmosphere after a sports moment",
+    atmosphere: "contrast" as const,
+    reverse: true,
   },
 ];
 
 export default function HomePage() {
-  const match = getFeaturedMatch();
-  const home = getTeamById(match.homeTeamId)!;
-  const away = getTeamById(match.awayTeamId)!;
-
   return (
     <div>
-      <PhotoBackground
-        src={heroMedia.home}
-        alt="Stadium night atmosphere"
-        priority
-        scrim="heavy"
-        className="min-h-[88vh] border-b border-border"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 md:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:py-28">
-          <FadeIn>
-            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-orange">
-              PROWEM
-            </p>
-            <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-              Run Sports.
-              <br />
-              Build Communities.
-              <br />
-              Create Experiences.
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              One platform for sports events, clubs, live matches and fans.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/events" size="lg">
-                Run an Event
-              </Button>
-              <Button href="/clubs" variant="outline" size="lg">
-                Build a Club
-              </Button>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.12} className="space-y-4">
-            <GlassPanel className="overflow-hidden p-5 md:p-6">
-              <div className="pointer-events-none absolute -right-6 -top-6 opacity-[0.14]">
-                <Crest slug={home.slug} name={home.name} size={140} />
-              </div>
-              <div className="relative mb-5 flex items-center justify-between">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-muted">
-                  Bundesliga · {match.round}
-                </p>
-                <LiveIndicator />
-              </div>
-              <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <Crest slug={home.slug} name={home.name} size={28} />
-                  <p className="text-base font-semibold md:text-lg">{home.shortName}</p>
-                </div>
-                <p className="text-4xl font-semibold tabular-nums text-orange md:text-5xl">
-                  {match.homeScore}
-                  <span className="mx-2 text-muted">—</span>
-                  {match.awayScore}
-                </p>
-                <div className="flex items-center justify-end gap-2">
-                  <p className="text-right text-base font-semibold md:text-lg">
-                    {away.shortName}
-                  </p>
-                  <Crest slug={away.slug} name={away.name} size={28} />
-                </div>
-              </div>
-              <p className="relative mt-4 text-sm text-orange">
-                {match.minute}&apos; · Der Klassiker
-              </p>
-            </GlassPanel>
-            <div className="grid grid-cols-2 gap-3">
-              <GlassPanel variant="subtle" className="overflow-hidden p-4">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
-                  Player pulse
-                </p>
-                <p className="mt-3 text-xl font-semibold">Harry Kane</p>
-                <p className="text-sm text-muted">28 goals · 92 rating</p>
-                <Link
-                  href="/clubs/bayern-munich/players/kane"
-                  className="mt-3 inline-block text-[11px] uppercase tracking-[0.14em] text-orange"
-                >
-                  Open profile →
-                </Link>
-              </GlassPanel>
-              <GlassPanel variant="subtle" className="p-4">
-                <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
-                  Fan layer
-                </p>
-                <p className="mt-3 text-xl font-semibold">Alex</p>
-                <p className="text-sm text-muted">L18 · Super Fan</p>
-              </GlassPanel>
-            </div>
-          </FadeIn>
-        </div>
-      </PhotoBackground>
-
-      <SectionShell
-        atmosphere="tint"
-        className="border-b border-border"
-        innerClassName="mx-auto max-w-7xl px-4 py-20 md:px-6"
-      >
-        <p className="text-xs uppercase tracking-[0.22em] text-brand">
-          Four primary experiences
-        </p>
-        <h2 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
-          One data source. Many branded destinations.
-        </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {paths.map((path, index) => (
-            <Link
-              key={path.href}
-              href={path.href}
-              className="group relative min-h-[240px] overflow-hidden rounded-[18px] border border-[var(--glass-border)]"
-            >
-              <MediaImage src={path.image} alt={path.title} />
-              <div className="absolute inset-0 photo-scrim-heavy" />
-              <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
-                <p className="text-[11px] uppercase tracking-[0.18em] text-muted">
-                  0{index + 1}
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold group-hover:text-brand">
-                  {path.title}
-                </h3>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">
-                  {path.subtext}
-                </p>
-                <p className="mt-6 text-xs uppercase tracking-[0.16em] text-brand">
-                  {path.cta} →
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </SectionShell>
-
-      <SectionShell
-        atmosphere="mesh"
-        innerClassName="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 md:grid-cols-3 md:px-6"
-      >
-        <div className="pointer-events-none absolute inset-0 opacity-30">
-          <MediaImage src={mediaCatalog.footballKick} alt="" />
-          <div className="absolute inset-0 bg-bg-0/80" />
-        </div>
-        {[
-          {
-            title: "Your competition. Your identity.",
-            body: "Every event gets its own branded digital home — powered by the same platform.",
-          },
-          {
-            title: "From live data to live content.",
-            body: "A goal updates scores, tables, social drafts, video markers and fan XP together.",
-          },
-          {
-            title: "Built for every sport.",
-            body: "Football today. Dota 2 tonight. Architecture that stays sport-agnostic.",
-          },
-        ].map((item) => (
-          <GlassPanel key={item.title} variant="subtle" className="relative p-6">
-            <h3 className="text-xl font-semibold">{item.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{item.body}</p>
-          </GlassPanel>
-        ))}
-      </SectionShell>
+      <HomeHero />
+      <ServiceMarquee />
+      <AudienceIntro />
+      {services.map((service) => (
+        <ServiceFeature key={service.id} {...service} />
+      ))}
+      <PlatformCtaBand />
     </div>
   );
 }

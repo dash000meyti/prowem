@@ -21,6 +21,10 @@ description: Guides building and extending the PROWEM 2.0 sports digital infrast
 - **Trigger Goal**: score + timeline + stats + social + notify + fan XP
 - **Complete Mission**: XP + progress + achievement/reward در صورت آستانه
 
+## صفحهٔ اصلی
+- `/` لندینگ مارکتینگی B2B است (خدمات به organizers و clubs) — نه hub چهار تجربهٔ دمو
+- بدون entity دمو روی هیرو؛ ورود دمو از هدر/فوتر یا CTA پایانی
+
 ## کیفیت
 - انگلیسی در UI؛ بدون placeholder ضعیف
 - حس sports media premium نه SaaS dashboard

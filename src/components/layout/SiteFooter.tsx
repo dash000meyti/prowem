@@ -7,9 +7,28 @@ export function SiteFooter() {
         <div>
           <p className="text-sm font-semibold tracking-[0.28em]">PROWEM</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-            Digital infrastructure for modern sports — events, clubs, live
-            matches and fan communities on one data layer.
+            Digital infrastructure for event organizers and clubs — competitions,
+            club destinations, matchday automation and sports consulting.
           </p>
+        </div>
+        <div>
+          <p className="text-xs uppercase tracking-[0.18em] text-orange">
+            Services
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-muted">
+            <li>
+              <Link href="/#event-platform">Event infrastructure</Link>
+            </li>
+            <li>
+              <Link href="/#club-platform">Club infrastructure</Link>
+            </li>
+            <li>
+              <Link href="/#matchday-platform">Matchday infrastructure</Link>
+            </li>
+            <li>
+              <Link href="/#consulting">Consulting &amp; design</Link>
+            </li>
+          </ul>
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-orange">
@@ -37,15 +56,6 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2 text-sm text-muted">
             <li>About</li>
             <li>Contact</li>
-          </ul>
-        </div>
-        <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-orange">
-            Resources
-          </p>
-          <ul className="mt-4 space-y-2 text-sm text-muted">
-            <li>Documentation</li>
-            <li>Support</li>
             <li className="pt-2">X · Instagram · LinkedIn</li>
           </ul>
         </div>

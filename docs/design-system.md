@@ -28,6 +28,20 @@ LIVE سیستم سراسری می‌تواند `--orange` بماند؛ CTA و na
 
 ریتم پیشنهادی: Hero عکس → tint → contrast → mesh → band (CTA).
 
+## Marketing homepage (`/`)
+
+ریتم: Hero full-bleed → Audience (tint) → Service features متناوب (contrast / mesh / tint) → Platform CTA (band).
+
+قوانین هیرو:
+
+- فقط برند PROWEM + یک headline + یک جمله + گروه CTA + تصویر غالب edge-to-edge
+- بدون کارت، بدون glass panel، بدون badge/overlay شناور روی رسانه
+- بدون entity دمو (اسکور زنده، باشگاه، فن)
+
+کامپوننت‌ها: `src/components/marketing/*` (`HomeHero`, `ServiceMarquee`, `AudienceIntro`, `ServiceFeature`, `PlatformCtaBand`).
+
+حس بصری: سینمایی و editorial (Ken Burns هیرو، line-reveal تایپوگرافی، پنل‌های full-bleed مخاطب، watermark شماره خدمات، CTA با عکس زمینه) — بدون کارت هیرو و بدون badge شناور.
+
 ## رنگ پایه Platform
 
 | نقش | مقدار |

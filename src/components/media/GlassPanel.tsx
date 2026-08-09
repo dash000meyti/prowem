@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
-type Variant = "default" | "strong" | "subtle";
+type Variant = "default" | "strong" | "subtle" | "marketing";
 
 const variants: Record<Variant, string> = {
   default: "glass-panel",
   strong: "glass-panel-strong",
   subtle: "glass-panel-subtle",
+  marketing: "glass-panel-marketing",
 };
 
 export function GlassPanel({

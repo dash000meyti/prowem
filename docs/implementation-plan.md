@@ -15,7 +15,7 @@ Next.js App Router + TS strict + Tailwind + Space Grotesk + theme CSS vars + lay
 کامپوننت‌های reusable در `src/components/{ui,match,club,event,fan,marketing}`
 
 ### Phase 3 — Marketing homepage
-`/` با هیرو و ۴ CTA
+`/` لندینگ B2B خدمات برای organizers و clubs (چهار ستون خدمات؛ بدون hub چهار تجربهٔ دمو)
 
 ### Phase 4 — Event
 تمام مسیرهای Event (`/events/[slug]`) با تم اختصاصی و داده مشترک

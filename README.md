@@ -34,7 +34,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Route | Experience |
 |-------|------------|
-| `/` | Marketing homepage |
+| `/` | B2B marketing — services for organizers & clubs |
 | `/events/bundesliga` | Event platform |
 | `/clubs/bayern-munich` | Club platform |
 | `/clubs/bayern-munich/teams/dota2` | Esports team |
