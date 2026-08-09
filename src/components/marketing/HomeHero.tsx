@@ -45,17 +45,16 @@ export function HomeHero() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col justify-center overflow-y-auto px-4 pb-4 pt-6 md:px-6 md:pb-6 md:pt-8">
+      <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col justify-center px-4 py-5 md:px-6 md:py-8">
         <motion.div
-          className="my-auto"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
         >
           <GlassPanel variant="display" className="relative p-0 md:p-0">
             {/* Display chrome — status bar */}
-            <div className="relative z-[1] flex items-center justify-between gap-4 border-b border-white/[0.08] px-5 py-3 md:px-8 md:py-3.5">
-              <div className="flex items-center gap-3">
+            <div className="relative z-[1] flex items-center justify-between gap-3 border-b border-white/[0.08] px-4 py-2.5 md:gap-4 md:px-8 md:py-3.5">
+              <div className="flex items-center gap-2.5 md:gap-3">
                 <span className="flex h-2 w-2 rounded-full bg-orange shadow-[0_0_10px_rgba(255,90,31,0.7)]" />
                 <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-muted">
                   Platform console
@@ -73,9 +72,9 @@ export function HomeHero() {
               </div>
             </div>
 
-            <div className="relative z-[1] px-5 py-7 md:px-10 md:py-10 lg:px-12 lg:py-12">
+            <div className="relative z-[1] px-4 py-5 sm:px-5 sm:py-7 md:px-10 md:py-10 lg:px-12 lg:py-12">
               <motion.p
-                className="text-sm font-semibold tracking-[0.48em] text-orange md:text-base"
+                className="text-xs font-semibold tracking-[0.4em] text-orange sm:text-sm sm:tracking-[0.48em] md:text-base"
                 initial={{ opacity: 0, letterSpacing: "0.7em", y: 10 }}
                 animate={{ opacity: 1, letterSpacing: "0.48em", y: 0 }}
                 transition={{ duration: 1, ease }}
@@ -83,10 +82,10 @@ export function HomeHero() {
                 PROWEM
               </motion.p>
 
-              <h1 className="mt-5 max-w-5xl">
+              <h1 className="mt-3 max-w-5xl sm:mt-5">
                 <span className="block overflow-hidden">
                   <motion.span
-                    className="block text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-[5.5rem]"
+                    className="block text-[2rem] font-semibold leading-[1.02] tracking-tight sm:text-4xl md:text-6xl lg:text-[5.5rem] lg:leading-[0.98]"
                     initial={{ y: "110%", opacity: 0 }}
                     animate={{ y: "0%", opacity: 1 }}
                     transition={{ duration: 0.85, delay: 0.18, ease }}
@@ -94,9 +93,9 @@ export function HomeHero() {
                     Run Sports.
                   </motion.span>
                 </span>
-                <span className="mt-1 block min-h-[1.05em] overflow-hidden md:mt-2">
+                <span className="mt-0.5 block min-h-[1.1em] overflow-hidden sm:mt-1 md:mt-2">
                   <motion.span
-                    className="block text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-[5.5rem]"
+                    className="block text-[2rem] font-semibold leading-[1.02] tracking-tight sm:text-4xl md:text-6xl lg:text-[5.5rem] lg:leading-[0.98]"
                     initial={{ y: "110%", opacity: 0 }}
                     animate={{ y: "0%", opacity: 1 }}
                     transition={{ duration: 0.85, delay: 0.32, ease }}
@@ -107,7 +106,7 @@ export function HomeHero() {
               </h1>
 
               <motion.p
-                className="mt-7 max-w-xl text-base leading-relaxed text-muted md:text-lg"
+                className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:mt-7 sm:text-base md:text-lg"
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.62, ease }}
@@ -117,35 +116,35 @@ export function HomeHero() {
               </motion.p>
 
               <motion.div
-                className="mt-9 flex flex-wrap gap-3"
+                className="mt-5 flex gap-2.5 sm:mt-9 sm:flex-wrap sm:gap-3"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.74, ease }}
               >
                 <Button
                   href="#event-platform"
-                  size="lg"
-                  className="rounded-xl shadow-brand"
+                  size="md"
+                  className="min-w-0 flex-1 rounded-xl shadow-brand sm:flex-none sm:px-7 md:h-12 md:text-base"
                 >
                   For organizers
                 </Button>
                 <Button
                   href="#club-platform"
                   variant="outline"
-                  size="lg"
-                  className="rounded-xl"
+                  size="md"
+                  className="min-w-0 flex-1 rounded-xl sm:flex-none sm:px-7 md:h-12 md:text-base"
                 >
                   For clubs
                 </Button>
               </motion.div>
 
               <motion.div
-                className="mt-7 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-muted"
+                className="mt-5 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-muted sm:mt-7"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1, duration: 0.8 }}
               >
-                <span className="relative flex h-8 w-px overflow-hidden bg-white/15">
+                <span className="relative flex h-6 w-px overflow-hidden bg-white/15 sm:h-8">
                   <motion.span
                     className="absolute inset-x-0 top-0 h-3 bg-orange"
                     animate={{ y: [0, 20, 0], opacity: [1, 0.2, 1] }}
@@ -160,9 +159,9 @@ export function HomeHero() {
               </motion.div>
             </div>
 
-            {/* Display chrome — module strip */}
+            {/* Module strip — single row always (avoids tall 2×2 grid on mobile) */}
             <motion.div
-              className="relative z-[1] grid grid-cols-2 border-t border-white/[0.08] sm:grid-cols-4"
+              className="relative z-[1] flex border-t border-white/[0.08] overflow-x-auto sm:grid sm:grid-cols-4 sm:overflow-visible"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9, duration: 0.7 }}
@@ -171,13 +170,13 @@ export function HomeHero() {
                 <a
                   key={mod.label}
                   href={mod.href}
-                  className="group flex items-center justify-between gap-2 border-white/[0.06] px-5 py-3.5 text-[10px] uppercase tracking-[0.2em] text-muted transition hover:bg-white/[0.03] hover:text-foreground max-sm:border-b max-sm:odd:border-r max-sm:[&:nth-child(n+3)]:border-b-0 sm:border-r sm:last:border-r-0"
+                  className="group flex shrink-0 items-center justify-between gap-2 border-white/[0.06] px-4 py-2.5 text-[10px] uppercase tracking-[0.18em] text-muted transition hover:bg-white/[0.03] hover:text-foreground sm:justify-between sm:border-r sm:px-5 sm:py-3.5 sm:tracking-[0.2em] sm:last:border-r-0"
                 >
                   <span>
                     <span className="mr-2 text-orange/70">0{i + 1}</span>
                     {mod.label}
                   </span>
-                  <span className="text-orange opacity-0 transition group-hover:opacity-100">
+                  <span className="hidden text-orange opacity-0 transition group-hover:opacity-100 sm:inline">
                     →
                   </span>
                 </a>
