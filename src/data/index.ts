@@ -59,6 +59,8 @@ export {
   mediaCatalog,
   resolveMedia,
   crestPath,
+  playerPortraitPath,
+  playerPortraitFallback,
   heroMedia,
   toneToMedia,
 } from "./media";

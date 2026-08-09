@@ -12,6 +12,7 @@ High-fidelity interactive prototype of **PROWEM** — digital infrastructure for
 - Lucide React
 - Local mock data (no backend)
 - Local images under `public/images/`
+- Football player portraits under `public/images/players/` (`npm run fetch-players`)
 
 ## Demo world
 

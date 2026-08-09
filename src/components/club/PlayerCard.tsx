@@ -2,8 +2,13 @@ import Link from "next/link";
 import type { Player } from "@/types";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { MediaImage } from "@/components/media/MediaImage";
-import { heroMedia } from "@/data/media";
-import { getClubForTeam, getTeamById, isFeaturedClub } from "@/data";
+import {
+  getClubForTeam,
+  getTeamById,
+  isFeaturedClub,
+  playerPortraitFallback,
+  playerPortraitPath,
+} from "@/data";
 import { Crest } from "@/components/media/Crest";
 
 export function PlayerCard({
@@ -21,22 +26,30 @@ export function PlayerCard({
       ? `/clubs/${club.slug}/players/${player.slug}`
       : undefined);
 
+  const portrait =
+    player.sport === "football"
+      ? playerPortraitPath(player.slug)
+      : playerPortraitFallback(player.sport);
+
   const body = (
     <GlassPanel className="overflow-hidden transition hover:border-[var(--glass-border-strong)]">
-      <div className="relative h-36">
+      <div className="relative h-52 bg-bg-2">
         <MediaImage
-          src={
-            player.sport === "dota2" ? heroMedia.bayernDota : heroMedia.player
-          }
+          src={portrait}
           alt={player.name}
           sizes="320px"
+          className="object-cover object-top"
         />
-        <div className="absolute inset-0 photo-scrim" />
-        <div className="absolute left-3 top-3 z-10 rounded-sm bg-black/40 px-2 py-1 text-xs font-semibold text-orange">
+        {/* Light top wash only — name/meta sit below the photo */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/45 to-transparent"
+          aria-hidden
+        />
+        <div className="absolute left-3 top-3 z-10 rounded-sm bg-black/55 px-2 py-1 text-xs font-semibold text-orange backdrop-blur-[2px]">
           {player.number ?? player.shortName.slice(0, 2)}
         </div>
         {player.rating != null ? (
-          <span className="absolute right-3 top-3 z-10 text-sm font-semibold tabular-nums text-orange">
+          <span className="absolute right-3 top-3 z-10 rounded-sm bg-black/55 px-2 py-1 text-sm font-semibold tabular-nums text-orange backdrop-blur-[2px]">
             {player.rating.toFixed(1)}
           </span>
         ) : null}

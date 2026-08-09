@@ -97,6 +97,17 @@ export function crestPath(slug: string) {
   return `/images/clubs/${clubSlug}/crest.svg`;
 }
 
+/** Local player portrait — populated by `npm run fetch-media` */
+export function playerPortraitPath(slug: string) {
+  return `/images/players/${slug}.jpg`;
+}
+
+export function playerPortraitFallback(sport: string) {
+  if (sport === "dota2") return mediaCatalog.esportsStage;
+  if (sport === "socca") return mediaCatalog.soccaCage;
+  return mediaCatalog.athletePortrait;
+}
+
 export const heroMedia = {
   home: mediaCatalog.stadiumNight,
   bundesliga: mediaCatalog.bundesligaHero,

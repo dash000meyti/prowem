@@ -3,116 +3,106 @@
 import { motion } from "framer-motion";
 import { MediaImage } from "@/components/media/MediaImage";
 import { GlassPanel } from "@/components/media/GlassPanel";
-import { SectionShell } from "@/components/layout/SectionShell";
-import type { Atmosphere } from "@/components/layout/SectionShell";
 import { cn } from "@/lib/utils";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+export type ServiceTheme = "ember" | "steel" | "amber" | "night";
+
+const themeClass: Record<ServiceTheme, string> = {
+  ember: "marketing-theme-ember",
+  steel: "marketing-theme-steel",
+  amber: "marketing-theme-amber",
+  night: "marketing-theme-night",
+};
+
 export type ServiceFeatureProps = {
   id: string;
   index: string;
-  indexShort: string;
   title: string;
   body: string;
   points: string[];
   image: string;
   imageAlt: string;
-  atmosphere?: Atmosphere;
+  theme?: ServiceTheme;
   reverse?: boolean;
 };
 
 export function ServiceFeature({
   id,
   index,
-  indexShort,
   title,
   body,
   points,
   image,
   imageAlt,
-  atmosphere = "plain",
+  theme = "ember",
   reverse = false,
 }: ServiceFeatureProps) {
   return (
-    <SectionShell
-      id={id}
-      atmosphere={atmosphere}
-      className="border-b border-border scroll-mt-20"
-      innerClassName="relative mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32"
-    >
-      <span
-        className="pointer-events-none absolute -top-6 right-4 select-none text-[8rem] font-semibold leading-none text-white/[0.035] md:right-8 md:text-[12rem]"
-        aria-hidden
-      >
-        {indexShort}
-      </span>
-
+    <section id={id} className="relative scroll-mt-20 px-4 py-8 md:px-6 md:py-10">
       <div
         className={cn(
-          "grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8",
-          reverse && "lg:[&>*:first-child]:order-2",
+          "pointer-events-none absolute inset-0 opacity-90",
+          themeClass[theme],
         )}
+        aria-hidden
+      />
+      <motion.div
+        className="relative z-10 mx-auto max-w-5xl"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.65, ease }}
-        >
-          <GlassPanel variant="marketing" className="h-full p-7 md:p-10">
-            <div className="flex items-center gap-4">
-              <span className="h-px w-10 bg-orange" aria-hidden />
-              <p className="text-[11px] uppercase tracking-[0.24em] text-brand">
+        <GlassPanel variant="marketing" className="p-3 md:p-4">
+          <div
+            className={cn(
+              "grid items-center gap-5 md:gap-6 lg:grid-cols-[1.15fr_0.85fr]",
+              reverse && "lg:grid-cols-[0.85fr_1.15fr] lg:[&>*:first-child]:order-2",
+            )}
+          >
+            <div className="p-5 md:p-8">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-orange">
                 {index}
               </p>
+              <h2 className="mt-4 max-w-lg text-2xl font-semibold tracking-tight md:text-4xl md:leading-[1.1]">
+                {title}
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted md:text-base">
+                {body}
+              </p>
+              <ul className="mt-7 space-y-2.5">
+                {points.map((point) => (
+                  <li
+                    key={point}
+                    className="flex gap-3 text-sm leading-relaxed text-foreground/85"
+                  >
+                    <span
+                      className="mt-2 h-1 w-1 shrink-0 rounded-full bg-orange"
+                      aria-hidden
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h2 className="mt-5 max-w-xl text-3xl font-semibold tracking-tight md:text-4xl lg:text-[2.75rem] lg:leading-[1.08]">
-              {title}
-            </h2>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-muted">
-              {body}
-            </p>
-            <ul className="mt-8 space-y-3">
-              {points.map((point, i) => (
-                <motion.li
-                  key={point}
-                  className="rounded-[14px] border border-white/8 bg-white/[0.04] px-4 py-3 text-sm leading-relaxed text-foreground/90 backdrop-blur-sm md:text-[15px]"
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.45, delay: 0.1 + i * 0.08, ease }}
-                >
-                  {point}
-                </motion.li>
-              ))}
-            </ul>
-          </GlassPanel>
-        </motion.div>
 
-        <motion.div
-          className="group"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease }}
-        >
-          <GlassPanel variant="marketing" className="h-full p-3 md:p-4">
-            <div className="relative aspect-4/5 overflow-hidden rounded-[18px] md:aspect-4/3 md:min-h-full">
+            <div className="relative aspect-5/4 overflow-hidden rounded-[18px] md:aspect-auto md:min-h-[280px] md:h-full">
               <MediaImage
                 src={image}
                 alt={imageAlt}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="transition duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover"
               />
               <div
-                className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(8,9,11,0.25)_0%,transparent_45%,rgba(255,90,31,0.14)_100%)]"
+                className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,9,11,0.45),transparent_55%)]"
                 aria-hidden
               />
             </div>
-          </GlassPanel>
-        </motion.div>
-      </div>
-    </SectionShell>
+          </div>
+        </GlassPanel>
+      </motion.div>
+    </section>
   );
 }

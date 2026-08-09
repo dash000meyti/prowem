@@ -8,66 +8,62 @@ import { mediaCatalog } from "@/data";
 const services = [
   {
     id: "event-platform",
-    index: "01 — Event infrastructure",
-    indexShort: "01",
-    title: "Stage sports and digital competitions with clarity.",
-    body: "Run tournaments and leagues end to end — publish fixtures, standings, news and live data under a branded event destination fans recognize instantly.",
+    index: "01 — Event",
+    title: "Stage competitions with clarity.",
+    body: "Run tournaments end to end — fixtures, standings, news and live data under a branded destination.",
     points: [
-      "Operate football, socca, esports and more on one sport-agnostic layer",
-      "Publish schedules, tables, brackets, stats and editorial content",
-      "Own a branded digital home for every competition you run",
+      "Sport-agnostic leagues and cups",
+      "Schedules, tables, brackets and stats",
+      "Your competition. Your identity.",
     ],
     image: mediaCatalog.stadiumLights,
     imageAlt: "Stadium lights over a competition venue",
-    atmosphere: "contrast" as const,
+    theme: "ember" as const,
     reverse: false,
   },
   {
     id: "club-platform",
-    index: "02 — Club infrastructure",
-    indexShort: "02",
-    title: "Make the club the center of every team and fan.",
-    body: "Give clubs a digital headquarters for multi-sport teams, player stories and a fan club that turns supporters into a lasting community.",
+    index: "02 — Club",
+    title: "Make the club the center.",
+    body: "A digital headquarters for multi-sport teams, player stories and a lasting fan community.",
     points: [
-      "Present club identity, history and multi-team structures in one place",
-      "Surface player profiles, news and team destinations by sport",
-      "Activate a fan club with missions, rewards and belonging",
+      "Club identity and multi-team structure",
+      "Players, news and sport destinations",
+      "Fan club with missions and belonging",
     ],
     image: mediaCatalog.jerseyDetail,
     imageAlt: "Club jersey detail close-up",
-    atmosphere: "tint" as const,
+    theme: "steel" as const,
     reverse: true,
   },
   {
     id: "matchday-platform",
-    index: "03 — Matchday infrastructure",
-    indexShort: "03",
+    index: "03 — Matchday",
     title: "From stream to story — automatically.",
-    body: "Capture the match, push live information, generate match reports as the game unfolds, and ship social stories from the same data the moment the whistle blows.",
+    body: "Live data, automated reports, and social stories from the same match layer.",
     points: [
-      "Connect filming and streaming with live scores, stats and timelines",
-      "Automate live match reporting from a single data event",
-      "Produce post-match social stories grounded in real match data",
+      "Streaming connected to live scores",
+      "Automated match reporting",
+      "Post-match stories from real data",
     ],
     image: mediaCatalog.nightMatch,
     imageAlt: "Night match under stadium lights",
-    atmosphere: "mesh" as const,
+    theme: "night" as const,
     reverse: false,
   },
   {
     id: "consulting",
-    index: "04 — Consulting & design",
-    indexShort: "04",
-    title: "Shape better sports events from the ground up.",
-    body: "Partner with PROWEM to design formats, digital journeys and operational improvements that make every competition sharper for organizers, clubs and fans.",
+    index: "04 — Consulting",
+    title: "Shape better sports events.",
+    body: "Design formats, journeys and operations that make every competition sharper.",
     points: [
-      "Advise on event structure, fan journeys and digital touchpoints",
-      "Design branded experiences that feel premium on every screen",
-      "Improve how competitions run — before, during and after matchday",
+      "Event structure and fan journeys",
+      "Premium branded experience design",
+      "Before, during and after matchday",
     ],
     image: mediaCatalog.celebration,
     imageAlt: "Celebration atmosphere after a sports moment",
-    atmosphere: "contrast" as const,
+    theme: "amber" as const,
     reverse: true,
   },
 ];
@@ -76,12 +72,22 @@ export default function HomePage() {
   return (
     <div>
       <HomeHero />
-      <ServiceMarquee />
-      <AudienceIntro />
-      {services.map((service) => (
-        <ServiceFeature key={service.id} {...service} />
-      ))}
-      <PlatformCtaBand />
+      <div className="marketing-canvas">
+        <ServiceMarquee />
+        <AudienceIntro />
+        <div className="mx-auto max-w-5xl px-4 pb-4 pt-6 md:px-6">
+          <p className="text-center text-[11px] uppercase tracking-[0.28em] text-orange/80">
+            Services
+          </p>
+          <h2 className="mx-auto mt-3 max-w-xl text-center text-3xl font-semibold tracking-tight md:text-4xl">
+            Infrastructure for modern sports.
+          </h2>
+        </div>
+        {services.map((service) => (
+          <ServiceFeature key={service.id} {...service} />
+        ))}
+        <PlatformCtaBand />
+      </div>
     </div>
   );
 }

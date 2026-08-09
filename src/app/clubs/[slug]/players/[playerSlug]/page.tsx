@@ -8,9 +8,10 @@ import {
   getClubBySlug,
   getPlayerBySlug,
   getTeamById,
-  heroMedia,
   isFeaturedClub,
   matches,
+  playerPortraitFallback,
+  playerPortraitPath,
 } from "@/data";
 import { sportLabel } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -40,7 +41,9 @@ export default async function ClubPlayerPage({
     .slice(0, 4);
 
   const hero =
-    player.sport === "dota2" ? heroMedia.bayernDota : heroMedia.player;
+    player.sport === "football"
+      ? playerPortraitPath(player.slug)
+      : playerPortraitFallback(player.sport);
 
   return (
     <div>
