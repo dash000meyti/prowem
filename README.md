@@ -31,6 +31,26 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Deploy with Docker (from GitHub)
+
+On any server with Docker and Docker Compose:
+
+```bash
+git clone https://github.com/<org-or-user>/prowem.git
+cd prowem
+docker compose up -d --build
+```
+
+App listens on port **3000** (override with `PORT=8080 docker compose up -d --build`).
+
+Useful commands:
+
+```bash
+docker compose logs -f      # follow logs
+docker compose down         # stop
+docker compose up -d --build  # rebuild after git pull
+```
+
 ## Key routes
 
 | Route | Experience |

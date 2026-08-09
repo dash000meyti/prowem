@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/Button";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { heroMedia } from "@/data";
 
-const ease = [0.22, 1, 0.36, 1] as const;
+import { TypewriterRotate } from "@/components/marketing/TypewriterRotate";
 
-const lines = ["Run Sports.", "Build Communities.", "Create Experiences."];
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const modules = [
   { label: "Event", href: "#event-platform" },
@@ -86,22 +86,26 @@ export function HomeHero() {
               </motion.p>
 
               <h1 className="mt-5 max-w-5xl">
-                {lines.map((line, i) => (
-                  <span key={line} className="block overflow-hidden">
-                    <motion.span
-                      className="block text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-[5.5rem]"
-                      initial={{ y: "110%", opacity: 0 }}
-                      animate={{ y: "0%", opacity: 1 }}
-                      transition={{
-                        duration: 0.85,
-                        delay: 0.18 + i * 0.12,
-                        ease,
-                      }}
-                    >
-                      {line}
-                    </motion.span>
-                  </span>
-                ))}
+                <span className="block overflow-hidden">
+                  <motion.span
+                    className="block text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-[5.5rem]"
+                    initial={{ y: "110%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    transition={{ duration: 0.85, delay: 0.18, ease }}
+                  >
+                    Run Sports.
+                  </motion.span>
+                </span>
+                <span className="mt-1 block min-h-[1.05em] overflow-hidden md:mt-2">
+                  <motion.span
+                    className="block text-4xl font-semibold leading-[0.98] tracking-tight md:text-6xl lg:text-[5.5rem]"
+                    initial={{ y: "110%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    transition={{ duration: 0.85, delay: 0.32, ease }}
+                  >
+                    <TypewriterRotate />
+                  </motion.span>
+                </span>
               </h1>
 
               <motion.p
