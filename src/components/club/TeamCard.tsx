@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Team } from "@/types";
 import { sportLabel } from "@/lib/utils";
-import { getClubForTeam } from "@/data";
+import { getClubForTeam, isFeaturedClub } from "@/data";
 import { Crest } from "@/components/media/Crest";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { MediaImage } from "@/components/media/MediaImage";
@@ -17,14 +17,10 @@ export function TeamCard({
   const club = getClubForTeam(team.id);
   const to =
     href ??
-    (club?.slug === "nexus"
-      ? team.sport === "dota2"
-        ? "/clubs/nexus/teams/dota2"
-        : team.sport === "socca"
-          ? "/clubs/nexus/teams/socca"
-          : "/clubs/nexus"
+    (club && isFeaturedClub(club.slug)
+      ? `/clubs/${club.slug}/teams/${team.sport}`
       : club
-        ? `/clubs/${club.slug}`
+        ? `/events/bundesliga/teams`
         : "#");
 
   const thumb =

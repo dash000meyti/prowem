@@ -54,7 +54,7 @@ export function Bracket({ items }: { items: BracketMatch[] }) {
       </div>
       <div>
         <p className="mb-3 text-xs uppercase tracking-[0.18em] text-orange">
-          Semi Finals
+          Der Klassikers
         </p>
         <div className="space-y-3">
           {sf.map((item) => (

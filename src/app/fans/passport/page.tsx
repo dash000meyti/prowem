@@ -79,7 +79,7 @@ export default function FanPassportPage() {
           <SectionHeader
             eyebrow="Stamps"
             title="Achievements"
-            description="Unlocked across NOVA CUP and NEXUS multi-arena following."
+            description="Unlocked across Bundesliga and Bayern multi-arena following."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {achievements.map((ach) => (

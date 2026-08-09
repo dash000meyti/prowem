@@ -77,30 +77,28 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     if (goalTriggered) return;
 
     const goalEvent: MatchEventItem = {
-      id: "me-nb-goal-72-live",
+      id: "me-bd-goal-72-live",
       minute: 72,
       type: "goal",
-      teamId: "team-nexus-fc",
-      playerId: "player-kai-novak",
-      playerName: "Kai Novak",
-      detail: "Curled finish after Brandt cut-back",
+      teamId: "team-bayern-fc",
+      playerId: "player-kane",
+      playerName: "Harry Kane",
+      detail: "Clinical finish inside the box",
       period: "2H",
     };
 
-    // If already 2-1 with 72' goal in data, treat trigger as "propagation demo"
-    // by bumping to 3-1 and adding a new event for the wow moment.
     setMatch((prev) => {
       const alreadyHas72 = prev.events.some(
         (e) => e.minute === 72 && e.type === "goal",
       );
       if (alreadyHas72) {
         const extra: MatchEventItem = {
-          id: "me-nb-goal-78",
+          id: "me-bd-goal-78",
           minute: 78,
           type: "goal",
-          teamId: "team-nexus-fc",
-          playerId: "player-samuel-oke",
-          playerName: "Samuel Oke",
+          teamId: "team-bayern-fc",
+          playerId: "player-olise",
+          playerName: "Michael Olise",
           detail: "Counter-attack finish — GOAL DETECTED",
           period: "2H",
         };
@@ -123,8 +121,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       {
         id: `social-${Date.now()}`,
         headline: "GOAL!",
-        body: "NEXUS extend the lead in the NOVA CUP Semi Final.",
-        scoreLine: "NEXUS FC 3–1 Berlin United",
+        body: "Bayern extend the lead in Der Klassiker.",
+        scoreLine: "Bayern Munich 3–1 Borussia Dortmund",
         minute: 78,
         platform: "X",
       },
@@ -135,7 +133,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       {
         id: `n-${Date.now()}`,
         title: "Match alert",
-        body: "GOAL — NEXUS FC score. +150 XP for live watchers.",
+        body: "GOAL — Bayern Munich score. +150 XP for live watchers.",
       },
       ...prev,
     ]);

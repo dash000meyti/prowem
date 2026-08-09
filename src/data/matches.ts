@@ -1,1255 +1,896 @@
 import type { Match } from "@/types";
 
-const EVT = "evt-nova-cup-2026";
-const VENUE_OLYMPIA = "Olympiastadion";
-const VENUE_ARENA = "NOVA Arena East";
-const VENUE_PARK = "Stadionpark Pitch A";
-
-const NEXUS_XI = [
-  "player-erik-holm",
-  "player-luis-navarro",
-  "player-mateo-ricci",
-  "player-jonas-berg",
-  "player-amir-hassan",
-  "player-theo-marc",
-  "player-kai-novak",
-  "player-samuel-oke",
-  "player-yannick-durand",
-  "player-felix-brandt",
-  "player-marco-vesa",
-];
-
-const BERLIN_XI = [
-  "player-niklas-auer",
-  "player-owen-clarke",
-  "player-piotr-lewand",
-  "player-hugo-sander",
-  "player-rafael-costa",
-  "player-emil-vogel",
-  "player-tarek-malik",
-  "player-luka-petrov",
-  "player-sean-murphy",
-  "player-diego-alvarez",
-  "player-ben-richter",
-];
-
 export const matches: Match[] = [
-  // ——— Live Semi Final (hero match) ———
   {
-    id: "match-nexus-berlin",
-    slug: "nexus-vs-berlin-united",
-    eventId: EVT,
+    id: "match-bayern-dortmund",
+    slug: "bayern-vs-dortmund",
+    eventId: "evt-bundesliga",
     sport: "football",
-    round: "Semi Final",
+    round: "Matchday 12",
     status: "live",
-    kickoff: "2026-06-20T19:00:00+02:00",
+    kickoff: "2025-11-08T18:30:00+01:00",
     minute: 72,
     period: "2H",
-    homeTeamId: "team-nexus-fc",
-    awayTeamId: "team-berlin-united",
+    homeTeamId: "team-bayern-fc",
+    awayTeamId: "team-dortmund-fc",
     homeScore: 2,
     awayScore: 1,
-    venue: VENUE_OLYMPIA,
+    venue: "Allianz Arena",
     events: [
       {
-        id: "me-nb-1",
+        id: "me-bd-1",
         minute: 12,
         type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-kai-novak",
-        playerName: "Kai Novak",
-        detail: "Low drive from the edge",
-        period: "1H",
+        teamId: "team-bayern-fc",
+        playerId: "player-kane",
+        playerName: "Harry Kane",
+        detail: "Right-footed finish",
+        period: "1H"
       },
       {
-        id: "me-nb-2",
+        id: "me-bd-2",
         minute: 28,
         type: "yellow",
-        teamId: "team-berlin-united",
-        playerId: "player-emil-vogel",
-        playerName: "Emil Vogel",
-        detail: "Late challenge on Marc",
-        period: "1H",
+        teamId: "team-dortmund-fc",
+        playerId: "player-schlotterbeck",
+        playerName: "Nico Schlotterbeck",
+        period: "1H"
       },
       {
-        id: "me-nb-3",
-        minute: 34,
-        type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-luka-petrov",
-        playerName: "Luka Petrov",
-        detail: "Header from Costa cross",
-        period: "1H",
-      },
-      {
-        id: "me-nb-4",
-        minute: 45,
-        type: "ht",
-        teamId: "team-nexus-fc",
-        detail: "Half-time · 1–1",
-        period: "HT",
-      },
-      {
-        id: "me-nb-5",
-        minute: 61,
-        type: "sub",
-        teamId: "team-nexus-fc",
-        playerId: "player-felix-brandt",
-        playerName: "Felix Brandt",
-        detail: "On for Durand · fresh left side",
-        period: "2H",
-      },
-      {
-        id: "me-nb-6",
-        minute: 72,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-marco-vesa",
-        playerName: "Marco Vesa",
-        detail: "Tap-in after Oke through ball",
-        period: "2H",
-      },
-    ],
-    footballStats: {
-      possession: [54, 46],
-      shots: [14, 9],
-      shotsOnTarget: [7, 4],
-      corners: [6, 3],
-      fouls: [8, 11],
-      passAccuracy: [86, 81],
-    },
-    homeLineupIds: NEXUS_XI,
-    awayLineupIds: BERLIN_XI,
-    highlightIds: ["vid-nexus-berlin-goals"],
-    newsIds: ["news-semi-nexus-berlin"],
-    videoIds: ["vid-nexus-berlin-goals", "vid-nova-cup-atmosphere"],
-  },
-
-  // ——— Other live matches ———
-  {
-    id: "match-wolves-hamburg",
-    slug: "berlin-wolves-vs-hamburg-united",
-    eventId: EVT,
-    sport: "football",
-    round: "Playoff",
-    status: "live",
-    kickoff: "2026-06-20T19:00:00+02:00",
-    minute: 68,
-    period: "2H",
-    homeTeamId: "team-berlin-wolves",
-    awayTeamId: "team-hamburg-united",
-    homeScore: 1,
-    awayScore: 1,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-wh-1",
-        minute: 22,
-        type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-max-keller",
-        playerName: "Max Keller",
-        detail: "Counter finish",
-        period: "1H",
-      },
-      {
-        id: "me-wh-2",
-        minute: 45,
-        type: "ht",
-        teamId: "team-berlin-wolves",
-        detail: "Half-time · 1–0",
-        period: "HT",
-      },
-      {
-        id: "me-wh-3",
-        minute: 57,
-        type: "goal",
-        teamId: "team-hamburg-united",
-        playerId: "player-finn-bode",
-        playerName: "Finn Bode",
-        detail: "Near-post header",
-        period: "2H",
-      },
-    ],
-    footballStats: {
-      possession: [48, 52],
-      shots: [10, 12],
-      shotsOnTarget: [4, 5],
-      corners: [4, 5],
-      fouls: [12, 9],
-      passAccuracy: [79, 84],
-    },
-    homeLineupIds: [
-      "player-tom-weiss",
-      "player-ivan-drago",
-      "player-max-keller",
-    ],
-    awayLineupIds: [
-      "player-arne-hoff",
-      "player-joris-klein",
-      "player-finn-bode",
-    ],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: ["vid-wolves-hamburg-live"],
-  },
-  {
-    id: "match-munich-paris",
-    slug: "munich-stars-vs-paris-elite",
-    eventId: EVT,
-    sport: "football",
-    round: "Semi Final",
-    status: "live",
-    kickoff: "2026-06-20T16:30:00+02:00",
-    minute: 81,
-    period: "2H",
-    homeTeamId: "team-munich-stars",
-    awayTeamId: "team-paris-elite",
-    homeScore: 2,
-    awayScore: 2,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-mp-1",
-        minute: 9,
-        type: "goal",
-        teamId: "team-paris-elite",
-        playerId: "player-adrien-morel",
-        playerName: "Adrien Morel",
-        detail: "Curled finish",
-        period: "1H",
-      },
-      {
-        id: "me-mp-2",
-        minute: 31,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-pascal-meier",
-        playerName: "Pascal Meier",
-        detail: "Poacher’s rebound",
-        period: "1H",
-      },
-      {
-        id: "me-mp-3",
-        minute: 45,
-        type: "ht",
-        teamId: "team-munich-stars",
-        detail: "Half-time · 1–1",
-        period: "HT",
-      },
-      {
-        id: "me-mp-4",
-        minute: 58,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-leon-hartmann",
-        playerName: "Leon Hartmann",
-        detail: "Free-kick",
-        period: "2H",
-      },
-      {
-        id: "me-mp-5",
-        minute: 74,
-        type: "goal",
-        teamId: "team-paris-elite",
-        playerId: "player-karim-saidi",
-        playerName: "Karim Saidi",
-        detail: "Equaliser on the break",
-        period: "2H",
-      },
-    ],
-    footballStats: {
-      possession: [51, 49],
-      shots: [13, 11],
-      shotsOnTarget: [6, 6],
-      corners: [5, 4],
-      fouls: [7, 8],
-      passAccuracy: [87, 85],
-    },
-    homeLineupIds: [
-      "player-nico-stahl",
-      "player-leon-hartmann",
-      "player-pascal-meier",
-    ],
-    awayLineupIds: [
-      "player-enzo-blanc",
-      "player-adrien-morel",
-      "player-karim-saidi",
-    ],
-    highlightIds: [],
-    newsIds: ["news-munich-paris-thriller"],
-    videoIds: ["vid-munich-paris-goals"],
-  },
-
-  // ——— Finished Quarter Finals (8) ———
-  {
-    id: "match-qf1-nexus-lisbon",
-    slug: "nexus-vs-lisbon-tide",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T15:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-nexus-fc",
-    awayTeamId: "team-lisbon-tide",
-    homeScore: 3,
-    awayScore: 1,
-    venue: VENUE_OLYMPIA,
-    events: [
-      {
-        id: "me-qf1-1",
-        minute: 18,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-marco-vesa",
-        playerName: "Marco Vesa",
-      },
-      {
-        id: "me-qf1-2",
+        id: "me-bd-3",
         minute: 41,
         type: "goal",
-        teamId: "team-lisbon-tide",
-        playerId: "player-joao-silva",
-        playerName: "João Silva",
+        teamId: "team-dortmund-fc",
+        playerId: "player-guirassy",
+        playerName: "Serhou Guirassy",
+        detail: "Header from corner",
+        period: "1H"
       },
       {
-        id: "me-qf1-3",
-        minute: 67,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-samuel-oke",
-        playerName: "Samuel Oke",
+        id: "me-bd-4",
+        minute: 45,
+        type: "ht",
+        teamId: "team-bayern-fc",
+        detail: "Half-time",
+        period: "HT"
       },
       {
-        id: "me-qf1-4",
-        minute: 84,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-yannick-durand",
-        playerName: "Yannick Durand",
-      },
-    ],
-    footballStats: {
-      possession: [58, 42],
-      shots: [16, 8],
-      shotsOnTarget: [9, 3],
-      corners: [7, 2],
-      fouls: [9, 10],
-      passAccuracy: [88, 80],
-    },
-    homeLineupIds: NEXUS_XI,
-    awayLineupIds: ["player-joao-silva", "player-tiago-mendes"],
-    highlightIds: ["vid-qf-nexus-lisbon"],
-    newsIds: ["news-nexus-qf-win"],
-    videoIds: ["vid-qf-nexus-lisbon"],
-  },
-  {
-    id: "match-qf2-berlin-vienna",
-    slug: "berlin-united-vs-vienna-pulse",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T15:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-berlin-united",
-    awayTeamId: "team-vienna-pulse",
-    homeScore: 2,
-    awayScore: 0,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-qf2-1",
-        minute: 33,
-        type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-ben-richter",
-        playerName: "Ben Richter",
-      },
-      {
-        id: "me-qf2-2",
-        minute: 71,
-        type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-luka-petrov",
-        playerName: "Luka Petrov",
-      },
-    ],
-    footballStats: {
-      possession: [52, 48],
-      shots: [12, 7],
-      shotsOnTarget: [5, 2],
-      corners: [5, 3],
-      fouls: [11, 12],
-      passAccuracy: [83, 85],
-    },
-    homeLineupIds: BERLIN_XI,
-    awayLineupIds: ["player-stefan-hofer", "player-david-lang"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-qf3-wolves-amsterdam",
-    slug: "berlin-wolves-vs-amsterdam-ridge",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T18:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-berlin-wolves",
-    awayTeamId: "team-amsterdam-ridge",
-    homeScore: 2,
-    awayScore: 1,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-qf3-1",
-        minute: 14,
-        type: "goal",
-        teamId: "team-amsterdam-ridge",
-        playerId: "player-daan-visser",
-        playerName: "Daan Visser",
-      },
-      {
-        id: "me-qf3-2",
-        minute: 39,
-        type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-max-keller",
-        playerName: "Max Keller",
-      },
-      {
-        id: "me-qf3-3",
-        minute: 88,
-        type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-ivan-drago",
-        playerName: "Ivan Drago",
-      },
-    ],
-    footballStats: {
-      possession: [46, 54],
-      shots: [11, 13],
-      shotsOnTarget: [5, 4],
-      corners: [3, 6],
-      fouls: [14, 8],
-      passAccuracy: [77, 86],
-    },
-    homeLineupIds: [
-      "player-tom-weiss",
-      "player-ivan-drago",
-      "player-max-keller",
-    ],
-    awayLineupIds: ["player-daan-visser", "player-jesse-bouwman"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-qf4-hamburg-prague",
-    slug: "hamburg-united-vs-prague-signal",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T18:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-hamburg-united",
-    awayTeamId: "team-prague-signal",
-    homeScore: 1,
-    awayScore: 0,
-    venue: VENUE_OLYMPIA,
-    events: [
-      {
-        id: "me-qf4-1",
-        minute: 64,
-        type: "goal",
-        teamId: "team-hamburg-united",
-        playerId: "player-finn-bode",
-        playerName: "Finn Bode",
-        detail: "Set-piece header",
-      },
-    ],
-    footballStats: {
-      possession: [55, 45],
-      shots: [10, 6],
-      shotsOnTarget: [4, 1],
-      corners: [6, 2],
-      fouls: [8, 13],
-      passAccuracy: [85, 78],
-    },
-    homeLineupIds: [
-      "player-arne-hoff",
-      "player-joris-klein",
-      "player-finn-bode",
-    ],
-    awayLineupIds: ["player-adam-novy", "player-martin-kral"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-qf5-munich-warsaw",
-    slug: "munich-stars-vs-warsaw-north",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T20:30:00+02:00",
-    period: "FT",
-    homeTeamId: "team-munich-stars",
-    awayTeamId: "team-warsaw-north",
-    homeScore: 3,
-    awayScore: 2,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-qf5-1",
-        minute: 7,
-        type: "goal",
-        teamId: "team-warsaw-north",
-        playerId: "player-michal-baran",
-        playerName: "Michał Baran",
-      },
-      {
-        id: "me-qf5-2",
-        minute: 22,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-pascal-meier",
-        playerName: "Pascal Meier",
-      },
-      {
-        id: "me-qf5-3",
-        minute: 48,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-leon-hartmann",
-        playerName: "Leon Hartmann",
-      },
-      {
-        id: "me-qf5-4",
-        minute: 69,
-        type: "goal",
-        teamId: "team-warsaw-north",
-        playerId: "player-kacper-nowak",
-        playerName: "Kacper Nowak",
-      },
-      {
-        id: "me-qf5-5",
-        minute: 90,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-pascal-meier",
-        playerName: "Pascal Meier",
-        detail: "Stoppage-time winner",
-      },
-    ],
-    footballStats: {
-      possession: [57, 43],
-      shots: [15, 10],
-      shotsOnTarget: [8, 5],
-      corners: [6, 4],
-      fouls: [10, 15],
-      passAccuracy: [87, 76],
-    },
-    homeLineupIds: [
-      "player-nico-stahl",
-      "player-leon-hartmann",
-      "player-pascal-meier",
-    ],
-    awayLineupIds: ["player-kacper-nowak", "player-michal-baran"],
-    highlightIds: ["vid-munich-warsaw-thriller"],
-    newsIds: ["news-munich-stoppage"],
-    videoIds: ["vid-munich-warsaw-thriller"],
-  },
-  {
-    id: "match-qf6-paris-oslo",
-    slug: "paris-elite-vs-oslo-frost",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-19T20:30:00+02:00",
-    period: "FT",
-    homeTeamId: "team-paris-elite",
-    awayTeamId: "team-oslo-frost",
-    homeScore: 2,
-    awayScore: 1,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-qf6-1",
-        minute: 29,
-        type: "goal",
-        teamId: "team-paris-elite",
-        playerId: "player-karim-saidi",
-        playerName: "Karim Saidi",
-      },
-      {
-        id: "me-qf6-2",
-        minute: 55,
-        type: "goal",
-        teamId: "team-oslo-frost",
-        playerId: "player-erik-solberg",
-        playerName: "Erik Solberg",
-      },
-      {
-        id: "me-qf6-3",
-        minute: 78,
-        type: "goal",
-        teamId: "team-paris-elite",
-        playerId: "player-adrien-morel",
-        playerName: "Adrien Morel",
-      },
-    ],
-    footballStats: {
-      possession: [61, 39],
-      shots: [14, 5],
-      shotsOnTarget: [7, 2],
-      corners: [8, 1],
-      fouls: [6, 11],
-      passAccuracy: [89, 82],
-    },
-    homeLineupIds: [
-      "player-enzo-blanc",
-      "player-adrien-morel",
-      "player-karim-saidi",
-    ],
-    awayLineupIds: ["player-anders-lie", "player-erik-solberg"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-qf7-milan-stockholm",
-    slug: "milan-forge-vs-stockholm-iron",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-18T18:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-milan-forge",
-    awayTeamId: "team-stockholm-iron",
-    homeScore: 2,
-    awayScore: 0,
-    venue: VENUE_OLYMPIA,
-    events: [
-      {
-        id: "me-qf7-1",
-        minute: 36,
-        type: "goal",
-        teamId: "team-milan-forge",
-        playerId: "player-luca-ferrari",
-        playerName: "Luca Ferrari",
-      },
-      {
-        id: "me-qf7-2",
-        minute: 81,
-        type: "goal",
-        teamId: "team-milan-forge",
-        playerId: "player-andrea-conti",
-        playerName: "Andrea Conti",
-      },
-    ],
-    footballStats: {
-      possession: [49, 51],
-      shots: [9, 8],
-      shotsOnTarget: [5, 2],
-      corners: [4, 4],
-      fouls: [13, 10],
-      passAccuracy: [81, 84],
-    },
-    homeLineupIds: ["player-luca-ferrari", "player-andrea-conti"],
-    awayLineupIds: ["player-viktor-lind", "player-oscar-bergstrom"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-qf8-copenhagen-zurich",
-    slug: "copenhagen-harbor-vs-zurich-altitude",
-    eventId: EVT,
-    sport: "football",
-    round: "Quarter Final",
-    status: "finished",
-    kickoff: "2026-06-18T20:30:00+02:00",
-    period: "FT",
-    homeTeamId: "team-copenhagen-harbor",
-    awayTeamId: "team-zurich-altitude",
-    homeScore: 1,
-    awayScore: 1,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-qf8-1",
-        minute: 44,
-        type: "goal",
-        teamId: "team-copenhagen-harbor",
-        playerId: "player-lars-jensen",
-        playerName: "Lars Jensen",
-      },
-      {
-        id: "me-qf8-2",
-        minute: 72,
-        type: "goal",
-        teamId: "team-zurich-altitude",
-        playerId: "player-simon-bauer",
-        playerName: "Simon Bauer",
-      },
-      {
-        id: "me-qf8-3",
-        minute: 120,
-        type: "pen",
-        teamId: "team-copenhagen-harbor",
-        detail: "Copenhagen win 5–4 on penalties",
-      },
-    ],
-    footballStats: {
-      possession: [53, 47],
-      shots: [11, 10],
-      shotsOnTarget: [4, 4],
-      corners: [5, 5],
-      fouls: [9, 9],
-      passAccuracy: [84, 85],
-    },
-    homeLineupIds: ["player-mikkel-rasmussen", "player-lars-jensen"],
-    awayLineupIds: ["player-noah-keller", "player-simon-bauer"],
-    highlightIds: ["vid-copenhagen-pens"],
-    newsIds: ["news-copenhagen-pens"],
-    videoIds: ["vid-copenhagen-pens"],
-  },
-
-  // ——— Earlier round / group-style finished (for volume) ———
-  {
-    id: "match-r16-nexus-warsaw",
-    slug: "nexus-vs-warsaw-north-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-18T15:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-nexus-fc",
-    awayTeamId: "team-warsaw-north",
-    homeScore: 2,
-    awayScore: 0,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-r16-1",
-        minute: 27,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-kai-novak",
-        playerName: "Kai Novak",
-      },
-      {
-        id: "me-r16-2",
-        minute: 63,
-        type: "goal",
-        teamId: "team-nexus-fc",
-        playerId: "player-marco-vesa",
-        playerName: "Marco Vesa",
-      },
-    ],
-    footballStats: {
-      possession: [60, 40],
-      shots: [15, 6],
-      shotsOnTarget: [8, 2],
-      corners: [7, 2],
-      fouls: [7, 12],
-      passAccuracy: [89, 77],
-    },
-    homeLineupIds: NEXUS_XI,
-    awayLineupIds: ["player-kacper-nowak", "player-michal-baran"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-r16-berlin-oslo",
-    slug: "berlin-united-vs-oslo-frost-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-18T15:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-berlin-united",
-    awayTeamId: "team-oslo-frost",
-    homeScore: 3,
-    awayScore: 1,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-r16b-1",
-        minute: 11,
-        type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-ben-richter",
-        playerName: "Ben Richter",
-      },
-      {
-        id: "me-r16b-2",
-        minute: 40,
-        type: "goal",
-        teamId: "team-oslo-frost",
-        playerId: "player-anders-lie",
-        playerName: "Anders Lie",
-      },
-      {
-        id: "me-r16b-3",
+        id: "me-bd-5",
         minute: 58,
         type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-sean-murphy",
-        playerName: "Sean Murphy",
+        teamId: "team-bayern-fc",
+        playerId: "player-musiala",
+        playerName: "Jamal Musiala",
+        detail: "Cut inside, curled finish",
+        period: "2H"
       },
       {
-        id: "me-r16b-4",
-        minute: 79,
-        type: "goal",
-        teamId: "team-berlin-united",
-        playerId: "player-diego-alvarez",
-        playerName: "Diego Alvarez",
-      },
+        id: "me-bd-6",
+        minute: 67,
+        type: "sub",
+        teamId: "team-dortmund-fc",
+        playerName: "Beier on",
+        detail: "Maximilian Beier replaces Adeyemi",
+        period: "2H"
+      }
     ],
     footballStats: {
-      possession: [56, 44],
-      shots: [14, 7],
-      shotsOnTarget: [7, 3],
-      corners: [5, 3],
-      fouls: [8, 10],
-      passAccuracy: [85, 81],
+      possession: [
+        58,
+        42
+      ],
+      shots: [
+        14,
+        9
+      ],
+      shotsOnTarget: [
+        7,
+        4
+      ],
+      corners: [
+        6,
+        3
+      ],
+      fouls: [
+        8,
+        11
+      ],
+      passAccuracy: [
+        88,
+        82
+      ]
     },
-    homeLineupIds: BERLIN_XI,
-    awayLineupIds: ["player-anders-lie", "player-erik-solberg"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
+    homeLineupIds: [
+      "player-neuer",
+      "player-davies",
+      "player-kim",
+      "player-upamecano",
+      "player-kimmich",
+      "player-goretzka",
+      "player-musiala",
+      "player-olise",
+      "player-sane",
+      "player-coman",
+      "player-kane"
+    ],
+    awayLineupIds: [
+      "player-kobel",
+      "player-bensebaini",
+      "player-schlotterbeck",
+      "player-anton",
+      "player-ryerson",
+      "player-sabitzer",
+      "player-gross",
+      "player-brandt",
+      "player-adeyemi",
+      "player-beier",
+      "player-guirassy"
+    ],
+    highlightIds: [
+      "vid-klassiker-kane"
+    ],
+    newsIds: [
+      "news-klassiker-live"
+    ],
+    videoIds: [
+      "vid-klassiker-kane",
+      "vid-musiala-goal"
+    ]
   },
   {
-    id: "match-r16-munich-lisbon",
-    slug: "munich-stars-vs-lisbon-tide-r16",
-    eventId: EVT,
+    id: "match-leverkusen-leipzig",
+    slug: "leverkusen-vs-leipzig",
+    eventId: "evt-bundesliga",
     sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-18T12:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-munich-stars",
-    awayTeamId: "team-lisbon-tide",
-    homeScore: 2,
-    awayScore: 2,
-    venue: VENUE_OLYMPIA,
+    round: "Matchday 12",
+    status: "live",
+    kickoff: "2025-11-08T15:30:00+01:00",
+    minute: 55,
+    period: "2H",
+    homeTeamId: "team-leverkusen-fc",
+    awayTeamId: "team-leipzig-fc",
+    homeScore: 1,
+    awayScore: 1,
+    venue: "BayArena",
     events: [
       {
-        id: "me-r16m-1",
+        id: "me-ll-1",
         minute: 19,
         type: "goal",
-        teamId: "team-lisbon-tide",
-        playerId: "player-tiago-mendes",
-        playerName: "Tiago Mendes",
+        teamId: "team-leverkusen-fc",
+        playerId: "player-wirtz",
+        playerName: "Florian Wirtz",
+        period: "1H"
       },
       {
-        id: "me-r16m-2",
-        minute: 35,
+        id: "me-ll-2",
+        minute: 44,
         type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-leon-hartmann",
-        playerName: "Leon Hartmann",
-      },
-      {
-        id: "me-r16m-3",
-        minute: 61,
-        type: "goal",
-        teamId: "team-munich-stars",
-        playerId: "player-pascal-meier",
-        playerName: "Pascal Meier",
-      },
-      {
-        id: "me-r16m-4",
-        minute: 88,
-        type: "goal",
-        teamId: "team-lisbon-tide",
-        playerId: "player-joao-silva",
-        playerName: "João Silva",
-      },
-      {
-        id: "me-r16m-5",
-        minute: 120,
-        type: "pen",
-        teamId: "team-munich-stars",
-        detail: "Munich win 4–3 on penalties",
-      },
+        teamId: "team-leipzig-fc",
+        playerId: "player-sesko",
+        playerName: "Benjamin Šeško",
+        period: "1H"
+      }
     ],
     footballStats: {
-      possession: [50, 50],
-      shots: [12, 12],
-      shotsOnTarget: [5, 5],
-      corners: [4, 5],
-      fouls: [9, 9],
-      passAccuracy: [86, 85],
+      possession: [
+        52,
+        48
+      ],
+      shots: [
+        10,
+        8
+      ],
+      shotsOnTarget: [
+        4,
+        3
+      ],
+      corners: [
+        4,
+        5
+      ],
+      fouls: [
+        9,
+        8
+      ],
+      passAccuracy: [
+        85,
+        84
+      ]
     },
     homeLineupIds: [
-      "player-nico-stahl",
-      "player-leon-hartmann",
-      "player-pascal-meier",
+      "player-hradecky",
+      "player-wirtz",
+      "player-boniface"
     ],
-    awayLineupIds: ["player-joao-silva", "player-tiago-mendes"],
+    awayLineupIds: [
+      "player-gulacsi",
+      "player-olmo",
+      "player-sesko"
+    ],
     highlightIds: [],
     newsIds: [],
-    videoIds: [],
+    videoIds: []
   },
   {
-    id: "match-r16-paris-vienna",
-    slug: "paris-elite-vs-vienna-pulse-r16",
-    eventId: EVT,
+    id: "match-werder-frankfurt",
+    slug: "werder-vs-frankfurt",
+    eventId: "evt-bundesliga",
     sport: "football",
-    round: "Round of 16",
+    round: "Matchday 11",
     status: "finished",
-    kickoff: "2026-06-18T12:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-paris-elite",
-    awayTeamId: "team-vienna-pulse",
-    homeScore: 1,
-    awayScore: 0,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-r16p-1",
-        minute: 52,
-        type: "goal",
-        teamId: "team-paris-elite",
-        playerId: "player-enzo-blanc",
-        playerName: "Enzo Blanc",
-      },
-    ],
-    footballStats: {
-      possession: [62, 38],
-      shots: [13, 4],
-      shotsOnTarget: [5, 1],
-      corners: [7, 2],
-      fouls: [5, 14],
-      passAccuracy: [90, 79],
-    },
-    homeLineupIds: [
-      "player-enzo-blanc",
-      "player-adrien-morel",
-      "player-karim-saidi",
-    ],
-    awayLineupIds: ["player-stefan-hofer", "player-david-lang"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-r16-hamburg-milan",
-    slug: "hamburg-united-vs-milan-forge-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-18T10:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-hamburg-united",
-    awayTeamId: "team-milan-forge",
+    kickoff: "2025-11-01T15:30:00+01:00",
+    homeTeamId: "team-werder-fc",
+    awayTeamId: "team-frankfurt-fc",
     homeScore: 2,
-    awayScore: 1,
-    venue: VENUE_ARENA,
-    events: [
-      {
-        id: "me-r16h-1",
-        minute: 23,
-        type: "goal",
-        teamId: "team-hamburg-united",
-        playerId: "player-joris-klein",
-        playerName: "Joris Klein",
-      },
-      {
-        id: "me-r16h-2",
-        minute: 47,
-        type: "goal",
-        teamId: "team-milan-forge",
-        playerId: "player-andrea-conti",
-        playerName: "Andrea Conti",
-      },
-      {
-        id: "me-r16h-3",
-        minute: 83,
-        type: "goal",
-        teamId: "team-hamburg-united",
-        playerId: "player-finn-bode",
-        playerName: "Finn Bode",
-      },
-    ],
-    footballStats: {
-      possession: [47, 53],
-      shots: [10, 11],
-      shotsOnTarget: [4, 4],
-      corners: [4, 5],
-      fouls: [11, 10],
-      passAccuracy: [82, 83],
-    },
-    homeLineupIds: [
-      "player-arne-hoff",
-      "player-joris-klein",
-      "player-finn-bode",
-    ],
-    awayLineupIds: ["player-luca-ferrari", "player-andrea-conti"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-r16-wolves-copenhagen",
-    slug: "berlin-wolves-vs-copenhagen-harbor-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-18T10:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-berlin-wolves",
-    awayTeamId: "team-copenhagen-harbor",
-    homeScore: 3,
     awayScore: 2,
-    venue: VENUE_OLYMPIA,
+    venue: "Weserstadion",
     events: [
       {
-        id: "me-r16w-1",
-        minute: 8,
+        id: "me-wf-1",
+        minute: 22,
         type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-max-keller",
-        playerName: "Max Keller",
+        teamId: "team-werder-fc",
+        playerId: "player-ducksch",
+        playerName: "Marvin Ducksch",
+        period: "1H"
       },
       {
-        id: "me-r16w-2",
-        minute: 25,
-        type: "goal",
-        teamId: "team-copenhagen-harbor",
-        playerId: "player-mikkel-rasmussen",
-        playerName: "Mikkel Rasmussen",
-      },
-      {
-        id: "me-r16w-3",
+        id: "me-wf-2",
         minute: 51,
         type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-ivan-drago",
-        playerName: "Ivan Drago",
+        teamId: "team-frankfurt-fc",
+        playerId: "player-marmoush",
+        playerName: "Omar Marmoush",
+        period: "2H"
       },
       {
-        id: "me-r16w-4",
+        id: "me-wf-3",
         minute: 70,
         type: "goal",
-        teamId: "team-copenhagen-harbor",
-        playerId: "player-lars-jensen",
-        playerName: "Lars Jensen",
+        teamId: "team-werder-fc",
+        playerId: "player-schmid",
+        playerName: "Romano Schmid",
+        period: "2H"
       },
       {
-        id: "me-r16w-5",
-        minute: 90,
+        id: "me-wf-4",
+        minute: 88,
         type: "goal",
-        teamId: "team-berlin-wolves",
-        playerId: "player-max-keller",
-        playerName: "Max Keller",
-        detail: "Late winner",
-      },
+        teamId: "team-frankfurt-fc",
+        playerId: "player-gotze",
+        playerName: "Mario Götze",
+        period: "2H"
+      }
     ],
     footballStats: {
-      possession: [44, 56],
-      shots: [12, 14],
-      shotsOnTarget: [6, 5],
-      corners: [3, 7],
-      fouls: [15, 8],
-      passAccuracy: [75, 87],
+      possession: [
+        46,
+        54
+      ],
+      shots: [
+        11,
+        13
+      ],
+      shotsOnTarget: [
+        5,
+        6
+      ],
+      corners: [
+        5,
+        7
+      ],
+      fouls: [
+        10,
+        9
+      ],
+      passAccuracy: [
+        81,
+        86
+      ]
     },
     homeLineupIds: [
-      "player-tom-weiss",
-      "player-ivan-drago",
-      "player-max-keller",
+      "player-zetterer",
+      "player-stage",
+      "player-ducksch",
+      "player-weiser",
+      "player-lynge",
+      "player-pieper",
+      "player-jung",
+      "player-schmid"
     ],
-    awayLineupIds: ["player-mikkel-rasmussen", "player-lars-jensen"],
+    awayLineupIds: [
+      "player-trapp",
+      "player-marmoush",
+      "player-gotze"
+    ],
     highlightIds: [],
-    newsIds: [],
-    videoIds: [],
+    newsIds: [
+      "news-werder-draw"
+    ],
+    videoIds: []
   },
   {
-    id: "match-r16-amsterdam-zurich",
-    slug: "amsterdam-ridge-vs-zurich-altitude-r16",
-    eventId: EVT,
+    id: "match-stuttgart-freiburg",
+    slug: "stuttgart-vs-freiburg",
+    eventId: "evt-bundesliga",
     sport: "football",
-    round: "Round of 16",
+    round: "Matchday 11",
     status: "finished",
-    kickoff: "2026-06-17T20:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-amsterdam-ridge",
-    awayTeamId: "team-zurich-altitude",
-    homeScore: 1,
-    awayScore: 0,
-    venue: VENUE_PARK,
-    events: [
-      {
-        id: "me-r16a-1",
-        minute: 77,
-        type: "goal",
-        teamId: "team-amsterdam-ridge",
-        playerId: "player-jesse-bouwman",
-        playerName: "Jesse Bouwman",
-      },
-    ],
-    footballStats: {
-      possession: [58, 42],
-      shots: [11, 5],
-      shotsOnTarget: [4, 1],
-      corners: [6, 2],
-      fouls: [7, 11],
-      passAccuracy: [88, 83],
-    },
-    homeLineupIds: ["player-daan-visser", "player-jesse-bouwman"],
-    awayLineupIds: ["player-noah-keller", "player-simon-bauer"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-  {
-    id: "match-r16-prague-stockholm",
-    slug: "prague-signal-vs-stockholm-iron-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-17T20:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-prague-signal",
-    awayTeamId: "team-stockholm-iron",
-    homeScore: 2,
+    kickoff: "2025-11-01T18:30:00+01:00",
+    homeTeamId: "team-stuttgart-fc",
+    awayTeamId: "team-freiburg-fc",
+    homeScore: 3,
     awayScore: 1,
-    venue: VENUE_ARENA,
+    venue: "MHPArena",
     events: [
       {
-        id: "me-r16ps-1",
-        minute: 16,
+        id: "me-sf-1",
+        minute: 15,
         type: "goal",
-        teamId: "team-prague-signal",
-        playerId: "player-martin-kral",
-        playerName: "Martin Král",
+        teamId: "team-stuttgart-fc",
+        playerId: "player-undav",
+        playerName: "Deniz Undav",
+        period: "1H"
       },
       {
-        id: "me-r16ps-2",
-        minute: 54,
-        type: "goal",
-        teamId: "team-stockholm-iron",
-        playerId: "player-oscar-bergstrom",
-        playerName: "Oscar Bergström",
-      },
-      {
-        id: "me-r16ps-3",
-        minute: 89,
-        type: "goal",
-        teamId: "team-prague-signal",
-        playerId: "player-adam-novy",
-        playerName: "Adam Nový",
-      },
-    ],
-    footballStats: {
-      possession: [51, 49],
-      shots: [9, 10],
-      shotsOnTarget: [4, 3],
-      corners: [3, 4],
-      fouls: [12, 9],
-      passAccuracy: [80, 84],
-    },
-    homeLineupIds: ["player-adam-novy", "player-martin-kral"],
-    awayLineupIds: ["player-viktor-lind", "player-oscar-bergstrom"],
-    highlightIds: [],
-    newsIds: [],
-    videoIds: [],
-  },
-
-  {
-    id: "match-r16-lisbon-stockholm",
-    slug: "lisbon-tide-vs-stockholm-iron-r16",
-    eventId: EVT,
-    sport: "football",
-    round: "Round of 16",
-    status: "finished",
-    kickoff: "2026-06-17T17:00:00+02:00",
-    period: "FT",
-    homeTeamId: "team-lisbon-tide",
-    awayTeamId: "team-stockholm-iron",
-    homeScore: 2,
-    awayScore: 1,
-    venue: VENUE_OLYMPIA,
-    events: [
-      {
-        id: "me-r16ls-1",
+        id: "me-sf-2",
         minute: 33,
         type: "goal",
-        teamId: "team-lisbon-tide",
-        playerId: "player-joao-silva",
-        playerName: "João Silva",
+        teamId: "team-freiburg-fc",
+        playerId: "player-grifo",
+        playerName: "Vincenzo Grifo",
+        period: "1H"
       },
       {
-        id: "me-r16ls-2",
-        minute: 59,
+        id: "me-sf-3",
+        minute: 61,
         type: "goal",
-        teamId: "team-stockholm-iron",
-        playerId: "player-oscar-bergstrom",
-        playerName: "Oscar Bergström",
+        teamId: "team-stuttgart-fc",
+        playerId: "player-fuhrich",
+        playerName: "Chris Führich",
+        period: "2H"
       },
       {
-        id: "me-r16ls-3",
-        minute: 85,
+        id: "me-sf-4",
+        minute: 79,
         type: "goal",
-        teamId: "team-lisbon-tide",
-        playerId: "player-tiago-mendes",
-        playerName: "Tiago Mendes",
-      },
+        teamId: "team-stuttgart-fc",
+        playerId: "player-undav",
+        playerName: "Deniz Undav",
+        period: "2H"
+      }
     ],
     footballStats: {
-      possession: [54, 46],
-      shots: [12, 8],
-      shotsOnTarget: [5, 3],
-      corners: [5, 3],
-      fouls: [8, 11],
-      passAccuracy: [86, 81],
+      possession: [
+        55,
+        45
+      ],
+      shots: [
+        16,
+        8
+      ],
+      shotsOnTarget: [
+        8,
+        3
+      ],
+      corners: [
+        7,
+        3
+      ],
+      fouls: [
+        8,
+        12
+      ],
+      passAccuracy: [
+        87,
+        80
+      ]
     },
-    homeLineupIds: ["player-joao-silva", "player-tiago-mendes"],
-    awayLineupIds: ["player-viktor-lind", "player-oscar-bergstrom"],
+    homeLineupIds: [
+      "player-nubel",
+      "player-undav",
+      "player-fuhrich"
+    ],
+    awayLineupIds: [
+      "player-atzenholt",
+      "player-grifo",
+      "player-hofer"
+    ],
     highlightIds: [],
     newsIds: [],
-    videoIds: [],
+    videoIds: []
   },
-
-  // ——— Upcoming Final placeholder ———
   {
-    id: "match-final-nova",
-    slug: "nova-cup-final-2026",
-    eventId: EVT,
+    id: "match-union-wolfsburg",
+    slug: "union-vs-wolfsburg",
+    eventId: "evt-bundesliga",
     sport: "football",
-    round: "Final",
+    round: "Matchday 11",
+    status: "finished",
+    kickoff: "2025-11-02T15:30:00+01:00",
+    homeTeamId: "team-union-fc",
+    awayTeamId: "team-wolfsburg-fc",
+    homeScore: 1,
+    awayScore: 0,
+    venue: "Alte Försterei",
+    events: [
+      {
+        id: "me-uw-1",
+        minute: 64,
+        type: "goal",
+        teamId: "team-union-fc",
+        playerId: "player-behrens",
+        playerName: "Kevin Behrens",
+        period: "2H"
+      }
+    ],
+    footballStats: {
+      possession: [
+        44,
+        56
+      ],
+      shots: [
+        9,
+        12
+      ],
+      shotsOnTarget: [
+        3,
+        4
+      ],
+      corners: [
+        4,
+        6
+      ],
+      fouls: [
+        14,
+        10
+      ],
+      passAccuracy: [
+        74,
+        83
+      ]
+    },
+    homeLineupIds: [
+      "player-ronnow",
+      "player-haberer",
+      "player-behrens"
+    ],
+    awayLineupIds: [
+      "player-grabara",
+      "player-arnold",
+      "player-winde"
+    ],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  },
+  {
+    id: "match-gladbach-bayern",
+    slug: "gladbach-vs-bayern",
+    eventId: "evt-bundesliga",
+    sport: "football",
+    round: "Matchday 10",
+    status: "finished",
+    kickoff: "2025-10-25T18:30:00+02:00",
+    homeTeamId: "team-gladbach-fc",
+    awayTeamId: "team-bayern-fc",
+    homeScore: 0,
+    awayScore: 3,
+    venue: "Borussia-Park",
+    events: [
+      {
+        id: "me-gb-1",
+        minute: 18,
+        type: "goal",
+        teamId: "team-bayern-fc",
+        playerId: "player-kane",
+        playerName: "Harry Kane",
+        period: "1H"
+      },
+      {
+        id: "me-gb-2",
+        minute: 47,
+        type: "goal",
+        teamId: "team-bayern-fc",
+        playerId: "player-olise",
+        playerName: "Michael Olise",
+        period: "2H"
+      },
+      {
+        id: "me-gb-3",
+        minute: 81,
+        type: "goal",
+        teamId: "team-bayern-fc",
+        playerId: "player-sane",
+        playerName: "Leroy Sané",
+        period: "2H"
+      }
+    ],
+    footballStats: {
+      possession: [
+        38,
+        62
+      ],
+      shots: [
+        6,
+        18
+      ],
+      shotsOnTarget: [
+        1,
+        9
+      ],
+      corners: [
+        2,
+        8
+      ],
+      fouls: [
+        11,
+        7
+      ],
+      passAccuracy: [
+        78,
+        91
+      ]
+    },
+    homeLineupIds: [
+      "player-olschowsky",
+      "player-plea",
+      "player-weigl"
+    ],
+    awayLineupIds: [
+      "player-neuer",
+      "player-davies",
+      "player-kim",
+      "player-upamecano",
+      "player-kimmich",
+      "player-goretzka",
+      "player-musiala",
+      "player-olise",
+      "player-sane",
+      "player-coman",
+      "player-kane"
+    ],
+    highlightIds: [],
+    newsIds: [
+      "news-bayern-away"
+    ],
+    videoIds: []
+  },
+  {
+    id: "match-dortmund-werder",
+    slug: "dortmund-vs-werder",
+    eventId: "evt-bundesliga",
+    sport: "football",
+    round: "Matchday 10",
+    status: "finished",
+    kickoff: "2025-10-25T15:30:00+02:00",
+    homeTeamId: "team-dortmund-fc",
+    awayTeamId: "team-werder-fc",
+    homeScore: 2,
+    awayScore: 0,
+    venue: "Signal Iduna Park",
+    events: [
+      {
+        id: "me-dw-1",
+        minute: 34,
+        type: "goal",
+        teamId: "team-dortmund-fc",
+        playerId: "player-guirassy",
+        playerName: "Serhou Guirassy",
+        period: "1H"
+      },
+      {
+        id: "me-dw-2",
+        minute: 72,
+        type: "goal",
+        teamId: "team-dortmund-fc",
+        playerId: "player-brandt",
+        playerName: "Julian Brandt",
+        period: "2H"
+      }
+    ],
+    footballStats: {
+      possession: [
+        61,
+        39
+      ],
+      shots: [
+        15,
+        5
+      ],
+      shotsOnTarget: [
+        7,
+        1
+      ],
+      corners: [
+        8,
+        2
+      ],
+      fouls: [
+        9,
+        12
+      ],
+      passAccuracy: [
+        86,
+        79
+      ]
+    },
+    homeLineupIds: [
+      "player-kobel",
+      "player-bensebaini",
+      "player-schlotterbeck",
+      "player-anton",
+      "player-ryerson",
+      "player-sabitzer",
+      "player-gross",
+      "player-brandt",
+      "player-adeyemi",
+      "player-beier",
+      "player-guirassy"
+    ],
+    awayLineupIds: [
+      "player-zetterer",
+      "player-ducksch",
+      "player-schmid"
+    ],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  },
+  {
+    id: "match-bayern-union",
+    slug: "bayern-vs-union",
+    eventId: "evt-bundesliga",
+    sport: "football",
+    round: "Matchday 13",
     status: "scheduled",
-    kickoff: "2026-06-21T20:00:00+02:00",
-    homeTeamId: "team-nexus-fc",
-    awayTeamId: "team-munich-stars",
+    kickoff: "2025-11-15T15:30:00+01:00",
+    homeTeamId: "team-bayern-fc",
+    awayTeamId: "team-union-fc",
     homeScore: 0,
     awayScore: 0,
-    venue: VENUE_OLYMPIA,
+    venue: "Allianz Arena",
     events: [],
     homeLineupIds: [],
     awayLineupIds: [],
     highlightIds: [],
-    newsIds: ["news-final-preview"],
-    videoIds: [],
+    newsIds: [],
+    videoIds: []
   },
+  {
+    id: "match-bayern-lorient-socca",
+    slug: "bayern-socca-vs-lorient-socca",
+    eventId: "evt-socca-austria-pro",
+    sport: "socca",
+    round: "Round 8",
+    status: "finished",
+    kickoff: "2025-03-12T19:00:00+01:00",
+    homeTeamId: "team-bayern-socca",
+    awayTeamId: "team-lorient-socca",
+    homeScore: 5,
+    awayScore: 3,
+    venue: "Vienna Arena Cage A",
+    events: [
+      {
+        id: "me-bls-1",
+        minute: 4,
+        type: "goal",
+        teamId: "team-bayern-socca",
+        playerId: "player-bayern-socca-1",
+        playerName: "Felix Kranz"
+      },
+      {
+        id: "me-bls-2",
+        minute: 11,
+        type: "goal",
+        teamId: "team-lorient-socca",
+        playerId: "player-lorient-socca-1",
+        playerName: "Yanis Merle"
+      }
+    ],
+    homeLineupIds: [
+      "player-bayern-socca-1",
+      "player-bayern-socca-2",
+      "player-bayern-socca-3",
+      "player-bayern-socca-4",
+      "player-bayern-socca-5"
+    ],
+    awayLineupIds: [
+      "player-lorient-socca-1",
+      "player-lorient-socca-2",
+      "player-lorient-socca-3",
+      "player-lorient-socca-4",
+      "player-lorient-socca-5"
+    ],
+    highlightIds: [],
+    newsIds: [
+      "news-lorient-cage"
+    ],
+    videoIds: []
+  },
+  {
+    id: "match-dortmund-werder-socca",
+    slug: "dortmund-socca-vs-werder-socca",
+    eventId: "evt-socca-austria-pro",
+    sport: "socca",
+    round: "Round 8",
+    status: "finished",
+    kickoff: "2025-03-12T20:30:00+01:00",
+    homeTeamId: "team-dortmund-socca",
+    awayTeamId: "team-werder-socca",
+    homeScore: 4,
+    awayScore: 4,
+    venue: "Vienna Arena Cage B",
+    events: [],
+    homeLineupIds: [
+      "player-dortmund-socca-1",
+      "player-dortmund-socca-2",
+      "player-dortmund-socca-3"
+    ],
+    awayLineupIds: [
+      "player-werder-socca-1",
+      "player-werder-socca-2",
+      "player-werder-socca-3"
+    ],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  },
+  {
+    id: "match-vienna-meridians-bayern-socca",
+    slug: "vienna-meridians-vs-bayern-socca",
+    eventId: "evt-socca-austria-pro",
+    sport: "socca",
+    round: "Round 9",
+    status: "scheduled",
+    kickoff: "2025-03-19T19:00:00+01:00",
+    homeTeamId: "team-vienna-meridians-socca",
+    awayTeamId: "team-bayern-socca",
+    homeScore: 0,
+    awayScore: 0,
+    venue: "Vienna Arena Cage A",
+    events: [],
+    homeLineupIds: [],
+    awayLineupIds: [],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  },
+  {
+    id: "match-bayern-dortmund-dota",
+    slug: "bayern-dota-vs-dortmund-dota",
+    eventId: "evt-the-international",
+    sport: "dota2",
+    round: "Upper Bracket Semi",
+    status: "finished",
+    kickoff: "2024-09-12T18:00:00+02:00",
+    homeTeamId: "team-bayern-dota2",
+    awayTeamId: "team-dortmund-dota2",
+    homeScore: 2,
+    awayScore: 1,
+    venue: "Royal Arena, Copenhagen",
+    events: [
+      {
+        id: "me-bdd-1",
+        minute: 0,
+        type: "kill",
+        teamId: "team-bayern-dota2",
+        playerId: "player-bayern-carry",
+        playerName: "Nova",
+        detail: "Game 1 first blood"
+      }
+    ],
+    dotaStats: {
+      kills: [
+        42,
+        35
+      ],
+      towers: [
+        9,
+        6
+      ],
+      roshan: [
+        2,
+        1
+      ],
+      gold: [
+        98000,
+        91000
+      ],
+      duration: "48:12 avg"
+    },
+    homeLineupIds: [
+      "player-bayern-carry",
+      "player-bayern-mid",
+      "player-bayern-offlane",
+      "player-bayern-soft",
+      "player-bayern-hard"
+    ],
+    awayLineupIds: [
+      "player-dortmund-carry",
+      "player-dortmund-mid",
+      "player-dortmund-offlane",
+      "player-dortmund-soft",
+      "player-dortmund-hard"
+    ],
+    highlightIds: [
+      "vid-ti-bayern-dortmund"
+    ],
+    newsIds: [
+      "news-ti-ub-semi"
+    ],
+    videoIds: [
+      "vid-ti-bayern-dortmund"
+    ]
+  },
+  {
+    id: "match-liquid-spirit",
+    slug: "liquid-vs-spirit",
+    eventId: "evt-the-international",
+    sport: "dota2",
+    round: "Upper Bracket Semi",
+    status: "finished",
+    kickoff: "2024-09-12T14:00:00+02:00",
+    homeTeamId: "team-liquid-dota2",
+    awayTeamId: "team-spirit-dota2",
+    homeScore: 1,
+    awayScore: 2,
+    venue: "Royal Arena, Copenhagen",
+    events: [],
+    dotaStats: {
+      kills: [
+        38,
+        44
+      ],
+      towers: [
+        7,
+        10
+      ],
+      roshan: [
+        1,
+        2
+      ],
+      gold: [
+        94000,
+        101000
+      ],
+      duration: "51:04 avg"
+    },
+    homeLineupIds: [
+      "player-tl-1",
+      "player-tl-2",
+      "player-tl-3"
+    ],
+    awayLineupIds: [
+      "player-ts-1",
+      "player-ts-2",
+      "player-ts-3"
+    ],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  },
+  {
+    id: "match-ti-final",
+    slug: "spirit-vs-bayern-dota",
+    eventId: "evt-the-international",
+    sport: "dota2",
+    round: "Grand Final",
+    status: "scheduled",
+    kickoff: "2024-09-15T18:00:00+02:00",
+    homeTeamId: "team-spirit-dota2",
+    awayTeamId: "team-bayern-dota2",
+    homeScore: 0,
+    awayScore: 0,
+    venue: "Royal Arena, Copenhagen",
+    events: [],
+    homeLineupIds: [],
+    awayLineupIds: [],
+    highlightIds: [],
+    newsIds: [],
+    videoIds: []
+  }
 ];
 
 export function getMatchById(id: string) {
@@ -1262,8 +903,4 @@ export function getMatchBySlug(slug: string) {
 
 export function getMatchesByEventId(eventId: string) {
   return matches.filter((m) => m.eventId === eventId);
-}
-
-export function getLiveMatches() {
-  return matches.filter((m) => m.status === "live");
 }

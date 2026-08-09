@@ -37,7 +37,7 @@ export function GoalAutomationPanel() {
               {match.homeScore}–{match.awayScore}
             </p>
             <p className="mt-2 text-sm text-muted">
-              {match.minute}&apos; · Semi Final
+              {match.minute}&apos; · Der Klassiker
             </p>
             <div className="mt-5">
               <Button onClick={triggerGoal} disabled={goalTriggered}>

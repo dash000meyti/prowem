@@ -3,14 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-const clubLinks = [
-  { href: "/clubs/nexus", label: "Home", exact: true },
-  { href: "/clubs/nexus/teams", label: "Teams" },
-  { href: "/clubs/nexus/teams/football", label: "Football" },
-  { href: "/clubs/nexus/teams/socca", label: "Socca" },
-  { href: "/clubs/nexus/teams/dota2", label: "Dota 2" },
-];
+import { getClubBySlug, getTeamsByClubId } from "@/data";
+import { sportLabel } from "@/lib/utils";
 
 const fanLinks = [
   { href: "/fans", label: "Dashboard", exact: true },
@@ -21,24 +15,43 @@ const fanLinks = [
   { href: "/fans/shop", label: "Shop" },
 ];
 
-export function ClubNavigation({ multiTeam = true }: { multiTeam?: boolean }) {
+export function ClubNavigation({
+  slug,
+  multiTeam = true,
+}: {
+  slug: string;
+  multiTeam?: boolean;
+}) {
   const pathname = usePathname();
-  const links = multiTeam
-    ? clubLinks
-    : clubLinks.filter((l) => l.label !== "Teams");
+  const club = getClubBySlug(slug);
+  const teams = getTeamsByClubId(club?.id ?? "");
+  const base = `/clubs/${slug}`;
+
+  const links = [
+    { href: base, label: "Home", exact: true },
+    ...(multiTeam
+      ? [
+          { href: `${base}/teams`, label: "Teams", exact: false },
+          ...teams.map((t) => ({
+            href: `${base}/teams/${t.sport}`,
+            label: sportLabel(t.sport),
+            exact: false,
+          })),
+        ]
+      : []),
+  ];
 
   return (
     <div className="border-b border-border bg-brand-surface/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6">
         <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-brand">
-          NEXUS
+          {club?.shortName ?? slug.toUpperCase()}
         </span>
         {links.map((link) => {
           const active = link.exact
             ? pathname === link.href
             : pathname === link.href ||
-              (link.href !== "/clubs/nexus/teams" &&
-                pathname.startsWith(link.href));
+              (link.href !== `${base}/teams` && pathname.startsWith(link.href));
           return (
             <Link
               key={link.href}

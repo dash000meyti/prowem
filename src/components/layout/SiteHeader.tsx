@@ -5,28 +5,37 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { getClubBySlug, getEventBySlug } from "@/data";
 
 const links = [
-  { href: "/events/nova-cup-2026", label: "Events" },
-  { href: "/clubs/nexus", label: "Clubs" },
+  { href: "/events", label: "Events" },
+  { href: "/clubs", label: "Clubs" },
   { href: "/fans", label: "Fans" },
   { href: "/matches/live", label: "Match" },
 ];
 
 function propertyFromPath(pathname: string) {
-  if (pathname.startsWith("/events/nova-cup-2026")) {
-    return {
-      label: "NOVA CUP",
-      href: "/events/nova-cup-2026",
-      primary: "#FF5A1F",
-    };
+  const eventMatch = pathname.match(/^\/events\/([^/]+)/);
+  if (eventMatch && eventMatch[1]) {
+    const event = getEventBySlug(eventMatch[1]);
+    if (event) {
+      return {
+        label: event.shortName,
+        href: `/events/${event.slug}`,
+        primary: event.theme.primary,
+      };
+    }
   }
-  if (pathname.startsWith("/clubs/nexus")) {
-    return {
-      label: "NEXUS",
-      href: "/clubs/nexus",
-      primary: "#00C2A8",
-    };
+  const clubMatch = pathname.match(/^\/clubs\/([^/]+)/);
+  if (clubMatch && clubMatch[1]) {
+    const club = getClubBySlug(clubMatch[1]);
+    if (club) {
+      return {
+        label: club.shortName,
+        href: `/clubs/${club.slug}`,
+        primary: club.theme.primary,
+      };
+    }
   }
   if (pathname.startsWith("/fans")) {
     return { label: "FAN", href: "/fans", primary: "#FF5A1F" };
@@ -86,9 +95,7 @@ export function SiteHeader() {
               className={cn(
                 "text-xs uppercase tracking-[0.18em] text-muted transition hover:text-foreground",
                 pathname.startsWith(link.href) &&
-                  (property
-                    ? "font-semibold"
-                    : "text-brand"),
+                  (property ? "font-semibold" : "text-brand"),
               )}
               style={
                 pathname.startsWith(link.href) && property

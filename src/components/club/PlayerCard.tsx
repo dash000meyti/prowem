@@ -3,7 +3,7 @@ import type { Player } from "@/types";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { MediaImage } from "@/components/media/MediaImage";
 import { heroMedia } from "@/data/media";
-import { getTeamById } from "@/data";
+import { getClubForTeam, getTeamById, isFeaturedClub } from "@/data";
 import { Crest } from "@/components/media/Crest";
 
 export function PlayerCard({
@@ -14,18 +14,19 @@ export function PlayerCard({
   href?: string;
 }) {
   const team = getTeamById(player.teamId);
+  const club = team ? getClubForTeam(team.id) : undefined;
   const profileHref =
     href ??
-    (player.slug === "kai-novak" ? "/clubs/nexus/players/kai-novak" : undefined);
+    (club && isFeaturedClub(club.slug)
+      ? `/clubs/${club.slug}/players/${player.slug}`
+      : undefined);
 
   const body = (
     <GlassPanel className="overflow-hidden transition hover:border-[var(--glass-border-strong)]">
       <div className="relative h-36">
         <MediaImage
           src={
-            player.sport === "dota2"
-              ? heroMedia.nexusDota
-              : heroMedia.player
+            player.sport === "dota2" ? heroMedia.bayernDota : heroMedia.player
           }
           alt={player.name}
           sizes="320px"

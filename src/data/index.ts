@@ -1,6 +1,13 @@
 export { organizers, getOrganizerById, getOrganizerBySlug } from "./organizers";
 export { events, getEventById, getEventBySlug } from "./events";
-export { clubs, getClubById, getClubBySlug } from "./clubs";
+export {
+  clubs,
+  getClubById,
+  getClubBySlug,
+  isFeaturedClub,
+  getFeaturedClubs,
+  FEATURED_CLUB_SLUGS,
+} from "./clubs";
 export { teams, getTeamById, getTeamBySlug, getTeamsByClubId } from "./teams";
 export {
   players,
@@ -14,7 +21,12 @@ export {
   getMatchBySlug,
   getMatchesByEventId,
 } from "./matches";
-export { standings, getStandingByTeamId } from "./standings";
+export {
+  standings,
+  soccaStandings,
+  getStandingByTeamId,
+  getStandingsForEventId,
+} from "./standings";
 export { bracket, getBracketByRound } from "./bracket";
 export {
   news,
@@ -51,14 +63,13 @@ export {
   toneToMedia,
 } from "./media";
 
-
 import { clubs } from "./clubs";
 import { events } from "./events";
 import { fans } from "./fans";
 import { matches } from "./matches";
 import { news } from "./news";
 import { players } from "./players";
-import { standings } from "./standings";
+import { getStandingsForEventId } from "./standings";
 import { teams } from "./teams";
 import { videos } from "./videos";
 
@@ -98,14 +109,18 @@ export function getVideosForEvent(eventId: string) {
   return videos.filter((v) => v.eventId === eventId);
 }
 
-export function getStandingsForEvent() {
-  return [...standings].sort((a, b) => a.position - b.position);
+export function getStandingsForEvent(eventId?: string) {
+  return getStandingsForEventId(eventId ?? "evt-bundesliga");
 }
 
 export function getFeaturedMatch() {
-  return matches.find((m) => m.id === "match-nexus-berlin")!;
+  return matches.find((m) => m.id === "match-bayern-dortmund")!;
 }
 
 export function getPrimaryFan() {
   return fans.find((f) => f.id === "fan-alex")!;
+}
+
+export function getPrimaryEvent() {
+  return events.find((e) => e.id === "evt-bundesliga")!;
 }

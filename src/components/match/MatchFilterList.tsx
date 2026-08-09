@@ -52,8 +52,8 @@ export function MatchFilterList({ matches }: { matches: Match[] }) {
               home={home}
               away={away}
               href={
-                match.id === "match-nexus-berlin"
-                  ? "/matches/nova-cup/nexus-vs-berlin-united"
+                match.id === "match-bayern-dortmund"
+                  ? "/matches/bundesliga/bayern-vs-dortmund"
                   : undefined
               }
             />

@@ -25,8 +25,8 @@
 هر لایه هویت مستقل دارد و نباید کل محصول یک پالت واحد به نظر برسد:
 
 - **Platform (PROWEM):** marketing و chrome پایه
-- **Event:** property برنددار (مثلاً NOVA CUP)
-- **Club:** property برنددار (مثلاً NEXUS teal)
+- **Event:** property برنددار (مثلاً Bundesliga)
+- **Club:** property برنددار (مثلاً Bayern Munich)
 
 ورود به Event/Club باید حس ورود به digital property جدا روی همان زیرساخت را بدهد. پیاده‌سازی: `BrandScope` + تم از داده.
 
@@ -51,10 +51,10 @@ Score → Standings → Player Stats → Timeline → Website → Social → Vid
 
 ## جهان دمو
 
-- Organizer: **NOVA Sports**
-- Event: **NOVA CUP 2026** (Berlin, 18–21 June, 16 teams)
-- Club: **NEXUS** (Football + Socca + Dota 2)
-- Match زنده: **NEXUS FC 2–1 Berlin United**, 72'
+- Organizers: **DFL** · **Socca Austria** · **Valve**
+- Events: **Bundesliga** (football) · **Socca Austria Pro League** (socca) · **The International** (dota2)
+- Featured clubs: **Bayern Munich** · **Borussia Dortmund** · **Werder Bremen** · **FC Lorient**
+- Live match: **Bayern Munich 2–1 Borussia Dortmund**, 72' (Der Klassiker)
 - Fan: **Alex Morgan**, Level 18, SUPER FAN
 
 ## محدودهٔ پروتوتایپ

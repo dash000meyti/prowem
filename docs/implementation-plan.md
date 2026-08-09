@@ -18,10 +18,10 @@ Next.js App Router + TS strict + Tailwind + Space Grotesk + theme CSS vars + lay
 `/` با هیرو و ۴ CTA
 
 ### Phase 4 — Event
-تمام مسیرهای NOVA CUP با تم اختصاصی و داده مشترک
+تمام مسیرهای Event (`/events/[slug]`) با تم اختصاصی و داده مشترک
 
 ### Phase 5 — Club
-NEXUS + تیم‌ها؛ single-team mode در معماری پشتیبانی شود
+Featured clubs + تیم‌ها؛ single-team mode (مثلاً Lorient) در معماری پشتیبانی شود
 
 ### Phase 6 — Fan
 Dashboard، profile، missions، rewards، passport، shop + Complete Mission

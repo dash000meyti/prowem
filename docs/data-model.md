@@ -10,9 +10,9 @@
 
 | Entity | توضیح |
 |--------|--------|
-| Organizer | سازمان برگزارکننده (NOVA Sports) |
-| Event | رقابت (NOVA CUP 2026) + theme |
-| Club | سازمان مستقل (NEXUS) + theme |
+| Organizer | سازمان برگزارکننده (DFL, Socca Austria, Valve) |
+| Event | رقابت/لیگ (Bundesliga, Socca Austria Pro, The International) + theme |
+| Club | سازمان مستقل (Bayern, Dortmund, Werder, Lorient + stubs) + theme |
 | Team | تیم ورزشی/بازی؛ متعلق به یک Club؛ قابل شرکت در چند Event |
 | Player | بازیکن متعلق به Team |
 | Match | مسابقه بین دو Team در یک Event |
@@ -70,7 +70,7 @@ src/data/
 
 ## حجم حداقل mock
 
-1 Event · 8–16 Club · 16+ تیم فوتبال + تیم‌های NEXUS · 30–50 بازیکن فوتبال · 7+ Dota · 20+ Match · 15+ News · 10+ Video · 6+ Award/Legend · 10+ Mission/Reward/Achievement
+3 Event · 4 featured Club (+ stubs) · 9 featured teams + stub teams · 30+ players · 10+ Match · 8+ News · 6+ Video · 6+ Award/Legend · 10+ Mission/Reward/Achievement
 
 ## تعاملات شبیه‌سازی
 

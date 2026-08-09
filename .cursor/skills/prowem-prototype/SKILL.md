@@ -11,10 +11,11 @@ description: Guides building and extending the PROWEM 2.0 sports digital infrast
 3. داده را از `src/data` بگیر؛ کپی جدید نساز
 
 ## جهان دمو (ثابت)
-- NOVA Sports → NOVA CUP 2026 (Berlin, June 18–21)
-- NEXUS: Football, Socca, Dota 2
-- Live match: NEXUS FC 2–1 Berlin United, 72'
+- Events: Bundesliga · Socca Austria Pro League · The International
+- Featured clubs: Bayern Munich (football/socca/dota2) · Borussia Dortmund (football/socca/dota2) · Werder Bremen (football/socca) · FC Lorient (socca)
+- Live match: Bayern Munich 2–1 Borussia Dortmund, 72'
 - Fan: Alex Morgan, L18, 12840 XP, SUPER FAN
+- Media: local only under `public/images/` (`npm run fetch-media`)
 
 ## تعاملات اجباری
 - **Trigger Goal**: score + timeline + stats + social + notify + fan XP

@@ -14,14 +14,14 @@ const paths = [
     title: "Run an Event",
     subtext: "Create, operate and publish your competition from one platform.",
     cta: "Explore Event Platform",
-    href: "/events/nova-cup-2026",
+    href: "/events",
     image: mediaCatalog.stadiumLights,
   },
   {
     title: "Build a Club",
     subtext: "Build the digital home for your club, teams and players.",
     cta: "Explore Club Platform",
-    href: "/clubs/nexus",
+    href: "/clubs",
     image: mediaCatalog.footballAction,
   },
   {
@@ -36,7 +36,7 @@ const paths = [
     subtext:
       "Live scores, stats, video and content — all from one match data layer.",
     cta: "Enter Match Center",
-    href: "/matches/nova-cup/nexus-vs-berlin-united",
+    href: "/matches/bundesliga/bayern-vs-dortmund",
     image: mediaCatalog.pitchAerial,
   },
 ];
@@ -71,10 +71,10 @@ export default function HomePage() {
               One platform for sports events, clubs, live matches and fans.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/events/nova-cup-2026" size="lg">
+              <Button href="/events" size="lg">
                 Run an Event
               </Button>
-              <Button href="/clubs/nexus" variant="outline" size="lg">
+              <Button href="/clubs" variant="outline" size="lg">
                 Build a Club
               </Button>
             </div>
@@ -87,14 +87,14 @@ export default function HomePage() {
               </div>
               <div className="relative mb-5 flex items-center justify-between">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-muted">
-                  NOVA CUP · Semi Final
+                  Bundesliga · {match.round}
                 </p>
                 <LiveIndicator />
               </div>
               <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-3">
                 <div className="flex items-center gap-2">
                   <Crest slug={home.slug} name={home.name} size={28} />
-                  <p className="text-base font-semibold md:text-lg">{home.name}</p>
+                  <p className="text-base font-semibold md:text-lg">{home.shortName}</p>
                 </div>
                 <p className="text-4xl font-semibold tabular-nums text-orange md:text-5xl">
                   {match.homeScore}
@@ -103,13 +103,13 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center justify-end gap-2">
                   <p className="text-right text-base font-semibold md:text-lg">
-                    {away.name}
+                    {away.shortName}
                   </p>
                   <Crest slug={away.slug} name={away.name} size={28} />
                 </div>
               </div>
               <p className="relative mt-4 text-sm text-orange">
-                {match.minute}&apos; · Live data core
+                {match.minute}&apos; · Der Klassiker
               </p>
             </GlassPanel>
             <div className="grid grid-cols-2 gap-3">
@@ -117,10 +117,10 @@ export default function HomePage() {
                 <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
                   Player pulse
                 </p>
-                <p className="mt-3 text-xl font-semibold">Kai Novak</p>
-                <p className="text-sm text-muted">2 goals · 8.4 rating</p>
+                <p className="mt-3 text-xl font-semibold">Harry Kane</p>
+                <p className="text-sm text-muted">28 goals · 92 rating</p>
                 <Link
-                  href="/clubs/nexus/players/kai-novak"
+                  href="/clubs/bayern-munich/players/kane"
                   className="mt-3 inline-block text-[11px] uppercase tracking-[0.14em] text-orange"
                 >
                   Open profile →

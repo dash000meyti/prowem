@@ -1,8 +1,3 @@
----
-description: قوانین هسته PROWEM 2.0 — زبان، هویت محصول، کیفیت پروتوتایپ
-alwaysApply: true
----
-
 # PROWEM Core
 
 ## زبان
@@ -19,6 +14,12 @@ alwaysApply: true
 - Lorem ipsum / Test team / Team 1 / Player 1 / Sample news
 - Backend واقعی، auth، پرداخت، API اجتماعی واقعی
 - نابود کردن data layer مشترک یا hard-code کپی‌های ناسازگار entity
+- URL تصویر ریموت در runtime — همهٔ media از `/public/images`
 
 ## قبل از کار بزرگ
-مستندات `docs/` و این rules را رعایت کن. مسیرها و جهان دمو (NOVA CUP، NEXUS، Alex Morgan) را تغییر نده مگر درخواست صریح.
+مستندات `docs/` و این rules را رعایت کن. مسیرها و جهان دمو را تغییر نده مگر درخواست صریح:
+
+- Events: Bundesliga · Socca Austria Pro · The International
+- Clubs: Bayern Munich · Borussia Dortmund · Werder Bremen · FC Lorient
+- Live: Bayern 2–1 Dortmund, 72'
+- Fan: Alex Morgan

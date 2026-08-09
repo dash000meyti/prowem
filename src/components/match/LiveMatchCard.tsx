@@ -10,7 +10,7 @@ export function LiveMatchCard({
   match,
   home,
   away,
-  href = "/matches/nova-cup/nexus-vs-berlin-united",
+  href = "/matches/bundesliga/bayern-vs-dortmund",
 }: {
   match: Match;
   home: Team;

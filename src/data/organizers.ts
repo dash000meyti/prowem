@@ -2,13 +2,31 @@ import type { Organizer } from "@/types";
 
 export const organizers: Organizer[] = [
   {
-    id: "org-nova",
-    slug: "nova-sports",
-    name: "NOVA Sports",
-    shortName: "NOVA",
+    id: "org-dfl",
+    slug: "dfl",
+    name: "DFL Deutsche Fußball Liga",
+    shortName: "DFL",
     description:
-      "European sports infrastructure partner delivering premium competitions, club platforms and live digital experiences.",
-    location: "Berlin, Germany",
+      "The Deutsche Fußball Liga organises Germany's professional football leagues, including the Bundesliga — the country's top-flight competition.",
+    location: "Frankfurt, Germany",
+  },
+  {
+    id: "org-socca-austria",
+    slug: "socca-austria",
+    name: "Socca Austria",
+    shortName: "Socca AT",
+    description:
+      "Official member of the International Socca Federation, running national leagues including the Vienna Pro League.",
+    location: "Brunn am Gebirge, Austria",
+  },
+  {
+    id: "org-valve",
+    slug: "valve",
+    name: "Valve Corporation",
+    shortName: "Valve",
+    description:
+      "Publisher of Dota 2 and organiser of The International — the premier annual championship of the Dota Pro Circuit.",
+    location: "Bellevue, USA",
   },
 ];
 

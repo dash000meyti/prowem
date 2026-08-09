@@ -17,13 +17,10 @@ export function SiteFooter() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-muted">
             <li>
-              <Link href="/events/nova-cup-2026">Events</Link>
+              <Link href="/events">Events</Link>
             </li>
             <li>
-              <Link href="/clubs/nexus">Clubs</Link>
-            </li>
-            <li>
-              <Link href="/clubs/nexus/teams">Teams</Link>
+              <Link href="/clubs">Clubs</Link>
             </li>
             <li>
               <Link href="/fans">Fans</Link>

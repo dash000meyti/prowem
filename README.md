@@ -11,18 +11,20 @@ High-fidelity interactive prototype of **PROWEM** — digital infrastructure for
 - Framer Motion
 - Lucide React
 - Local mock data (no backend)
+- Local images under `public/images/`
 
 ## Demo world
 
-- **NOVA CUP 2026** — Berlin football festival
-- **NEXUS** — multi-team club (Football / Socca / Dota 2)
-- **Live match** — NEXUS FC vs Berlin United (Semi Final)
+- **Bundesliga** · **Socca Austria Pro League** · **The International**
+- **Bayern Munich** · **Borussia Dortmund** · **Werder Bremen** · **FC Lorient**
+- **Live match** — Bayern vs Dortmund (Der Klassiker), 72'
 - **Fan** — Alex Morgan (SUPER FAN)
 
 ## Run locally
 
 ```bash
 npm install
+npm run fetch-media   # optional: re-download local assets
 npm run dev
 ```
 
@@ -33,17 +35,14 @@ Open [http://localhost:3000](http://localhost:3000).
 | Route | Experience |
 |-------|------------|
 | `/` | Marketing homepage |
-| `/events/nova-cup-2026` | Event platform |
-| `/clubs/nexus` | Club platform |
-| `/clubs/nexus/teams/dota2` | Esports team |
+| `/events/bundesliga` | Event platform |
+| `/clubs/bayern-munich` | Club platform |
+| `/clubs/bayern-munich/teams/dota2` | Esports team |
+| `/clubs/fc-lorient` | Single-team club (socca) |
 | `/fans` | Fan dashboard |
 | `/matches/live` | Matchday |
-| `/matches/nova-cup/nexus-vs-berlin-united` | Match Center + Trigger Goal |
+| `/matches/bundesliga/bayern-vs-dortmund` | Match Center + Trigger Goal |
 
-## Docs (Persian)
+## Docs
 
-See [`docs/`](./docs/) for product architecture, IA, design system, data model, demo flow and implementation plan.
-
-## Demo tip
-
-On Match Center, click **Trigger Goal** to show live data propagating to score, timeline, social draft, notifications and fan XP.
+See `docs/` for product architecture, IA, data model, design system, and demo flow.

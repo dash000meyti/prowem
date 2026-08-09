@@ -7,7 +7,7 @@ export default function FanShopPage() {
       <SectionHeader
         eyebrow="Merch"
         title="Fan Shop"
-        description="Official kits, scarves and limited drops from NEXUS and NOVA CUP."
+        description="Official kits, scarves and limited drops from Bayern and Bundesliga."
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (

@@ -11,5 +11,6 @@ alwaysApply: false
 - selectors در `src/data/index.ts` برای join
 - sport-agnostic: payload آمار بر اساس `sport` typed باشد
 - حداقل حجم mock طبق `docs/data-model.md`
-- نام‌ها واقعی‌حس و منسجم با جهان NOVA/NEXUS
+- نام‌ها واقعی‌حس و منسجم با جهان Bundesliga / Bayern / Dortmund / Werder / Lorient
+- تصاویر فقط مسیر لوکال در `media.ts` — بدون URL ریموت
 - بدون `any` مگر ضروری

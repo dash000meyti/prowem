@@ -7,8 +7,8 @@ import { getLiveMatchesList, getTeamById, heroMedia } from "@/data";
 
 export default function MatchdayPage() {
   const live = getLiveMatchesList();
-  const featured = live.find((m) => m.id === "match-nexus-berlin");
-  const others = live.filter((m) => m.id !== "match-nexus-berlin");
+  const featured = live.find((m) => m.id === "match-bayern-dortmund");
+  const others = live.filter((m) => m.id !== "match-bayern-dortmund");
 
   return (
     <div>
@@ -41,7 +41,7 @@ export default function MatchdayPage() {
             <SectionHeader
               eyebrow="Semi final"
               title="Featured live"
-              description="NEXUS FC vs Berlin United — open the full Match Center."
+              description="Bayern Munich vs Borussia Dortmund — open the full Match Center."
             />
             <LiveMatchCard
               match={featured}

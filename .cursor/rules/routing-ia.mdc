@@ -7,9 +7,10 @@ alwaysApply: false
 # Routing & IA
 
 مسیرهای دمو را حفظ کن:
-- `/` · `/events/nova-cup-2026/*` · `/clubs/nexus/**` · `/fans/**` · `/matches/live` · `/matches/nova-cup/nexus-vs-berlin-united`
+- `/` · `/events` · `/events/[slug]/*` · `/clubs` · `/clubs/[slug]/**` · `/fans/**` · `/matches/live` · `/matches/bundesliga/bayern-vs-dortmund`
 
 ناوبری زمینه‌ای: Global / Event / Club / Team / Fan جدا حس شوند.
 Club تک‌تیمی: nav Teams را نشان نده.
 لینک entityها همیشه به همان دادهٔ مشترک `src/data` برود.
 صفحات monolithic ممنوع؛ از کامپوننت‌های `src/components` استفاده کن.
+تصاویر فقط لوکال از `/images/...`.

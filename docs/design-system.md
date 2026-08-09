@@ -9,8 +9,8 @@ PROWEM Platform  ≠  Event Property  ≠  Club Property
 | Scope | مسیرها | هویت |
 |-------|--------|------|
 | `platform` | `/` | PROWEM orange + charcoal |
-| `event` | `/events/*` | تم Event از داده (NOVA CUP) |
-| `club` | `/clubs/*` | تم Club از داده (NEXUS teal) |
+| `event` | `/events/*` | تم Event از داده (Bundesliga / SAPL / TI) |
+| `club` | `/clubs/*` | تم Club از داده (Bayern / Dortmund / …) |
 | `fan` | `/fans/*` | hybrid platform |
 | `match` | `/matches/*` | تم Event میزبان |
 

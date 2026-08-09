@@ -123,7 +123,7 @@ export default function FansDashboardPage() {
             match={featured}
             home={home}
             away={away}
-            href="/matches/nova-cup/nexus-vs-berlin-united"
+            href="/matches/bundesliga/bayern-vs-dortmund"
           />
         </section>
 

@@ -51,7 +51,7 @@ export function MatchCenterClient({
             <div className="relative mb-8 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.28em] text-orange">
-                  NOVA CUP · {match.round}
+                  {match.round}
                 </p>
                 <p className="mt-2 text-sm text-muted">{match.venue}</p>
               </div>

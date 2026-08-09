@@ -3,35 +3,44 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { getEventBySlug } from "@/data";
 
-const eventLinks = [
-  { href: "/events/nova-cup-2026", label: "Home", exact: true },
-  { href: "/events/nova-cup-2026/matches", label: "Matches" },
-  { href: "/events/nova-cup-2026/live", label: "Live" },
-  { href: "/events/nova-cup-2026/standings", label: "Standings" },
-  { href: "/events/nova-cup-2026/bracket", label: "Bracket" },
-  { href: "/events/nova-cup-2026/teams", label: "Teams" },
-  { href: "/events/nova-cup-2026/players", label: "Players" },
-  { href: "/events/nova-cup-2026/stats", label: "Stats" },
-  { href: "/events/nova-cup-2026/news", label: "News" },
-  { href: "/events/nova-cup-2026/videos", label: "Videos" },
-  { href: "/events/nova-cup-2026/history", label: "History" },
-  { href: "/events/nova-cup-2026/awards", label: "Awards" },
-  { href: "/events/nova-cup-2026/legends", label: "Legends" },
-  { href: "/events/nova-cup-2026/sponsors", label: "Sponsors" },
-  { href: "/events/nova-cup-2026/fan-zone", label: "Fan Zone" },
+const suffixes = [
+  { path: "", label: "Home", exact: true },
+  { path: "/matches", label: "Matches" },
+  { path: "/live", label: "Live" },
+  { path: "/standings", label: "Standings" },
+  { path: "/bracket", label: "Bracket" },
+  { path: "/teams", label: "Teams" },
+  { path: "/players", label: "Players" },
+  { path: "/stats", label: "Stats" },
+  { path: "/news", label: "News" },
+  { path: "/videos", label: "Videos" },
+  { path: "/history", label: "History" },
+  { path: "/awards", label: "Awards" },
+  { path: "/legends", label: "Legends" },
+  { path: "/sponsors", label: "Sponsors" },
+  { path: "/fan-zone", label: "Fan Zone" },
 ];
 
 export function EventNavigation() {
   const pathname = usePathname();
+  const slug = pathname.match(/^\/events\/([^/]+)/)?.[1] ?? "bundesliga";
+  const event = getEventBySlug(slug);
+  const base = `/events/${slug}`;
+  const links = suffixes.map((s) => ({
+    href: `${base}${s.path}`,
+    label: s.label,
+    exact: s.exact,
+  }));
 
   return (
     <div className="border-b border-border bg-brand-surface/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6">
         <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-brand">
-          NOVA CUP
+          {event?.shortName ?? slug.toUpperCase()}
         </span>
-        {eventLinks.map((link) => {
+        {links.map((link) => {
           const active = link.exact
             ? pathname === link.href
             : pathname.startsWith(link.href);
