@@ -10,7 +10,6 @@ import { DemoAccountChip } from "@/components/fan/DemoAccountChip";
 const links = [
   { href: "/events", label: "Events" },
   { href: "/clubs", label: "Clubs" },
-  { href: "/fans", label: "Fans" },
   { href: "/matches/live", label: "Match" },
 ];
 
