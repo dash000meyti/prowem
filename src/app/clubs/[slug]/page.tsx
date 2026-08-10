@@ -11,6 +11,7 @@ import { ClubTeamsShowcase } from "@/components/club/ClubTeamsShowcase";
 import { ClubTicketsSection } from "@/components/club/ClubTicketsSection";
 import { AchievementBadge } from "@/components/fan/AchievementBadge";
 import { MatchCard } from "@/components/match/MatchCard";
+import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionShell } from "@/components/layout/SectionShell";
 import {
@@ -75,12 +76,20 @@ export default async function ClubHomePage({
   const roster = primaryTeam ? getPlayersByTeamId(primaryTeam.id) : [];
   const clubProducts = getProductsByClubId(club.id);
   const topPatrons = getTopClubPatrons(club.id, 10);
-  const recentShoppers = getRecentClubShoppers(club.id, 5);
+  const recentShoppers = getRecentClubShoppers(club.id, 10);
 
   const teamsHref = `/clubs/${slug}/teams`;
   const teamHref = primaryTeam
     ? `/clubs/${slug}/teams/${primaryTeam.sport}`
     : undefined;
+  const newsHref = `/clubs/${slug}/news`;
+  const shopHref = `/clubs/${slug}/shop`;
+  const ticketsHref = `/clubs/${slug}/tickets`;
+  const videosHref = `/clubs/${slug}/videos`;
+  const legendsHref = `/clubs/${slug}/legends`;
+  const awardsHref = `/clubs/${slug}/awards`;
+  const sponsorsHref = `/clubs/${slug}/sponsors`;
+  const supportersHref = `/clubs/${slug}/supporters`;
 
   return (
     <div>
@@ -116,11 +125,19 @@ export default async function ClubHomePage({
         atmosphere="tint"
         innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
       >
-        <ClubFeaturedStories articles={clubNews} />
+        <ClubFeaturedStories articles={clubNews} newsHref={newsHref} />
 
         {liveOrUpcoming.length > 0 ? (
           <section>
-            <SectionHeader eyebrow="Fixtures" title="Live & upcoming" />
+            <SectionHeader
+              eyebrow="Fixtures"
+              title="Live & upcoming"
+              action={
+                <Button href={ticketsHref} variant="outline" size="sm">
+                  Tickets
+                </Button>
+              }
+            />
             <div className="grid gap-4 md:grid-cols-2">
               {liveOrUpcoming.map((match) => (
                 <MatchCard
@@ -156,7 +173,11 @@ export default async function ClubHomePage({
         atmosphere="mesh"
         innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
       >
-        <ClubShopSection clubName={club.name} products={clubProducts} />
+        <ClubShopSection
+          clubName={club.name}
+          products={clubProducts}
+          shopHref={shopHref}
+        />
         <ClubTicketsSection clubName={club.name} matches={upcomingTickets} />
       </SectionShell>
 
@@ -184,7 +205,15 @@ export default async function ClubHomePage({
       >
         {clubVideos.length > 0 ? (
           <section>
-            <SectionHeader eyebrow="Video" title="Watch" />
+            <SectionHeader
+              eyebrow="Video"
+              title="Watch"
+              action={
+                <Button href={videosHref} variant="outline" size="sm">
+                  All videos
+                </Button>
+              }
+            />
             <div className="grid gap-4 md:grid-cols-3">
               {clubVideos.map((video) => (
                 <VideoCard key={video.id} video={video} />
@@ -195,7 +224,15 @@ export default async function ClubHomePage({
 
         {clubLegends.length > 0 ? (
           <section>
-            <SectionHeader eyebrow="Legends" title="Club heritage" />
+            <SectionHeader
+              eyebrow="Legends"
+              title="Club heritage"
+              action={
+                <Button href={legendsHref} variant="outline" size="sm">
+                  All legends
+                </Button>
+              }
+            />
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {clubLegends.map((legend) => (
                 <LegendCard key={legend.id} legend={legend} />
@@ -206,7 +243,15 @@ export default async function ClubHomePage({
 
         {awards.length > 0 ? (
           <section>
-            <SectionHeader eyebrow="Awards" title="Recognition" />
+            <SectionHeader
+              eyebrow="Awards"
+              title="Recognition"
+              action={
+                <Button href={awardsHref} variant="outline" size="sm">
+                  All awards
+                </Button>
+              }
+            />
             <div className="grid gap-4 md:grid-cols-3">
               {awards.map((award) => (
                 <AwardCard key={award.id} award={award} />
@@ -232,6 +277,11 @@ export default async function ClubHomePage({
               eyebrow="Partners"
               title="Club sponsors"
               description="Commercial partners by support tier — title, gold and official."
+              action={
+                <Button href={sponsorsHref} variant="outline" size="sm">
+                  All sponsors
+                </Button>
+              }
             />
             <SponsorGrid sponsors={sponsors} />
           </section>
@@ -241,6 +291,7 @@ export default async function ClubHomePage({
           clubName={club.name}
           topPatrons={topPatrons}
           recentShoppers={recentShoppers}
+          supportersHref={supportersHref}
         />
       </SectionShell>
     </div>

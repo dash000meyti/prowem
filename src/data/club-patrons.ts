@@ -36,6 +36,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Cologne",
     clubId: "club-dortmund",
     totalContributed: 1320,
+    lastPurchaseAt: "2025-11-03T18:20:00+01:00",
+    lastPurchaseLabel: "Yellow Wall Scarf",
   },
   {
     id: "pat-dort-5",
@@ -52,6 +54,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Hagen",
     clubId: "club-dortmund",
     totalContributed: 980,
+    lastPurchaseAt: "2025-11-02T12:00:00+01:00",
+    lastPurchaseLabel: "Training Tee",
   },
   {
     id: "pat-dort-7",
@@ -68,6 +72,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Dortmund",
     clubId: "club-dortmund",
     totalContributed: 860,
+    lastPurchaseAt: "2025-11-01T09:30:00+01:00",
+    lastPurchaseLabel: "Multi-Arena Hoodie",
   },
   {
     id: "pat-dort-9",
@@ -84,6 +90,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Gelsenkirchen",
     clubId: "club-dortmund",
     totalContributed: 745,
+    lastPurchaseAt: "2025-10-30T15:45:00+01:00",
+    lastPurchaseLabel: "BVB Match Football",
   },
   {
     id: "pat-dort-11",
@@ -129,6 +137,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Munich",
     clubId: "club-bayern",
     totalContributed: 1580,
+    lastPurchaseAt: "2025-11-04T10:10:00+01:00",
+    lastPurchaseLabel: "Crest Cap",
   },
   {
     id: "pat-bay-4",
@@ -145,6 +155,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Nuremberg",
     clubId: "club-bayern",
     totalContributed: 1295,
+    lastPurchaseAt: "2025-11-03T08:25:00+01:00",
+    lastPurchaseLabel: "Match Football",
   },
   {
     id: "pat-bay-6",
@@ -161,6 +173,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Regensburg",
     clubId: "club-bayern",
     totalContributed: 990,
+    lastPurchaseAt: "2025-11-02T19:40:00+01:00",
+    lastPurchaseLabel: "Away Jersey",
   },
   {
     id: "pat-bay-8",
@@ -177,6 +191,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Salzburg",
     clubId: "club-bayern",
     totalContributed: 810,
+    lastPurchaseAt: "2025-11-01T11:15:00+01:00",
+    lastPurchaseLabel: "Dual-Arena Scarf",
   },
   {
     id: "pat-bay-10",
@@ -184,6 +200,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Munich",
     clubId: "club-bayern",
     totalContributed: 760,
+    lastPurchaseAt: "2025-10-29T16:05:00+01:00",
+    lastPurchaseLabel: "Home Jersey",
   },
   {
     id: "pat-bay-11",
@@ -220,6 +238,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Oldenburg",
     clubId: "club-werder",
     totalContributed: 1180,
+    lastPurchaseAt: "2025-11-04T13:20:00+01:00",
+    lastPurchaseLabel: "Lifestyle Hoodie",
   },
   {
     id: "pat-wer-3",
@@ -236,6 +256,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Hamburg",
     clubId: "club-werder",
     totalContributed: 920,
+    lastPurchaseAt: "2025-11-03T17:50:00+01:00",
+    lastPurchaseLabel: "Home Jersey",
   },
   {
     id: "pat-wer-5",
@@ -252,6 +274,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Bremen",
     clubId: "club-werder",
     totalContributed: 790,
+    lastPurchaseAt: "2025-11-02T08:40:00+01:00",
+    lastPurchaseLabel: "Grün-Weiß Scarf",
   },
   {
     id: "pat-wer-7",
@@ -259,6 +283,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Delmenhorst",
     clubId: "club-werder",
     totalContributed: 715,
+    lastPurchaseAt: "2025-11-01T12:25:00+01:00",
+    lastPurchaseLabel: "Match Football",
   },
   {
     id: "pat-wer-8",
@@ -275,6 +301,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Kiel",
     clubId: "club-werder",
     totalContributed: 640,
+    lastPurchaseAt: "2025-10-31T19:10:00+01:00",
+    lastPurchaseLabel: "Home Jersey",
   },
   {
     id: "pat-wer-10",
@@ -282,6 +310,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Bremen",
     clubId: "club-werder",
     totalContributed: 590,
+    lastPurchaseAt: "2025-10-28T11:00:00+01:00",
+    lastPurchaseLabel: "Grün-Weiß Scarf",
   },
   {
     id: "pat-wer-11",
@@ -318,6 +348,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Vannes",
     clubId: "club-lorient",
     totalContributed: 860,
+    lastPurchaseAt: "2025-03-16T10:30:00+01:00",
+    lastPurchaseLabel: "Les Merlus Scarf",
   },
   {
     id: "pat-lor-3",
@@ -334,6 +366,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Lorient",
     clubId: "club-lorient",
     totalContributed: 690,
+    lastPurchaseAt: "2025-03-15T14:55:00+01:00",
+    lastPurchaseLabel: "Merlus Travel Hoodie",
   },
   {
     id: "pat-lor-5",
@@ -341,6 +375,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Nantes",
     clubId: "club-lorient",
     totalContributed: 620,
+    lastPurchaseAt: "2025-03-13T09:20:00+01:00",
+    lastPurchaseLabel: "Lorient Cage Ball",
   },
   {
     id: "pat-lor-6",
@@ -357,6 +393,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Brest",
     clubId: "club-lorient",
     totalContributed: 510,
+    lastPurchaseAt: "2025-03-12T18:10:00+01:00",
+    lastPurchaseLabel: "Les Merlus Scarf",
   },
   {
     id: "pat-lor-8",
@@ -364,6 +402,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Lorient",
     clubId: "club-lorient",
     totalContributed: 465,
+    lastPurchaseAt: "2025-03-11T12:40:00+01:00",
+    lastPurchaseLabel: "Merlus Travel Hoodie",
   },
   {
     id: "pat-lor-9",
@@ -371,6 +411,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Auray",
     clubId: "club-lorient",
     totalContributed: 420,
+    lastPurchaseAt: "2025-03-10T16:00:00+01:00",
+    lastPurchaseLabel: "Lorient Cage Ball",
   },
   {
     id: "pat-lor-10",
@@ -378,6 +420,8 @@ export const clubPatrons: ClubPatron[] = [
     city: "Lorient",
     clubId: "club-lorient",
     totalContributed: 390,
+    lastPurchaseAt: "2025-03-09T11:25:00+01:00",
+    lastPurchaseLabel: "Socca Cage Kit",
   },
   {
     id: "pat-lor-11",

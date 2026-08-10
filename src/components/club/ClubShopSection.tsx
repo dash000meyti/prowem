@@ -29,9 +29,11 @@ function sortShopProducts(items: Product[]) {
 export function ClubShopSection({
   clubName,
   products,
+  shopHref = "/fans/shop",
 }: {
   clubName: string;
   products: Product[];
+  shopHref?: string;
 }) {
   if (products.length === 0) return null;
 
@@ -47,7 +49,7 @@ export function ClubShopSection({
         title={`Shop ${clubName}`}
         description="Jerseys, scarves, match balls and apparel — gear for every arena."
         action={
-          <Button href="/fans/shop" variant="outline" size="sm">
+          <Button href={shopHref} variant="outline" size="sm">
             See the whole shop
           </Button>
         }
@@ -66,7 +68,7 @@ export function ClubShopSection({
 
       <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
         <Link
-          href="/fans/shop"
+          href={shopHref}
           className="group relative block min-h-[360px] overflow-hidden lg:col-span-5"
         >
           <MediaImage
@@ -97,7 +99,7 @@ export function ClubShopSection({
 
         <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
           {grid.map((product) => (
-            <ProductTile key={product.id} product={product} />
+            <ProductTile key={product.id} product={product} href={shopHref} />
           ))}
         </div>
       </div>

@@ -8,7 +8,8 @@
 ### Event directory
 - `/events` — لیست همهٔ Eventها
 - `/events/[slug]` — `bundesliga` · `socca-austria-pro` · `the-international`
-- زیرمسیرها: matches, live, standings, bracket, teams, players, stats, news, videos, history, awards, legends, sponsors, fan-zone
+- زیرمسیرها: matches, standings (با bracket در صورت knockout + stats زیر جدول), teams, news, videos, history/heritage (history + awards + legends), sponsors, fan-zone
+- مسیرهای قدیمی live / bracket / stats / players / awards / legends به مقصدهای جدید redirect می‌شوند
 
 ### Club directory
 - `/clubs` — لیست باشگاه‌های featured
@@ -16,6 +17,7 @@
 - `/clubs/[slug]/teams` — فقط اگر بیش از یک تیم
 - `/clubs/[slug]/teams/[sport]` — football / socca / dota2
 - `/clubs/[slug]/players/[playerSlug]`
+- زیرمسیرهای باشگاه (مثل event): news, videos, shop, tickets, legends, awards, sponsors, supporters
 
 ### Fan
 - `/fans`
@@ -34,10 +36,13 @@
 
 | زمینه | ناوبری |
 |--------|--------|
-| Global | PROWEM + Events / Clubs / Fans / Match (دسترسی دمو؛ محتوای `/` مارکتینگ است) |
-| Event | Home, Matches, Live, Standings, Bracket, Teams, Players, Stats, News, Videos, History, Awards, Legends, Sponsors, Fan Zone |
-| Club چندتیمی | Home + Teams + per-sport |
-| Club تک‌تیمی (Lorient) | بدون nav «Teams» |
+| Global | PROWEM header فقط روی `/` · `/events` · `/clubs` · `/matches/*` |
+| Event property | PropertyNav به‌عنوان هدر اصلی (بدون PROWEM SiteHeader) |
+| Club property | ClubNavigation / PropertyNav به‌عنوان هدر اصلی |
+| Fan property | FanNavigation به‌عنوان هدر اصلی |
+| Event | Home · Matches (live در بالا) · Standings (bracket در بالا در صورت وجود + stats زیر جدول) · Teams · News · Videos · Heritage · Sponsors · Fan Zone |
+| Club چندتیمی | Home · Teams (dropdown → All teams + sports) · News · Videos · Shop · Tickets · Legends · Awards · Sponsors · Supporters |
+| Club تک‌تیمی (Lorient) | همان بخش‌ها بدون Teams dropdown |
 | Fan | Dashboard, Profile, Missions, Rewards, Passport, Shop |
 
 ## جریان دمو (خلاصه)

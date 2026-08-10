@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { getClubBySlug, getTeamsByClubId } from "@/data";
 import { sportLabel } from "@/lib/utils";
+import { getClubBySlug, getTeamsByClubId } from "@/data";
+import { PropertyNav, type PropertyNavItem } from "@/components/layout/PropertyNav";
 
-const fanLinks = [
+const fanLinks: PropertyNavItem[] = [
   { href: "/fans", label: "Dashboard", exact: true },
   { href: "/fans/profile", label: "Profile" },
   { href: "/fans/missions", label: "Missions" },
@@ -22,81 +20,42 @@ export function ClubNavigation({
   slug: string;
   multiTeam?: boolean;
 }) {
-  const pathname = usePathname();
   const club = getClubBySlug(slug);
   const teams = getTeamsByClubId(club?.id ?? "");
   const base = `/clubs/${slug}`;
 
-  const links = [
+  const items: PropertyNavItem[] = [
     { href: base, label: "Home", exact: true },
     ...(multiTeam
       ? [
-          { href: `${base}/teams`, label: "Teams", exact: false },
-          ...teams.map((t) => ({
-            href: `${base}/teams/${t.sport}`,
-            label: sportLabel(t.sport),
-            exact: false,
-          })),
+          {
+            href: `${base}/teams`,
+            label: "Teams",
+            children: teams.map((t) => ({
+              href: `${base}/teams/${t.sport}`,
+              label: sportLabel(t.sport),
+            })),
+          } satisfies PropertyNavItem,
         ]
       : []),
+    { href: `${base}/news`, label: "News" },
+    { href: `${base}/videos`, label: "Videos" },
+    { href: `${base}/shop`, label: "Shop" },
+    { href: `${base}/tickets`, label: "Tickets" },
+    { href: `${base}/legends`, label: "Legends" },
+    { href: `${base}/awards`, label: "Awards" },
+    { href: `${base}/sponsors`, label: "Sponsors" },
+    { href: `${base}/supporters`, label: "Supporters" },
   ];
 
   return (
-    <div className="border-b border-border bg-brand-surface/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6">
-        <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-brand">
-          {club?.shortName ?? slug.toUpperCase()}
-        </span>
-        {links.map((link) => {
-          const active = link.exact
-            ? pathname === link.href
-            : pathname === link.href ||
-              (link.href !== `${base}/teams` && pathname.startsWith(link.href));
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "shrink-0 rounded-sm px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-muted transition hover:text-foreground",
-                active && "bg-brand-tint text-brand",
-              )}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+    <PropertyNav
+      brand={club?.shortName ?? slug.toUpperCase()}
+      items={items}
+    />
   );
 }
 
 export function FanNavigation() {
-  const pathname = usePathname();
-
-  return (
-    <div className="border-b border-border bg-brand-surface/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-4 py-3 md:px-6">
-        <span className="mr-2 shrink-0 text-xs font-semibold tracking-[0.2em] text-brand">
-          FAN
-        </span>
-        {fanLinks.map((link) => {
-          const active = link.exact
-            ? pathname === link.href
-            : pathname.startsWith(link.href);
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "shrink-0 rounded-sm px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-muted transition hover:text-foreground",
-                active && "bg-brand-tint text-brand",
-              )}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
+  return <PropertyNav brand="FAN" items={fanLinks} />;
 }

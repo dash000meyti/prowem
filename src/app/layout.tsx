@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-bg-0 font-sans text-foreground">
+      <body className="flex min-h-full flex-col overflow-x-hidden bg-bg-0 font-sans text-foreground">
         <DemoProvider>
           <BrandScope theme={platformTheme()} className="flex min-h-full flex-1 flex-col">
             <a

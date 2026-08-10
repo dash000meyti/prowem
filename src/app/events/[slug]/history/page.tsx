@@ -1,10 +1,19 @@
+import { AwardCard, LegendCard } from "@/components/event/AwardLegendCards";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getEventBySlug } from "@/data";
+import {
+  getAwardsByEventId,
+  getEventBySlug,
+  legends,
+} from "@/data";
 import { notFound } from "next/navigation";
 
 const historyBySlug: Record<
   string,
-  { title: string; description: string; chapters: { year: string; title: string; body: string }[] }
+  {
+    title: string;
+    description: string;
+    chapters: { year: string; title: string; body: string }[];
+  }
 > = {
   bundesliga: {
     title: "Bundesliga history",
@@ -35,7 +44,8 @@ const historyBySlug: Record<
   },
   "socca-austria-pro": {
     title: "Socca Austria Pro League",
-    description: "Vienna's cage competition under Socca Austria — intensity, tempo, and club brands.",
+    description:
+      "Vienna's cage competition under Socca Austria — intensity, tempo, and club brands.",
     chapters: [
       {
         year: "2018",
@@ -51,7 +61,8 @@ const historyBySlug: Record<
   },
   "the-international": {
     title: "The International",
-    description: "Dota 2's world championship — the Aegis, the main stage, and the season's defining series.",
+    description:
+      "Dota 2's world championship — the Aegis, the main stage, and the season's defining series.",
     chapters: [
       {
         year: "2011",
@@ -67,7 +78,7 @@ const historyBySlug: Record<
   },
 };
 
-export default async function EventHistoryPage({
+export default async function EventHeritagePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -88,30 +99,64 @@ export default async function EventHistoryPage({
     ],
   };
 
-  return (
-    <div className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-      <SectionHeader
-        eyebrow="Archive"
-        title={pack.title}
-        description={pack.description}
-      />
+  const awards = getAwardsByEventId(event.id);
+  const eventLegends = legends.filter((l) => l.eventId === event.id);
+  const displayLegends =
+    eventLegends.length > 0 ? eventLegends : legends.slice(0, 6);
 
-      <div className="space-y-8">
-        {pack.chapters.map((chapter) => (
-          <article
-            key={chapter.year + chapter.title}
-            className="border-b border-border pb-8"
-          >
-            <p className="text-xs uppercase tracking-[0.2em] text-brand">
-              {chapter.year}
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold">{chapter.title}</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
-              {chapter.body}
-            </p>
-          </article>
-        ))}
-      </div>
+  return (
+    <div className="mx-auto max-w-7xl space-y-16 px-4 py-10 md:px-6">
+      <section>
+        <SectionHeader
+          eyebrow="Heritage"
+          title={pack.title}
+          description={pack.description}
+        />
+        <div className="space-y-8">
+          {pack.chapters.map((chapter) => (
+            <article
+              key={chapter.year + chapter.title}
+              className="border-b border-border pb-8"
+            >
+              <p className="text-xs uppercase tracking-[0.2em] text-brand">
+                {chapter.year}
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold">{chapter.title}</h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                {chapter.body}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {awards.length > 0 ? (
+        <section>
+          <SectionHeader
+            eyebrow="Honours"
+            title="Awards"
+            description="Titles and recognition from this competition cycle."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {awards.map((award) => (
+              <AwardCard key={award.id} award={award} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section>
+        <SectionHeader
+          eyebrow="Legacy"
+          title="Legends"
+          description="Icons and nights that still shape how this event is remembered."
+        />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {displayLegends.map((legend) => (
+            <LegendCard key={legend.id} legend={legend} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

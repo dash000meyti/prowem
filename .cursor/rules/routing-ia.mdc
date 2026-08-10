@@ -10,6 +10,8 @@ alwaysApply: false
 - `/` · `/events` · `/events/[slug]/*` · `/clubs` · `/clubs/[slug]/**` · `/fans/**` · `/matches/live` · `/matches/bundesliga/bayern-vs-dortmund`
 
 ناوبری زمینه‌ای: Global / Event / Club / Team / Fan جدا حس شوند.
+هدر PROWEM فقط روی `/` · `/events` · `/clubs` · `/matches/*`؛ داخل event/club/fan خودِ PropertyNav هدر است.
+Club چندتیمی: Teams به‌صورت dropdown (All teams + sports)؛ بخش‌های News/Videos/Shop/Tickets/Legends/Awards/Sponsors/Supporters مثل event.
 Club تک‌تیمی: nav Teams را نشان نده.
 لینک entityها همیشه به همان دادهٔ مشترک `src/data` برود.
 صفحات monolithic ممنوع؛ از کامپوننت‌های `src/components` استفاده کن.

@@ -51,7 +51,7 @@ function watchLiveHref(eventSlug: string, eventId: string) {
   if (eventId === "evt-bundesliga") {
     return "/matches/bundesliga/bayern-vs-dortmund";
   }
-  return `/events/${eventSlug}/live`;
+  return `/events/${eventSlug}/matches`;
 }
 
 export default async function NovaCupHomePage({
@@ -183,7 +183,7 @@ export default async function NovaCupHomePage({
             description="From quarter-finals to the Grand Final — every knockout path still alive."
             action={
               <Button
-                href={`/events/${slug}/bracket`}
+                href={`/events/${slug}/standings`}
                 variant="ghost"
                 size="sm"
               >
@@ -297,12 +297,8 @@ export default async function NovaCupHomePage({
                   : "The names shaping matchday nights."
             }
             action={
-              <Button
-                href={`/events/${slug}/players`}
-                variant="ghost"
-                size="sm"
-              >
-                All players
+              <Button href="/clubs" variant="ghost" size="sm">
+                Clubs
               </Button>
             }
           />
@@ -318,6 +314,11 @@ export default async function NovaCupHomePage({
             eyebrow="Legacy"
             title="Awards & legends"
             description="Honour the festival — and the names that built it."
+            action={
+              <Button href={`/events/${slug}/history`} variant="ghost" size="sm">
+                Full heritage
+              </Button>
+            }
           />
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-4 sm:grid-cols-2">

@@ -1,18 +1,22 @@
 import Link from "next/link";
 import type { NewsArticle } from "@/types";
 import { MediaImage } from "@/components/media/MediaImage";
+import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { resolveMedia } from "@/data/media";
 
 export function ClubFeaturedStories({
   articles,
+  newsHref,
 }: {
   articles: NewsArticle[];
+  newsHref?: string;
 }) {
   if (articles.length === 0) return null;
 
   const [featured, ...rest] = articles;
   const side = rest.slice(0, 2);
+  const moreHref = newsHref ?? "#";
 
   return (
     <section>
@@ -20,10 +24,17 @@ export function ClubFeaturedStories({
         eyebrow="Stories"
         title="From the club"
         description="Wins, previews and multi-arena moments — one editorial feed."
+        action={
+          newsHref ? (
+            <Button href={newsHref} variant="outline" size="sm">
+              All news
+            </Button>
+          ) : null
+        }
       />
       <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
         <Link
-          href="#"
+          href={moreHref}
           className="group relative block min-h-[320px] overflow-hidden lg:col-span-7 lg:min-h-[420px]"
         >
           <MediaImage
@@ -53,7 +64,7 @@ export function ClubFeaturedStories({
           {side.map((article) => (
             <Link
               key={article.id}
-              href="#"
+              href={moreHref}
               className="group relative block min-h-[190px] flex-1 overflow-hidden"
             >
               <MediaImage

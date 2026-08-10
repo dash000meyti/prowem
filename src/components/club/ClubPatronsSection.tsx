@@ -1,4 +1,5 @@
 import type { ClubPatron } from "@/types";
+import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ShoppingBag, Trophy } from "lucide-react";
 
@@ -57,10 +58,12 @@ export function ClubPatronsSection({
   clubName,
   topPatrons,
   recentShoppers,
+  supportersHref,
 }: {
   clubName: string;
   topPatrons: ClubPatron[];
   recentShoppers: ClubPatron[];
+  supportersHref?: string;
 }) {
   if (topPatrons.length === 0 && recentShoppers.length === 0) return null;
 
@@ -70,6 +73,13 @@ export function ClubPatronsSection({
         eyebrow="Community"
         title={`Supporters of ${clubName}`}
         description="Fans who fund the club through memberships, donations and shop purchases."
+        action={
+          supportersHref ? (
+            <Button href={supportersHref} variant="outline" size="sm">
+              Full supporters
+            </Button>
+          ) : null
+        }
       />
       <div className="grid gap-6 lg:grid-cols-2">
         {topPatrons.length > 0 ? (
@@ -98,7 +108,7 @@ export function ClubPatronsSection({
             <div className="mb-4 flex items-center gap-2">
               <ShoppingBag className="h-4 w-4 text-brand" aria-hidden />
               <h3 className="text-sm font-semibold tracking-tight">
-                Latest shop buyers
+                Latest 10 shop buyers
               </h3>
             </div>
             <ul className="m-0 list-none p-0">
