@@ -20,6 +20,7 @@ export function LineupBoardShell({
   onChange,
   sport,
   fieldClassName,
+  aside,
   children,
 }: {
   title: string;
@@ -31,6 +32,7 @@ export function LineupBoardShell({
   onChange: (side: "home" | "away") => void;
   sport: string;
   fieldClassName?: string;
+  aside?: ReactNode;
   children: ReactNode;
 }) {
   const Field =
@@ -79,12 +81,25 @@ export function LineupBoardShell({
 
       <div
         className={cn(
-          "relative mt-5 overflow-hidden",
-          fieldClassName ?? "aspect-[500/709.2] w-full max-w-3xl",
+          "mt-5 flex flex-col gap-6",
+          aside && "lg:flex-row lg:items-start lg:gap-8",
         )}
       >
-        <Field className="pointer-events-none absolute inset-0 h-full w-full text-white/35" />
-        {children}
+        <div
+          className={cn(
+            "relative overflow-hidden",
+            fieldClassName ?? "aspect-[500/709.2] w-full max-w-3xl",
+            aside && "lg:mx-0 lg:max-w-2xl lg:flex-none",
+          )}
+        >
+          <Field className="pointer-events-none absolute inset-0 h-full w-full text-white/35" />
+          {children}
+        </div>
+        {aside ? (
+          <div className="w-full min-w-0 flex-1 lg:sticky lg:top-24">
+            {aside}
+          </div>
+        ) : null}
       </div>
     </div>
   );

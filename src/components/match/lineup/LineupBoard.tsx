@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import type { Match, Player, Team } from "@/types";
 import { LineupBoardShell } from "./LineupBoardShell";
+import { LineupSquadTable } from "./LineupSquadTable";
 import { SlotNodes } from "./overlays";
 import { slotsForLineup } from "./slots";
 
@@ -34,6 +35,7 @@ export function LineupBoard({
 }) {
   const [side, setSide] = useState<"home" | "away">("home");
   const players = side === "home" ? homeLineup : awayLineup;
+  const team = side === "home" ? home : away;
   const formation =
     side === "home" ? match.homeFormation : match.awayFormation;
   const mirrored = side === "away";
@@ -41,6 +43,11 @@ export function LineupBoard({
   const slots = useMemo(
     () => slotsForLineup(match.sport, players, formation, mirrored),
     [match.sport, players, formation, mirrored],
+  );
+
+  const tablePlayers = useMemo(
+    () => slots.map((slot) => slot.player),
+    [slots],
   );
 
   return (
@@ -54,6 +61,17 @@ export function LineupBoard({
       onChange={setSide}
       sport={match.sport}
       fieldClassName={`mx-auto ${FIELD_ASPECT[match.sport] ?? FIELD_ASPECT.football}`}
+      aside={
+        <LineupSquadTable
+          players={tablePlayers}
+          team={team}
+          formation={
+            match.sport === "football"
+              ? formation
+              : sideLabel(match.sport, formation)
+          }
+        />
+      }
     >
       <SlotNodes slots={slots} />
     </LineupBoardShell>
