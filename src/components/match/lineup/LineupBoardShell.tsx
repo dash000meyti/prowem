@@ -82,14 +82,14 @@ export function LineupBoardShell({
       <div
         className={cn(
           "mt-5 flex flex-col gap-6",
-          aside && "lg:flex-row lg:items-start lg:gap-8",
+          aside ? "lg:flex-row lg:items-start lg:gap-8" : undefined,
         )}
       >
         <div
           className={cn(
             "relative overflow-hidden",
             fieldClassName ?? "aspect-[500/709.2] w-full max-w-3xl",
-            aside && "lg:mx-0 lg:max-w-2xl lg:flex-none",
+            aside ? "lg:mx-0 lg:max-w-2xl lg:flex-none" : undefined,
           )}
         >
           <Field className="pointer-events-none absolute inset-0 h-full w-full text-white/35" />
