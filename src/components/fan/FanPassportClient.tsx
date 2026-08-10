@@ -145,7 +145,7 @@ export function FanPassportClient() {
           <div className="grid gap-3 md:grid-cols-3">
             {followingEvents.map((event) => (
               <Link key={event.id} href={`/events/${event.slug}/fan-zone`}>
-                <GlassPanel className="p-5 transition hover:border-brand/40">
+                <GlassPanel className="p-5 transition">
                   <Crest
                     entity="event"
                     slug={event.slug}

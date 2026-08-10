@@ -32,7 +32,7 @@ export function TeamCard({
 
   return (
     <Link href={to} className="group block">
-      <GlassPanel className="overflow-hidden transition hover:border-[var(--glass-border-strong)]">
+      <GlassPanel className="overflow-hidden transition">
         <div className="relative h-28">
           <MediaImage src={thumb} alt={team.name} sizes="320px" />
           <div className="absolute inset-0 photo-scrim-light" />

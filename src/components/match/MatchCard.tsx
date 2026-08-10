@@ -24,7 +24,7 @@ export function MatchCard({
   const content = (
     <GlassPanel
       className={cn(
-        "group overflow-hidden transition hover:border-[var(--glass-border-strong)]",
+        "group overflow-hidden transition",
         compact ? "p-3" : "p-0",
       )}
     >

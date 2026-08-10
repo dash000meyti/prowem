@@ -7,7 +7,7 @@ export function NewsCard({ article }: { article: NewsArticle }) {
   return (
     <GlassPanel
       as="article"
-      className="group overflow-hidden transition hover:border-[var(--glass-border-strong)]"
+      className="group overflow-hidden transition"
     >
       <div className="relative h-40">
         <MediaImage

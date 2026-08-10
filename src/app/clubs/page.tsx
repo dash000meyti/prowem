@@ -61,7 +61,7 @@ export default function ClubsIndexPage() {
             return (
               <FadeIn key={club.id} delay={index * 0.06}>
                 <Link href={`/clubs/${club.slug}`} className="group block h-full">
-                  <GlassPanel className="flex h-full flex-col overflow-hidden transition hover:border-[var(--glass-border-strong)]">
+                  <GlassPanel className="flex h-full flex-col overflow-hidden transition">
                     <div className="relative h-52 overflow-hidden">
                       <MediaImage src={image} alt={club.name} sizes="640px" />
                       <div className="absolute inset-0 photo-scrim-heavy" />

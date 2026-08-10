@@ -253,18 +253,18 @@ export function LiveStandingsTable({
                 zIndex: { duration: 0 },
               }}
               className={cn(
-                "relative grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-3 rounded-xl border px-3 py-2.5 backdrop-blur-md will-change-transform",
+                "relative grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-3 rounded-xl px-3 py-2.5 backdrop-blur-md will-change-transform",
                 highlighted
-                  ? "border-brand/35 bg-[color-mix(in_srgb,var(--brand-primary)_16%,rgba(0,0,0,0.45))]"
-                  : "border-white/10 bg-black/35",
+                  ? "border border-brand/35 bg-[color-mix(in_srgb,var(--brand-primary)_16%,rgba(0,0,0,0.45))]"
+                  : "glass-surface bg-black/35",
                 elevated && "standings-row-lift",
               )}
               style={{
                 boxShadow: elevated
-                  ? "0 22px 48px rgba(0,0,0,0.5), 0 0 36px color-mix(in srgb, var(--brand-primary) 40%, transparent)"
+                  ? "0 22px 48px rgba(0,0,0,0.5), 0 0 36px color-mix(in srgb, var(--brand-primary) 40%, transparent), var(--glass-shine-inset)"
                   : highlighted
-                    ? "0 8px 24px rgba(0,0,0,0.28)"
-                    : "0 4px 14px rgba(0,0,0,0.18)",
+                    ? "0 8px 24px rgba(0,0,0,0.28), var(--glass-shine-inset)"
+                    : "0 4px 14px rgba(0,0,0,0.18), var(--glass-shine-inset)",
               }}
             >
               <span

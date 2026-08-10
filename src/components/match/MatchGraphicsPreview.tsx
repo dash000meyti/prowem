@@ -140,7 +140,7 @@ function PhoneMock({
 
       <div
         ref={ref}
-        className="relative aspect-9/16 overflow-hidden rounded-[22px] border border-white/12 bg-[#08090B] shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
+        className="relative aspect-9/16 overflow-hidden rounded-[22px] glass-surface bg-[#08090B] shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
       >
         <MediaImage
           src={heroMedia.nightMatch}
@@ -205,7 +205,7 @@ function MatchReportMock() {
     <>
       <div className="flex-1" />
       <div className="space-y-3">
-        <div className="rounded-2xl border border-white/12 bg-black/55 px-3 py-3 text-center backdrop-blur-md">
+        <div className="rounded-2xl glass-surface bg-black/55 px-3 py-3 text-center backdrop-blur-md">
           <p className="text-[9px] uppercase tracking-[0.28em] text-white/70">
             Live · {match.minute}&apos;
           </p>
@@ -236,7 +236,7 @@ function MatchReportMock() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/12 bg-black/55 px-3 py-2 backdrop-blur-md">
+        <div className="rounded-2xl glass-surface bg-black/55 px-3 py-2 backdrop-blur-md">
           <div className="mb-1 flex justify-between px-1 text-[8px] uppercase tracking-[0.16em] text-white/55">
             <span>{home.shortName}</span>
             <span>{away.shortName}</span>
@@ -275,7 +275,7 @@ function TableUpdateMock() {
     <>
       <div className="flex-1" />
       <div className="space-y-3">
-        <div className="rounded-2xl border border-white/12 bg-black/55 px-3 py-3 backdrop-blur-md">
+        <div className="rounded-2xl glass-surface bg-black/55 px-3 py-3 backdrop-blur-md">
           <p className="text-[9px] uppercase tracking-[0.2em] text-brand">
             {goalTriggered ? "Goal" : "Live"}
           </p>
@@ -297,7 +297,7 @@ function TableUpdateMock() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/12 bg-black/55 px-3 py-3 backdrop-blur-md">
+        <div className="rounded-2xl glass-surface bg-black/55 px-3 py-3 backdrop-blur-md">
           <p className="mb-2 text-[9px] uppercase tracking-[0.18em] text-brand">
             Live table
           </p>
@@ -420,7 +420,7 @@ function MotmMock() {
           <RatingRing rating={playerOfTheMatch.rating} />
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 z-20 rounded-2xl border border-white/12 bg-black/60 px-4 py-2 backdrop-blur-md">
+        <div className="absolute inset-x-0 bottom-0 z-20 rounded-2xl glass-surface bg-black/60 px-4 py-2 backdrop-blur-md">
           <ul>
             {rows.map((row) => (
               <li

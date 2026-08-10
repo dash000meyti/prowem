@@ -32,7 +32,7 @@ export function PlayerCard({
       : playerPortraitFallback(player.sport);
 
   const body = (
-    <GlassPanel className="overflow-hidden transition hover:border-[var(--glass-border-strong)]">
+    <GlassPanel className="overflow-hidden transition">
       <div className="relative h-52 bg-bg-2">
         <MediaImage
           src={portrait}
