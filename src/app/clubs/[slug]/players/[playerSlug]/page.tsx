@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { FollowButton } from "@/components/fan/FollowButton";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Crest } from "@/components/media/Crest";
 import { GlassPanel } from "@/components/media/GlassPanel";
@@ -76,6 +77,11 @@ export default async function ClubPlayerPage({
               <Button href={`/clubs/${slug}/teams/${team.sport}`}>
                 {team.name}
               </Button>
+              <FollowButton
+                kind="player"
+                id={player.id}
+                label={player.name}
+              />
               <Button href={`/clubs/${slug}`} variant="outline">
                 Club home
               </Button>

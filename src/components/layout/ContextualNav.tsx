@@ -3,6 +3,8 @@
 import { sportLabel } from "@/lib/utils";
 import { getClubBySlug, getTeamsByClubId } from "@/data";
 import { PropertyNav, type PropertyNavItem } from "@/components/layout/PropertyNav";
+import { DemoAccountChip } from "@/components/fan/DemoAccountChip";
+import { FanAccountMenu } from "@/components/fan/FanAccountMenu";
 
 const fanLinks: PropertyNavItem[] = [
   { href: "/fans", label: "Dashboard", exact: true },
@@ -52,10 +54,17 @@ export function ClubNavigation({
     <PropertyNav
       brand={club?.shortName ?? slug.toUpperCase()}
       items={items}
+      trailing={<DemoAccountChip />}
     />
   );
 }
 
 export function FanNavigation() {
-  return <PropertyNav brand="FAN" items={fanLinks} />;
+  return (
+    <PropertyNav
+      brand="FAN"
+      items={fanLinks}
+      trailing={<FanAccountMenu />}
+    />
+  );
 }

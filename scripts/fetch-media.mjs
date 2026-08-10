@@ -104,7 +104,7 @@ async function pathExists(path) {
   }
 }
 
-function crestSvg({ label, primary, secondary, accent }) {
+function crestSvg({ label, primary, secondary, accent, fontSize = 28 }) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="${label}">
   <defs>
@@ -116,10 +116,16 @@ function crestSvg({ label, primary, secondary, accent }) {
   <circle cx="64" cy="64" r="60" fill="${secondary}"/>
   <circle cx="64" cy="64" r="52" fill="url(#g)"/>
   <circle cx="64" cy="64" r="44" fill="${secondary}" opacity="0.92"/>
-  <text x="64" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" font-weight="800" fill="${primary}">${label}</text>
+  <text x="64" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="${fontSize}" font-weight="800" fill="${primary}">${label}</text>
 </svg>
 `;
 }
+
+const EVENT_LOGOS = {
+  bundesliga: { label: "BL", primary: "#D2051E", secondary: "#0A0B0D", accent: "#FFFFFF", fontSize: 28 },
+  "socca-austria-pro": { label: "SAPL", primary: "#C8102E", secondary: "#0B1020", accent: "#F5F5F2", fontSize: 22 },
+  "the-international": { label: "TI", primary: "#C23B2C", secondary: "#0A0A0C", accent: "#E8C47A", fontSize: 28 },
+};
 
 const CRESTS = {
   "bayern-munich": { label: "FCB", primary: "#DC052D", secondary: "#0A0A0A", accent: "#0066B3" },
@@ -149,6 +155,15 @@ async function writeCrests() {
     await mkdir(dirname(dest), { recursive: true });
     await writeFile(dest, crestSvg(cfg));
     console.log("✓", `public/images/clubs/${slug}/crest.svg`);
+  }
+}
+
+async function writeEventLogos() {
+  for (const [slug, cfg] of Object.entries(EVENT_LOGOS)) {
+    const dest = join(publicImages, "events", slug, "logo.svg");
+    await mkdir(dirname(dest), { recursive: true });
+    await writeFile(dest, crestSvg(cfg));
+    console.log("✓", `public/images/events/${slug}/logo.svg`);
   }
 }
 
@@ -230,6 +245,7 @@ async function main() {
     }
 
     await writeCrests();
+    await writeEventLogos();
   }
 
   await fetchPlayerPortraits({ force });

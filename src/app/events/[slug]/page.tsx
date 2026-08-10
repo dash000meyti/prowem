@@ -9,6 +9,8 @@ import { NewsCard } from "@/components/event/NewsCard";
 import { VideoCard } from "@/components/event/VideoCard";
 import { AwardCard, LegendCard } from "@/components/event/AwardLegendCards";
 import { SponsorGrid } from "@/components/event/SponsorGrid";
+import { FollowButton } from "@/components/fan/FollowButton";
+import { Crest } from "@/components/media/Crest";
 import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { SectionShell } from "@/components/layout/SectionShell";
@@ -32,6 +34,7 @@ import {
   resolveMedia,
 } from "@/data";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import type { MediaKey } from "@/data/media";
 import { matchHref } from "@/lib/utils";
 
@@ -117,8 +120,16 @@ export default async function NovaCupHomePage({
         scrim="heavy"
         className="min-h-[70vh] border-b border-border"
       >
-        <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-          <GlassPanel variant="subtle" className="max-w-3xl p-6 md:p-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 py-20 md:flex-row md:items-end md:justify-between md:gap-12 md:px-6 md:py-28">
+          <GlassPanel variant="subtle" className="w-full max-w-3xl p-6 md:p-8">
+            <div className="mb-5 md:mb-6">
+              <Crest
+                entity="event"
+                slug={event.slug}
+                name={event.name}
+                size={96}
+              />
+            </div>
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
               {sportEyebrow} · {event.startDate.slice(0, 4)} · {event.city} ·{" "}
               {event.teamCount} Teams
@@ -133,6 +144,12 @@ export default async function NovaCupHomePage({
               <Button href={watchLiveHref(slug, event.id)} size="lg">
                 Watch Live
               </Button>
+              <FollowButton
+                kind="event"
+                id={event.id}
+                label={event.name}
+                size="lg"
+              />
               <Button
                 href={`/events/${slug}/matches`}
                 variant="outline"
@@ -142,6 +159,19 @@ export default async function NovaCupHomePage({
               </Button>
             </div>
           </GlassPanel>
+          <div
+            className="pointer-events-none relative w-full max-w-[220px] shrink-0 sm:max-w-[260px] md:max-w-[300px] lg:max-w-[340px]"
+            aria-hidden
+          >
+            <Image
+              src={resolveMedia("trophyCupCutout")}
+              alt=""
+              width={680}
+              height={1020}
+              priority
+              className="h-auto w-full object-contain drop-shadow-[0_28px_60px_rgba(0,0,0,0.65)]"
+            />
+          </div>
         </div>
       </PhotoBackground>
 

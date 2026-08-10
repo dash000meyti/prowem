@@ -3,6 +3,7 @@ import { VideoCard } from "@/components/event/VideoCard";
 import { PlayerCard } from "@/components/club/PlayerCard";
 import { MatchCard } from "@/components/match/MatchCard";
 import { Button } from "@/components/ui/Button";
+import { FollowButton } from "@/components/fan/FollowButton";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { AwardCard } from "@/components/event/AwardLegendCards";
@@ -87,6 +88,7 @@ export default async function ClubSportTeamPage({
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href={featuredHref}>Open Match Center</Button>
+            <FollowButton kind="team" id={team.id} label={team.name} />
             <Button href={`/clubs/${slug}`} variant="outline">
               Back to club
             </Button>

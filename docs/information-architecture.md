@@ -20,12 +20,14 @@
 - زیرمسیرهای باشگاه (مثل event): news, videos, shop, tickets, legends, awards, sponsors, supporters
 
 ### Fan
-- `/fans`
-- `/fans/profile`
-- `/fans/missions`
-- `/fans/rewards`
+- `/fans` — dashboard (account menu، Following، For you missions/shop)
+- `/fans/profile` — هویت + follows زنده
+- `/fans/missions` — For you / All / category + Complete Mission
+- `/fans/rewards` — Redeem شبیه‌سازی‌شده با XP
 - `/fans/passport`
-- `/fans/shop`
+- `/fans/shop` — For you (فالوها) + Discover
+
+Follow روی صفحات باشگاه / تیم / بازیکن / رویداد؛ شخصی‌سازی مأموریت و شاپ از `DemoProvider`.
 
 ### Match
 - `/matches/live`
@@ -39,12 +41,12 @@
 | Global | PROWEM header فقط روی `/` · `/events` · `/clubs` · `/matches/*` |
 | Event property | PropertyNav به‌عنوان هدر اصلی (بدون PROWEM SiteHeader) |
 | Club property | ClubNavigation / PropertyNav به‌عنوان هدر اصلی |
-| Fan property | FanNavigation به‌عنوان هدر اصلی |
+| Fan property | FanNavigation به‌عنوان هدر اصلی + FanAccountMenu |
 | Event | Home · Matches (live در بالا) · Standings (bracket در بالا در صورت وجود + stats زیر جدول) · Teams · News · Videos · Heritage · Sponsors · Fan Zone |
 | Club چندتیمی | Home · Teams (dropdown → All teams + sports) · News · Videos · Shop · Tickets · Legends · Awards · Sponsors · Supporters |
 | Club تک‌تیمی (Lorient) | همان بخش‌ها بدون Teams dropdown |
-| Fan | Dashboard, Profile, Missions, Rewards, Passport, Shop |
+| Fan | Dashboard, Profile, Missions, Rewards, Passport, Shop · account menu · DemoAccountChip روی club/event/match chrome |
 
 ## جریان دمو (خلاصه)
 
-1. Homepage (پیام خدمات) → 2. See platform / هدر → Bundesliga → 3. Teams/Standings/News → 4. Bayern Club → 5. Dota 2 Team → 6. Fans → 7. Complete Mission → 8. Matchday → 9. Match Center → 10. Trigger Goal
+1. Homepage (پیام خدمات) → 2. See platform / هدر (account chip) → Bundesliga → 3. Teams/Standings/News (+ Follow event) → 4. Bayern Club (+ Follow club) → 5. Dota 2 Team → 6. Fans (account menu + For you) → 7. Complete Mission / Redeem → 8. Matchday → 9. Match Center → 10. Trigger Goal

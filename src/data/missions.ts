@@ -1,4 +1,4 @@
-import type { Mission } from "@/types";
+import type { FanFollowState, Mission } from "@/types";
 
 export const missions: Mission[] = [
   {
@@ -7,6 +7,7 @@ export const missions: Mission[] = [
     description: "Tune into any Bundesliga Matchday fixture in the opening weekend.",
     xp: 250,
     category: "watch",
+    eventId: "evt-bundesliga",
     completed: true,
   },
   {
@@ -15,6 +16,7 @@ export const missions: Mission[] = [
     description: "Lock in a winner before kickoff on any Matchday 10–12 fixture.",
     xp: 400,
     category: "predict",
+    eventId: "evt-bundesliga",
     completed: true,
   },
   {
@@ -23,6 +25,7 @@ export const missions: Mission[] = [
     description: "Score at least 4/5 on the league history quiz.",
     xp: 300,
     category: "quiz",
+    eventId: "evt-bundesliga",
     completed: true,
   },
   {
@@ -31,6 +34,9 @@ export const missions: Mission[] = [
     description: "Confirm attendance near Allianz Arena on Klassiker matchday.",
     xp: 500,
     category: "attend",
+    eventId: "evt-bundesliga",
+    clubId: "club-bayern",
+    teamId: "team-bayern-fc",
     completed: true,
   },
   {
@@ -39,6 +45,9 @@ export const missions: Mission[] = [
     description: "Watch at least 60 live minutes of Bayern vs Dortmund.",
     xp: 600,
     category: "watch",
+    eventId: "evt-bundesliga",
+    clubId: "club-bayern",
+    teamId: "team-bayern-fc",
     rewardLabel: "Klassiker badge",
     completed: false,
   },
@@ -48,6 +57,9 @@ export const missions: Mission[] = [
     description: "Predict the final result of Bayern vs Dortmund before the 80th minute.",
     xp: 750,
     category: "predict",
+    eventId: "evt-bundesliga",
+    clubId: "club-dortmund",
+    teamId: "team-dortmund-fc",
     completed: false,
   },
   {
@@ -57,6 +69,7 @@ export const missions: Mission[] = [
       "Complete the partner challenge: react to three live goal moments during Der Klassiker.",
     xp: 1000,
     category: "sponsor",
+    eventId: "evt-bundesliga",
     sponsorId: "spn-telekom",
     rewardLabel: "Connectivity Boost XP ×1.2",
     completed: false,
@@ -67,6 +80,8 @@ export const missions: Mission[] = [
     description: "Share a live moment from Bayern vs Dortmund to your fan feed.",
     xp: 350,
     category: "social",
+    eventId: "evt-bundesliga",
+    clubId: "club-bayern",
     completed: false,
   },
   {
@@ -75,6 +90,7 @@ export const missions: Mission[] = [
     description: "Answer questions covering football, socca and Dota 2 under Bayern.",
     xp: 400,
     category: "quiz",
+    clubId: "club-bayern",
     completed: false,
   },
   {
@@ -83,6 +99,8 @@ export const missions: Mission[] = [
     description: "Watch a Socca Austria Pro League fixture featuring Lorient or Werder.",
     xp: 450,
     category: "watch",
+    eventId: "evt-socca-austria-pro",
+    clubId: "club-lorient",
     completed: false,
   },
   {
@@ -91,6 +109,9 @@ export const missions: Mission[] = [
     description: "Open the Bayern vs Dortmund TI upper-bracket series recap.",
     xp: 550,
     category: "watch",
+    eventId: "evt-the-international",
+    clubId: "club-bayern",
+    teamId: "team-bayern-dota2",
     completed: false,
   },
   {
@@ -99,6 +120,7 @@ export const missions: Mission[] = [
     description: "Scan an adidas activation code at a Bundesliga partner booth.",
     xp: 450,
     category: "sponsor",
+    eventId: "evt-bundesliga",
     sponsorId: "spn-adidas",
     rewardLabel: "Kit discount token",
     completed: false,
@@ -111,4 +133,43 @@ export function getMissionById(id: string) {
 
 export function getMissionsByCategory(category: Mission["category"]) {
   return missions.filter((m) => m.category === category);
+}
+
+export function getMissionsByEventId(eventId: string) {
+  return missions.filter((m) => m.eventId === eventId);
+}
+
+function missionMatchesFollows(mission: Mission, follows: FanFollowState) {
+  if (
+    mission.clubId &&
+    follows.followedClubIds.includes(mission.clubId)
+  ) {
+    return true;
+  }
+  if (
+    mission.teamId &&
+    follows.followedTeamIds.includes(mission.teamId)
+  ) {
+    return true;
+  }
+  if (
+    mission.eventId &&
+    follows.followedEventIds.includes(mission.eventId)
+  ) {
+    return true;
+  }
+  if (
+    mission.playerId &&
+    follows.favoritePlayerIds.includes(mission.playerId)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export function getMissionsForFan(follows: FanFollowState) {
+  const forYou = missions.filter((m) => missionMatchesFollows(m, follows));
+  const forYouIds = new Set(forYou.map((m) => m.id));
+  const discover = missions.filter((m) => !forYouIds.has(m.id));
+  return { forYou, discover, all: missions };
 }

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { FollowButton } from "@/components/fan/FollowButton";
 import { Crest } from "@/components/media/Crest";
 import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { resolveMedia } from "@/data/media";
@@ -41,8 +42,9 @@ export function ClubStoryHero({
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <Button href={primaryCta.href}>{primaryCta.label}</Button>
-          <Button href="/fans" variant="outline">
-            Join the community
+          <FollowButton kind="club" id={club.id} label={club.name} />
+          <Button href="/fans" variant="ghost">
+            Fan hub
           </Button>
         </div>
         <p className="sr-only">{club.description}</p>

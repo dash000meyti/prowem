@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { crestPath } from "@/data/media";
+import { crestPath, eventLogoPath } from "@/data/media";
 
 export function Crest({
   slug,
@@ -8,17 +8,29 @@ export function Crest({
   size = 40,
   className,
   watermark = false,
+  entity = "club",
 }: {
   slug: string;
   name?: string;
   size?: number;
   className?: string;
   watermark?: boolean;
+  entity?: "club" | "event";
 }) {
+  const src = entity === "event" ? eventLogoPath(slug) : crestPath(slug);
+  const alt =
+    entity === "event"
+      ? name
+        ? `${name} logo`
+        : "Event logo"
+      : name
+        ? `${name} crest`
+        : "Team crest";
+
   return (
     <Image
-      src={crestPath(slug)}
-      alt={name ? `${name} crest` : "Team crest"}
+      src={src}
+      alt={alt}
       width={size}
       height={size}
       className={cn(

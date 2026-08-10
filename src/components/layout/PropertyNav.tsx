@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -120,9 +120,11 @@ function DesktopDropdown({
 export function PropertyNav({
   brand,
   items,
+  trailing,
 }: {
   brand: string;
   items: PropertyNavItem[];
+  trailing?: ReactNode;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -148,20 +150,23 @@ export function PropertyNav({
     >
       {/* Mobile / tablet — hamburger */}
       <div className="lg:hidden">
-        <div className="flex h-14 items-center justify-between gap-4 px-4 md:px-6">
-          <p className="truncate text-sm font-semibold tracking-[0.22em] text-brand">
+        <div className="flex h-14 items-center justify-between gap-3 px-4 md:px-6">
+          <p className="min-w-0 truncate text-sm font-semibold tracking-[0.22em] text-brand">
             {brand}
           </p>
-          <button
-            type="button"
-            className="shrink-0 text-foreground"
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            aria-controls={panelId}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            {trailing}
+            <button
+              type="button"
+              className="shrink-0 text-foreground"
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
         {open ? (
           <div
@@ -227,7 +232,7 @@ export function PropertyNav({
       </div>
 
       {/* Desktop — no overflow clip so dropdowns sit above page media */}
-      <div className="relative z-[60] mx-auto hidden h-14 max-w-7xl items-center px-4 md:px-6 lg:flex">
+      <div className="relative z-[60] mx-auto hidden h-14 max-w-7xl items-center gap-3 px-4 md:px-6 lg:flex">
         <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
           <span className="mr-3 shrink-0 text-sm font-semibold tracking-[0.22em] text-brand">
             {brand}
@@ -265,6 +270,7 @@ export function PropertyNav({
             );
           })}
         </div>
+        {trailing ? <div className="shrink-0">{trailing}</div> : null}
       </div>
     </nav>
   );

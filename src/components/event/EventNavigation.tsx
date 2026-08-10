@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { getEventBySlug } from "@/data";
 import { PropertyNav, type PropertyNavItem } from "@/components/layout/PropertyNav";
+import { DemoAccountChip } from "@/components/fan/DemoAccountChip";
 
 /** Slim event IA — live lives under Matches; bracket/stats under Standings; heritage merges history/awards/legends */
 const suffixes = [
@@ -30,6 +31,10 @@ export function EventNavigation() {
   }));
 
   return (
-    <PropertyNav brand={event?.shortName ?? slug.toUpperCase()} items={items} />
+    <PropertyNav
+      brand={event?.shortName ?? slug.toUpperCase()}
+      items={items}
+      trailing={<DemoAccountChip />}
+    />
   );
 }

@@ -56,9 +56,21 @@ export {
   getSponsorsByClubId,
 } from "./sponsors";
 export { fans, getFanById, getFanBySlug } from "./fans";
-export { missions, getMissionById } from "./missions";
+export {
+  missions,
+  getMissionById,
+  getMissionsByCategory,
+  getMissionsByEventId,
+  getMissionsForFan,
+} from "./missions";
 export { rewards, getRewardById } from "./rewards";
-export { products, getProductById, getProductsByClubId } from "./products";
+export {
+  products,
+  getProductById,
+  getProductsByClubId,
+  getProductsByEventId,
+  getProductsForFan,
+} from "./products";
 export { achievements, getAchievementById } from "./achievements";
 export {
   clubPatrons,
@@ -69,6 +81,7 @@ export {
   mediaCatalog,
   resolveMedia,
   crestPath,
+  eventLogoPath,
   playerPortraitPath,
   playerPortraitFallback,
   matchThumbForSport,

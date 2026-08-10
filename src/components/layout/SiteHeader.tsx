@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { DemoAccountChip } from "@/components/fan/DemoAccountChip";
 
 const links = [
   { href: "/events", label: "Events" },
@@ -53,7 +54,7 @@ export function SiteHeader() {
             </>
           ) : null}
         </div>
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -66,14 +67,17 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <DemoAccountChip />
         </nav>
-        <button
-          className="md:hidden"
-          aria-label="Toggle menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <DemoAccountChip />
+          <button
+            aria-label="Toggle menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
       {open ? (
         <div className="border-t border-border px-4 py-4 md:hidden">

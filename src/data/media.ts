@@ -29,6 +29,7 @@ export const mediaCatalog = {
   shopApparel: "/images/shared/shopApparel.jpg",
   fansCommunity: "/images/shared/fansCommunity.jpg",
   trophyCup: "/images/shared/trophyCup.jpg",
+  trophyCupCutout: "/images/shared/trophyCupCutout.png",
   bayernHero: "/images/clubs/bayern-munich/hero.jpg",
   bayernCover: "/images/clubs/bayern-munich/cover.jpg",
   dortmundHero: "/images/clubs/borussia-dortmund/hero.jpg",
@@ -106,6 +107,10 @@ const TEAM_CREST_CLUB: Record<string, string> = {
 export function crestPath(slug: string) {
   const clubSlug = TEAM_CREST_CLUB[slug] ?? slug;
   return `/images/clubs/${clubSlug}/crest.svg`;
+}
+
+export function eventLogoPath(slug: string) {
+  return `/images/events/${slug}/logo.svg`;
 }
 
 /** Local player portrait — populated by `npm run fetch-media` */

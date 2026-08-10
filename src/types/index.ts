@@ -287,6 +287,10 @@ export interface Mission {
   sponsorId?: string;
   rewardLabel?: string;
   completed?: boolean;
+  eventId?: string;
+  clubId?: string;
+  teamId?: string;
+  playerId?: string;
 }
 
 export interface Reward {
@@ -305,10 +309,18 @@ export interface Product {
   category: string;
   limited?: boolean;
   clubId?: string;
+  eventId?: string;
   description: string;
   /** Key into mediaCatalog */
   image: string;
 }
+
+export type FanFollowState = {
+  followedClubIds: string[];
+  followedTeamIds: string[];
+  followedEventIds: string[];
+  favoritePlayerIds: string[];
+};
 
 export interface Fan {
   id: string;

@@ -1,4 +1,4 @@
-import type { Product } from "@/types";
+import type { FanFollowState, Product } from "@/types";
 
 export const products: Product[] = [
   {
@@ -177,6 +177,7 @@ export const products: Product[] = [
     name: "Bundesliga Matchday Scarf",
     price: 32,
     category: "Scarves",
+    eventId: "evt-bundesliga",
     description: "Official league scarf for Matchday atmospheres.",
     image: "shopScarf",
   },
@@ -185,6 +186,7 @@ export const products: Product[] = [
     name: "Bundesliga Snapback",
     price: 28,
     category: "Caps",
+    eventId: "evt-bundesliga",
     description: "Structured snapback with embroidered Bundesliga wordmark.",
     image: "shopCap",
   },
@@ -194,6 +196,7 @@ export const products: Product[] = [
     price: 78,
     category: "Apparel",
     limited: true,
+    eventId: "evt-the-international",
     description: "Limited TI stage hoodie — Aegis-inspired detailing.",
     image: "shopHoodie",
   },
@@ -202,6 +205,7 @@ export const products: Product[] = [
     name: "Socca Austria Pro Ball",
     price: 42,
     category: "Equipment",
+    eventId: "evt-socca-austria-pro",
     description: "Official cage ball of the Socca Austria Pro League.",
     image: "shopBall",
   },
@@ -213,4 +217,28 @@ export function getProductById(id: string) {
 
 export function getProductsByClubId(clubId: string) {
   return products.filter((p) => p.clubId === clubId);
+}
+
+export function getProductsByEventId(eventId: string) {
+  return products.filter((p) => p.eventId === eventId);
+}
+
+function productMatchesFollows(
+  product: Product,
+  follows: FanFollowState,
+) {
+  if (product.clubId && follows.followedClubIds.includes(product.clubId)) {
+    return true;
+  }
+  if (product.eventId && follows.followedEventIds.includes(product.eventId)) {
+    return true;
+  }
+  return false;
+}
+
+export function getProductsForFan(follows: FanFollowState) {
+  const forYou = products.filter((p) => productMatchesFollows(p, follows));
+  const forYouIds = new Set(forYou.map((p) => p.id));
+  const discover = products.filter((p) => !forYouIds.has(p.id));
+  return { forYou, discover, all: products };
 }
