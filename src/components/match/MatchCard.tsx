@@ -3,7 +3,7 @@ import { LiveIndicator } from "@/components/ui/LiveIndicator";
 import { Crest } from "@/components/media/Crest";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { MediaImage } from "@/components/media/MediaImage";
-import { heroMedia } from "@/data/media";
+import { matchThumbForSport } from "@/data/media";
 import { formatMatchMinute, formatScore, cn } from "@/lib/utils";
 import type { Match, Team } from "@/types";
 
@@ -20,6 +20,7 @@ export function MatchCard({
   href?: string;
   compact?: boolean;
 }) {
+  const thumb = matchThumbForSport(match.sport, match.id);
   const content = (
     <GlassPanel
       className={cn(
@@ -29,7 +30,7 @@ export function MatchCard({
     >
       {!compact ? (
         <div className="relative h-28 overflow-hidden">
-          <MediaImage src={heroMedia.matchday} alt="" sizes="400px" />
+          <MediaImage src={thumb} alt="" sizes="400px" />
           <div className="absolute inset-0 photo-scrim-light" />
           <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
             {match.status === "live" ? (

@@ -115,6 +115,15 @@ export interface FootballStats {
   passAccuracy: [number, number];
 }
 
+export interface SoccaStats {
+  possession: [number, number];
+  shots: [number, number];
+  shotsOnTarget: [number, number];
+  fouls: [number, number];
+  tackles: [number, number];
+  blocks: [number, number];
+}
+
 export interface DotaStats {
   kills: [number, number];
   towers: [number, number];
@@ -140,9 +149,13 @@ export interface Match {
   venue: string;
   events: MatchEventItem[];
   footballStats?: FootballStats;
+  soccaStats?: SoccaStats;
   dotaStats?: DotaStats;
   homeLineupIds: string[];
   awayLineupIds: string[];
+  /** e.g. "4-4-2" — used by pitch lineup board */
+  homeFormation?: string;
+  awayFormation?: string;
   highlightIds: string[];
   newsIds: string[];
   videoIds: string[];
@@ -162,7 +175,9 @@ export interface StandingRow {
 
 export interface BracketMatch {
   id: string;
+  eventId: string;
   round: "qf" | "sf" | "final";
+  bracketSide: "upper" | "lower";
   homeTeamId?: string;
   awayTeamId?: string;
   homeScore?: number;
@@ -170,6 +185,11 @@ export interface BracketMatch {
   winnerId?: string;
   matchId?: string;
   label: string;
+  /** Short header label e.g. "UB QUARTER" */
+  roundLabel: string;
+  scheduledAt: string;
+  /** Next match this winner feeds into */
+  feedsIntoId?: string;
 }
 
 export interface NewsArticle {
@@ -212,6 +232,8 @@ export interface Award {
   winnerType: "player" | "team" | "club";
   eventId?: string;
   clubId?: string;
+  /** Local path or media catalog key for trophy art */
+  image?: string;
 }
 
 export interface Legend {
@@ -223,6 +245,8 @@ export interface Legend {
   clubId?: string;
   eventId?: string;
   sport: Sport;
+  /** Media catalog key or local path under /images/legends/ */
+  image?: string;
 }
 
 export interface Sponsor {
@@ -232,6 +256,19 @@ export interface Sponsor {
   tagline: string;
   eventIds: string[];
   clubIds: string[];
+}
+
+/** Fan who financially supports a club (membership / shop) */
+export interface ClubPatron {
+  id: string;
+  name: string;
+  city: string;
+  clubId: string;
+  /** Lifetime contribution in euros */
+  totalContributed: number;
+  /** ISO timestamp of most recent shop purchase, if any */
+  lastPurchaseAt?: string;
+  lastPurchaseLabel?: string;
 }
 
 export interface Achievement {
@@ -269,6 +306,8 @@ export interface Product {
   limited?: boolean;
   clubId?: string;
   description: string;
+  /** Key into mediaCatalog */
+  image: string;
 }
 
 export interface Fan {

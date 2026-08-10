@@ -10,6 +10,7 @@ export const legends: Legend[] = [
       "Franz Beckenbauer redefined the sweeper role and captained Bayern through their first European dynasty — still the club's north star for leadership.",
     clubId: "club-bayern",
     sport: "football",
+    image: "/images/legends/beckenbauer.jpg",
   },
   {
     id: "leg-mueller",
@@ -20,6 +21,7 @@ export const legends: Legend[] = [
       "Gerd Müller’s goalscoring record remains the standard for Bayern strikers — instinct in the box, ruthless efficiency.",
     clubId: "club-bayern",
     sport: "football",
+    image: "/images/legends/mueller.jpg",
   },
   {
     id: "leg-lewandowski",
@@ -30,6 +32,7 @@ export const legends: Legend[] = [
       "Before his Bayern years, Lewandowski lit up Signal Iduna Park — a BVB centre-forward who owned Der Klassiker nights.",
     clubId: "club-dortmund",
     sport: "football",
+    image: "/images/legends/lewandowski.jpg",
   },
   {
     id: "leg-reif",
@@ -40,6 +43,7 @@ export const legends: Legend[] = [
       "Weidenfeller’s longevity between the posts for Dortmund became synonymous with Champions League nights under the Yellow Wall.",
     clubId: "club-dortmund",
     sport: "football",
+    image: "/images/legends/weidenfeller.jpg",
   },
   {
     id: "leg-klose",
@@ -50,6 +54,7 @@ export const legends: Legend[] = [
       "Miroslav Klose’s aerial menace at Werder Bremen helped define a golden era of attacking football on the Weser.",
     clubId: "club-werder",
     sport: "football",
+    image: "/images/legends/klose.jpg",
   },
   {
     id: "leg-micoud",
@@ -60,6 +65,7 @@ export const legends: Legend[] = [
       "Johan Micoud’s vision from midfield made Werder one of the most watchable sides in the Bundesliga.",
     clubId: "club-werder",
     sport: "football",
+    image: "/images/legends/micoud.jpg",
   },
   {
     id: "leg-abidal",
@@ -70,6 +76,7 @@ export const legends: Legend[] = [
       "Éric Abidal’s early years at FC Lorient remain part of the club’s Brittany identity — composure and steel at the back.",
     clubId: "club-lorient",
     sport: "football",
+    image: "/images/legends/abidal.jpg",
   },
 ];
 

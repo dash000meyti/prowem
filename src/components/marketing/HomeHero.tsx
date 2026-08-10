@@ -90,7 +90,7 @@ export function HomeHero() {
                     animate={{ y: "0%", opacity: 1 }}
                     transition={{ duration: 0.85, delay: 0.18, ease }}
                   >
-                    Run Sports.
+                    Make it matter.
                   </motion.span>
                 </span>
                 <span className="mt-0.5 block min-h-[1.1em] overflow-hidden sm:mt-1 md:mt-2">
@@ -116,46 +116,44 @@ export function HomeHero() {
               </motion.p>
 
               <motion.div
-                className="mt-5 flex gap-2.5 sm:mt-9 sm:flex-wrap sm:gap-3"
+                className="mt-5 flex flex-col items-stretch gap-4 sm:mt-9 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.74, ease }}
               >
-                <Button
-                  href="#event-platform"
-                  size="md"
-                  className="min-w-0 flex-1 rounded-xl shadow-brand sm:flex-none sm:px-7 md:h-12 md:text-base"
-                >
-                  For organizers
-                </Button>
-                <Button
-                  href="#club-platform"
-                  variant="outline"
-                  size="md"
-                  className="min-w-0 flex-1 rounded-xl sm:flex-none sm:px-7 md:h-12 md:text-base"
-                >
-                  For clubs
-                </Button>
-              </motion.div>
+                <div className="flex min-w-0 gap-2.5 sm:flex-none sm:gap-3">
+                  <Button
+                    href="#event-platform"
+                    size="md"
+                    className="min-w-0 flex-1 rounded-xl shadow-brand sm:flex-none sm:px-7 md:h-12 md:text-base"
+                  >
+                    For organizers
+                  </Button>
+                  <Button
+                    href="#club-platform"
+                    variant="outline"
+                    size="md"
+                    className="min-w-0 flex-1 rounded-xl sm:flex-none sm:px-7 md:h-12 md:text-base"
+                  >
+                    For clubs
+                  </Button>
+                </div>
 
-              <motion.div
-                className="mt-5 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-muted sm:mt-7"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.1, duration: 0.8 }}
-              >
-                <span className="relative flex h-6 w-px overflow-hidden bg-white/15 sm:h-8">
-                  <motion.span
-                    className="absolute inset-x-0 top-0 h-3 bg-orange"
-                    animate={{ y: [0, 20, 0], opacity: [1, 0.2, 1] }}
-                    transition={{
-                      duration: 1.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                </span>
-                Scroll to explore
+                <div className="flex items-center justify-center gap-3 text-[10px] uppercase tracking-[0.28em] text-muted sm:justify-end">
+                  <span className="hidden sm:inline">Scroll to explore</span>
+                  <span className="sm:hidden">Scroll</span>
+                  <span className="relative flex h-6 w-px overflow-hidden bg-white/15 sm:h-8">
+                    <motion.span
+                      className="absolute inset-x-0 top-0 h-3 bg-orange"
+                      animate={{ y: [0, 20, 0], opacity: [1, 0.2, 1] }}
+                      transition={{
+                        duration: 1.8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </span>
+                </div>
               </motion.div>
             </div>
 

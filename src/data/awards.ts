@@ -10,6 +10,7 @@ export const awards: Award[] = [
     winnerType: "player",
     eventId: "evt-bundesliga",
     clubId: "club-bayern",
+    image: "trophyCup",
   },
   {
     id: "awd-player-season",
@@ -20,6 +21,7 @@ export const awards: Award[] = [
     winnerType: "player",
     eventId: "evt-bundesliga",
     clubId: "club-leverkusen",
+    image: "trophyCup",
   },
   {
     id: "awd-socca-mvp",
@@ -30,6 +32,7 @@ export const awards: Award[] = [
     winnerType: "player",
     eventId: "evt-socca-austria-pro",
     clubId: "club-bayern",
+    image: "trophyCup",
   },
   {
     id: "awd-ti-aegis",
@@ -39,6 +42,7 @@ export const awards: Award[] = [
     winnerName: "TBD — Grand Final",
     winnerType: "team",
     eventId: "evt-the-international",
+    image: "trophyCup",
   },
   {
     id: "awd-klassiker-moment",
@@ -49,6 +53,7 @@ export const awards: Award[] = [
     winnerType: "player",
     eventId: "evt-bundesliga",
     clubId: "club-bayern",
+    image: "trophyCup",
   },
   {
     id: "awd-yellow-wall",
@@ -58,6 +63,7 @@ export const awards: Award[] = [
     winnerName: "Borussia Dortmund",
     winnerType: "club",
     clubId: "club-dortmund",
+    image: "trophyCup",
   },
 ];
 

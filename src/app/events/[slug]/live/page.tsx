@@ -7,13 +7,8 @@ import {
   getLiveMatchesList,
   getTeamById,
 } from "@/data";
+import { matchHref } from "@/lib/utils";
 import { notFound } from "next/navigation";
-
-function matchHref(matchId: string) {
-  return matchId === "match-bayern-dortmund"
-    ? "/matches/bundesliga/bayern-vs-dortmund"
-    : undefined;
-}
 
 export default async function EventLivePage({
   params,
@@ -25,8 +20,8 @@ export default async function EventLivePage({
   if (!event) notFound();
 
   const live = getLiveMatchesList(event.id);
-  const featured = live.find((m) => m.id === "match-bayern-dortmund");
-  const others = live.filter((m) => m.id !== "match-bayern-dortmund");
+  const featured = live[0];
+  const others = live.slice(1);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6">
@@ -36,10 +31,7 @@ export default async function EventLivePage({
         description="Fixtures currently in play."
         action={
           featured ? (
-            <Button
-              href="/matches/bundesliga/bayern-vs-dortmund"
-              size="sm"
-            >
+            <Button href={matchHref(featured, event.slug)} size="sm">
               Open Match Center
             </Button>
           ) : null
@@ -52,6 +44,7 @@ export default async function EventLivePage({
             match={featured}
             home={getTeamById(featured.homeTeamId)!}
             away={getTeamById(featured.awayTeamId)!}
+            href={matchHref(featured, event.slug)}
           />
         </div>
       ) : null}
@@ -64,7 +57,7 @@ export default async function EventLivePage({
               match={match}
               home={getTeamById(match.homeTeamId)!}
               away={getTeamById(match.awayTeamId)!}
-              href={matchHref(match.id)}
+              href={matchHref(match, event.slug)}
             />
           ))}
         </div>

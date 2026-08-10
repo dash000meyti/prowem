@@ -27,7 +27,12 @@ export {
   getStandingByTeamId,
   getStandingsForEventId,
 } from "./standings";
-export { bracket, getBracketByRound } from "./bracket";
+export {
+  bracket,
+  getBracketByRound,
+  getBracketMatchById,
+  getBracketForEvent,
+} from "./bracket";
 export {
   news,
   getNewsById,
@@ -56,11 +61,17 @@ export { rewards, getRewardById } from "./rewards";
 export { products, getProductById, getProductsByClubId } from "./products";
 export { achievements, getAchievementById } from "./achievements";
 export {
+  clubPatrons,
+  getTopClubPatrons,
+  getRecentClubShoppers,
+} from "./club-patrons";
+export {
   mediaCatalog,
   resolveMedia,
   crestPath,
   playerPortraitPath,
   playerPortraitFallback,
+  matchThumbForSport,
   heroMedia,
   toneToMedia,
 } from "./media";

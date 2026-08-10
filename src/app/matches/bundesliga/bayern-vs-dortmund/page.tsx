@@ -1,12 +1,16 @@
 import { MatchCenterClient } from "@/components/match/MatchCenterClient";
+import { BrandScope } from "@/components/theme/BrandScope";
 import {
+  getEventBySlug,
   getFeaturedMatch,
   getNewsById,
   getVideoById,
 } from "@/data";
+import { matchTheme } from "@/lib/theme";
 
 export default function NexusVsBerlinMatchPage() {
   const match = getFeaturedMatch();
+  const event = getEventBySlug("bundesliga")!;
   const relatedNews = match.newsIds
     .map((id) => getNewsById(id))
     .filter((n): n is NonNullable<typeof n> => Boolean(n));
@@ -17,9 +21,11 @@ export default function NexusVsBerlinMatchPage() {
     .filter((v): v is NonNullable<typeof v> => Boolean(v));
 
   return (
-    <MatchCenterClient
-      relatedNews={relatedNews}
-      relatedVideos={relatedVideos}
-    />
+    <BrandScope theme={matchTheme(event)} className="min-h-full">
+      <MatchCenterClient
+        relatedNews={relatedNews}
+        relatedVideos={relatedVideos}
+      />
+    </BrandScope>
   );
 }

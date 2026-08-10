@@ -13,8 +13,8 @@ import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { SectionShell } from "@/components/layout/SectionShell";
 import {
-  bracket,
   getAwardsByEventId,
+  getBracketForEvent,
   getEventBySlug,
   getFeaturedMatch,
   getLiveMatchesList,
@@ -28,9 +28,31 @@ import {
   getVideosByEventId,
   heroMedia,
   legends,
+  matchThumbForSport,
   resolveMedia,
 } from "@/data";
 import { notFound } from "next/navigation";
+import type { MediaKey } from "@/data/media";
+import { matchHref } from "@/lib/utils";
+
+function eventHeroFallback(sport: string): MediaKey {
+  if (sport === "dota2") return "theInternationalHero";
+  if (sport === "socca") return "soccaAustriaHero";
+  return "bundesligaHero";
+}
+
+function videosDescription(sport: string) {
+  if (sport === "dota2") return "Stage casts, draft boards and series highlights.";
+  if (sport === "socca") return "Cage intensity, goals and arena atmosphere.";
+  return "Highlights, tunnels and matchday atmosphere.";
+}
+
+function watchLiveHref(eventSlug: string, eventId: string) {
+  if (eventId === "evt-bundesliga") {
+    return "/matches/bundesliga/bayern-vs-dortmund";
+  }
+  return `/events/${eventSlug}/live`;
+}
 
 export default async function NovaCupHomePage({
   params,
@@ -51,6 +73,7 @@ export default async function NovaCupHomePage({
   const away = featured ? getTeamById(featured.awayTeamId) : undefined;
   const standings = getStandingsForEvent(event.id).slice(0, 8);
   const teams = getTeamsForEvent(event.id);
+  const eventBracket = getBracketForEvent(event.id);
   const news = getNewsByEventId(event.id).slice(0, 3);
   const videos = getVideosByEventId(event.id).slice(0, 3);
   const awards = getAwardsByEventId(event.id).slice(0, 4);
@@ -60,20 +83,35 @@ export default async function NovaCupHomePage({
     3,
   );
   const sponsors = getSponsorsByEventId(event.id);
-  const heroSrc = resolveMedia(event.theme.heroImage, "stadiumLights");
+  const heroFallback = eventHeroFallback(event.sport);
+  const heroSrc =
+    resolveMedia(event.theme.heroImage, heroFallback) ||
+    resolveMedia(heroFallback);
 
-  const watchlist = [
-    ...getPlayersByTeamId("team-bayern-fc"),
-    ...getPlayersByTeamId("team-dortmund-fc"),
-  ]
+  const watchlist = teams
+    .flatMap((team) => getPlayersByTeamId(team.id))
     .filter((p) => p.rating != null)
     .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
     .slice(0, 6);
 
+  const fanBandSrc =
+    event.sport === "dota2"
+      ? matchThumbForSport("dota2", "fan-band")
+      : event.sport === "socca"
+        ? matchThumbForSport("socca")
+        : heroMedia.fan;
+
+  const sportEyebrow =
+    event.sport === "dota2"
+      ? "Esports championship"
+      : event.sport === "socca"
+        ? "Cage league"
+        : "Matchday league";
+
   return (
     <div>
       <PhotoBackground
-        src={heroSrc || heroMedia.bundesliga}
+        src={heroSrc}
         alt={`${event.name} atmosphere`}
         priority
         scrim="heavy"
@@ -82,7 +120,8 @@ export default async function NovaCupHomePage({
         <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
           <GlassPanel variant="subtle" className="max-w-3xl p-6 md:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
-              {event.startDate.slice(0,4)} · {event.city} · {event.teamCount} Teams
+              {sportEyebrow} · {event.startDate.slice(0, 4)} · {event.city} ·{" "}
+              {event.teamCount} Teams
             </p>
             <h1 className="mt-5 text-5xl font-semibold leading-[0.95] tracking-tight md:text-7xl">
               {event.name}
@@ -91,7 +130,7 @@ export default async function NovaCupHomePage({
               {event.tagline}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/matches/bundesliga/bayern-vs-dortmund" size="lg">
+              <Button href={watchLiveHref(slug, event.id)} size="lg">
                 Watch Live
               </Button>
               <Button
@@ -118,11 +157,7 @@ export default async function NovaCupHomePage({
             description={`${home.name} vs ${away.name} · ${featured.venue}`}
             action={
               <Button
-                href={
-                  featured.id === "match-bayern-dortmund"
-                    ? "/matches/bundesliga/bayern-vs-dortmund"
-                    : `/events/${slug}/live`
-                }
+                href={matchHref(featured, slug)}
                 variant="secondary"
                 size="sm"
               >
@@ -130,12 +165,17 @@ export default async function NovaCupHomePage({
               </Button>
             }
           />
-          <LiveMatchCard match={featured} home={home} away={away} />
+          <LiveMatchCard
+            match={featured}
+            home={home}
+            away={away}
+            href={matchHref(featured, slug)}
+          />
       </SectionShell>
       ) : null}
 
       <SectionShell atmosphere="contrast" innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6">
-        {event.sport === "dota2" ? (
+        {event.sport === "dota2" && eventBracket.length > 0 ? (
         <div>
           <SectionHeader
             eyebrow="Tournament"
@@ -152,7 +192,7 @@ export default async function NovaCupHomePage({
             }
           />
           <GlassPanel className="p-4 md:p-6">
-            <Bracket items={bracket} />
+            <Bracket items={eventBracket} />
           </GlassPanel>
         </div>
         ) : null}
@@ -162,7 +202,11 @@ export default async function NovaCupHomePage({
           <SectionHeader
             eyebrow="Table"
             title="Standings"
-            description="League form across the field."
+            description={
+              event.sport === "socca"
+                ? "Cage league form across the Vienna circuit."
+                : "League form across the field."
+            }
             action={
               <Button
                 href={`/events/${slug}/standings`}
@@ -221,7 +265,7 @@ export default async function NovaCupHomePage({
           <SectionHeader
             eyebrow="Watch"
             title="Videos"
-            description="Highlights, tunnels and matchday atmosphere."
+            description={videosDescription(event.sport)}
             action={
               <Button
                 href={`/events/${slug}/videos`}
@@ -245,7 +289,13 @@ export default async function NovaCupHomePage({
           <SectionHeader
             eyebrow="Form"
             title="Players to watch"
-            description="The names shaping semi-final night."
+            description={
+              event.sport === "dota2"
+                ? "Carries and midlaners shaping the upper bracket."
+                : event.sport === "socca"
+                  ? "Cage finishers setting the pace in Vienna."
+                  : "The names shaping matchday nights."
+            }
             action={
               <Button
                 href={`/events/${slug}/players`}
@@ -296,7 +346,7 @@ export default async function NovaCupHomePage({
       <SectionShell atmosphere="band" innerClassName="mx-auto max-w-7xl px-4 py-14 md:px-6">
           <GlassPanel className="overflow-hidden p-0">
             <PhotoBackground
-              src={heroMedia.fan}
+              src={fanBandSrc}
               alt="Fan zone"
               scrim="heavy"
               className="min-h-[280px] rounded-[18px]"

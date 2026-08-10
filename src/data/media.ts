@@ -18,6 +18,17 @@ export const mediaCatalog = {
   jerseyDetail: "/images/shared/jerseyDetail.jpg",
   nightMatch: "/images/shared/nightMatch.jpg",
   abstractDark: "/images/shared/abstractDark.jpg",
+  shopJerseyRed: "/images/shared/shopJerseyRed.jpg",
+  shopJerseyYellow: "/images/shared/shopJerseyYellow.jpg",
+  shopJerseyGreen: "/images/shared/shopJerseyGreen.jpg",
+  shopJerseyAway: "/images/shared/shopJerseyAway.jpg",
+  shopScarf: "/images/shared/shopScarf.jpg",
+  shopCap: "/images/shared/shopCap.jpg",
+  shopHoodie: "/images/shared/shopHoodie.jpg",
+  shopBall: "/images/shared/shopBall.jpg",
+  shopApparel: "/images/shared/shopApparel.jpg",
+  fansCommunity: "/images/shared/fansCommunity.jpg",
+  trophyCup: "/images/shared/trophyCup.jpg",
   bayernHero: "/images/clubs/bayern-munich/hero.jpg",
   bayernCover: "/images/clubs/bayern-munich/cover.jpg",
   dortmundHero: "/images/clubs/borussia-dortmund/hero.jpg",
@@ -106,6 +117,21 @@ export function playerPortraitFallback(sport: string) {
   if (sport === "dota2") return mediaCatalog.esportsStage;
   if (sport === "socca") return mediaCatalog.soccaCage;
   return mediaCatalog.athletePortrait;
+}
+
+/** Match card / live card background keyed by sport (optional seed for variety) */
+export function matchThumbForSport(sport: string, seed?: string): string {
+  const flip = seed
+    ? [...seed].reduce((n, c) => n + c.charCodeAt(0), 0) % 2 === 0
+    : true;
+
+  if (sport === "dota2") {
+    return flip ? mediaCatalog.esportsStage : mediaCatalog.esportsCrowd;
+  }
+  if (sport === "socca") {
+    return mediaCatalog.soccaCage;
+  }
+  return flip ? mediaCatalog.nightMatch : mediaCatalog.footballAction;
 }
 
 export const heroMedia = {

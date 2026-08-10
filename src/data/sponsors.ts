@@ -74,6 +74,22 @@ export const sponsors: Sponsor[] = [
     clubIds: ["club-dortmund"],
   },
   {
+    id: "spn-bvb-signal",
+    name: "Signal Iduna",
+    tier: "title",
+    tagline: "Stadium naming and title partnership.",
+    eventIds: [],
+    clubIds: ["club-dortmund"],
+  },
+  {
+    id: "spn-bvb-brinkhoffs",
+    name: "Brinkhoff's",
+    tier: "silver",
+    tagline: "Matchday hospitality partner.",
+    eventIds: [],
+    clubIds: ["club-dortmund"],
+  },
+  {
     id: "spn-weser",
     name: "Weser Partner",
     tier: "gold",

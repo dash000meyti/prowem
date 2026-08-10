@@ -3,28 +3,22 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-/** Prefixes typed in front of the fixed anchor word */
-const PREFIXES = [
-  "Build",
-  "Create",
-  "Stage",
-  "Power",
-  "Own",
-] as const;
+/** Words typed after the fixed anchor */
+const SUFFIXES = ["Live.", "Share.", "Own.", "Relive.", "Defend."] as const;
 
 /**
- * Types a rotating prefix in front of a fixed word, holds, deletes, advances.
- * e.g. "Build Communities." → "Create Communities." → …
+ * Fixed word first, then a rotating typed suffix.
+ * e.g. "Moments Live." → "Moments Share." → …
  */
 export function TypewriterRotate({
-  prefixes = PREFIXES,
-  anchor = "Communities.",
+  suffixes = SUFFIXES,
+  anchor = "Moments",
   className,
   typingMs = 58,
   deletingMs = 34,
   holdMs = 2400,
 }: {
-  prefixes?: readonly string[];
+  suffixes?: readonly string[];
   anchor?: string;
   className?: string;
   typingMs?: number;
@@ -38,7 +32,7 @@ export function TypewriterRotate({
   );
 
   useEffect(() => {
-    const full = prefixes[index] ?? "";
+    const full = suffixes[index] ?? "";
     let timer: ReturnType<typeof setTimeout>;
 
     if (phase === "typing") {
@@ -55,15 +49,21 @@ export function TypewriterRotate({
     } else if (text.length > 0) {
       timer = setTimeout(() => setText(text.slice(0, -1)), deletingMs);
     } else {
-      setIndex((i) => (i + 1) % prefixes.length);
+      setIndex((i) => (i + 1) % suffixes.length);
       setPhase("typing");
     }
 
     return () => clearTimeout(timer);
-  }, [text, phase, index, prefixes, typingMs, deletingMs, holdMs]);
+  }, [text, phase, index, suffixes, typingMs, deletingMs, holdMs]);
 
   return (
-    <span className={cn("inline-flex flex-wrap items-baseline gap-x-[0.28em]", className)}>
+    <span
+      className={cn(
+        "inline-flex flex-wrap items-baseline gap-x-[0.28em]",
+        className,
+      )}
+    >
+      <span>{anchor}</span>
       <span className="inline-flex items-baseline text-orange">
         <span>{text}</span>
         <span
@@ -71,9 +71,8 @@ export function TypewriterRotate({
           aria-hidden
         />
       </span>
-      <span>{anchor}</span>
       <span className="sr-only">
-        {prefixes.map((p) => `${p} ${anchor}`).join(" ")}
+        {suffixes.map((s) => `${anchor} ${s}`).join(" ")}
       </span>
     </span>
   );

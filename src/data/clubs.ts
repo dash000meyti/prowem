@@ -45,7 +45,7 @@ export const clubs: Club[] = [
       coverImage: "dortmundCover",
     },
     teamIds: ["team-dortmund-fc", "team-dortmund-socca", "team-dortmund-dota2"],
-    sponsorIds: ["spn-puma", "spn-evonik", "spn-1und1"],
+    sponsorIds: ["spn-puma", "spn-evonik", "spn-1und1", "spn-bvb-signal", "spn-bvb-brinkhoffs"],
     achievementIds: ["ach-multi-arena", "ach-klassiker-night", "ach-yellow-wall"],
     legendIds: ["leg-lewandowski", "leg-reif"],
   },

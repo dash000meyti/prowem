@@ -1,15 +1,17 @@
 import { AwardCard, LegendCard } from "@/components/event/AwardLegendCards";
-import { NewsCard } from "@/components/event/NewsCard";
 import { SponsorGrid } from "@/components/event/SponsorGrid";
 import { VideoCard } from "@/components/event/VideoCard";
-import { PlayerCard } from "@/components/club/PlayerCard";
-import { TeamCard } from "@/components/club/TeamCard";
+import { ClubCommunityBand } from "@/components/club/ClubCommunityBand";
+import { ClubFeaturedStories } from "@/components/club/ClubFeaturedStories";
+import { ClubPatronsSection } from "@/components/club/ClubPatronsSection";
+import { ClubRosterSection } from "@/components/club/ClubRosterSection";
+import { ClubShopSection } from "@/components/club/ClubShopSection";
+import { ClubStoryHero } from "@/components/club/ClubStoryHero";
+import { ClubTeamsShowcase } from "@/components/club/ClubTeamsShowcase";
+import { ClubTicketsSection } from "@/components/club/ClubTicketsSection";
+import { AchievementBadge } from "@/components/fan/AchievementBadge";
 import { MatchCard } from "@/components/match/MatchCard";
-import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Crest } from "@/components/media/Crest";
-import { GlassPanel } from "@/components/media/GlassPanel";
-import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { SectionShell } from "@/components/layout/SectionShell";
 import {
   getAchievementById,
@@ -18,14 +20,17 @@ import {
   getLegendsByClubId,
   getNewsByClubId,
   getPlayersByTeamId,
+  getProductsByClubId,
+  getRecentClubShoppers,
   getSponsorsByClubId,
   getTeamById,
   getTeamsByClubId,
+  getTopClubPatrons,
   getVideosByClubId,
   isFeaturedClub,
   matches,
-  resolveMedia,
 } from "@/data";
+import { matchHref, sportLabel } from "@/lib/utils";
 import { notFound } from "next/navigation";
 
 export default async function ClubHomePage({
@@ -40,17 +45,26 @@ export default async function ClubHomePage({
 
   const clubTeams = getTeamsByClubId(club.id);
   const primaryTeam = clubTeams[0];
+  const multiTeam = clubTeams.length > 1;
   const teamIds = new Set(club.teamIds);
+
   const clubMatches = matches
     .filter((m) => teamIds.has(m.homeTeamId) || teamIds.has(m.awayTeamId))
     .sort((a, b) => b.kickoff.localeCompare(a.kickoff));
   const liveOrUpcoming = clubMatches.filter(
     (m) => m.status === "live" || m.status === "scheduled",
   );
+  const upcomingTickets = clubMatches
+    .filter((m) => m.status === "scheduled")
+    .sort((a, b) => a.kickoff.localeCompare(b.kickoff))
+    .slice(0, 4);
   const results = clubMatches
     .filter((m) => m.status === "finished")
     .slice(0, 4);
-  const clubNews = getNewsByClubId(club.id).slice(0, 3);
+  const clubNews = getNewsByClubId(club.id)
+    .slice()
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    .slice(0, 3);
   const clubVideos = getVideosByClubId(club.id).slice(0, 3);
   const sponsors = getSponsorsByClubId(club.id);
   const clubLegends = getLegendsByClubId(club.id);
@@ -58,98 +72,51 @@ export default async function ClubHomePage({
   const achievements = club.achievementIds
     .map((id) => getAchievementById(id))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
-  const highlightPlayers = primaryTeam
-    ? getPlayersByTeamId(primaryTeam.id)
-        .filter((p) => (p.rating ?? 0) >= 80)
-        .slice(0, 4)
-    : [];
+  const roster = primaryTeam ? getPlayersByTeamId(primaryTeam.id) : [];
+  const clubProducts = getProductsByClubId(club.id);
+  const topPatrons = getTopClubPatrons(club.id, 10);
+  const recentShoppers = getRecentClubShoppers(club.id, 5);
 
-  const multiTeam = clubTeams.length > 1;
+  const teamsHref = `/clubs/${slug}/teams`;
+  const teamHref = primaryTeam
+    ? `/clubs/${slug}/teams/${primaryTeam.sport}`
+    : undefined;
 
   return (
     <div>
-      <PhotoBackground
-        src={resolveMedia(
-          club.theme.coverImage ?? club.theme.heroImage,
-          "footballAction",
-        )}
-        alt={`${club.name} cover`}
-        priority
-        scrim="heavy"
-        className="min-h-[68vh] border-b border-border"
-      >
-        <div className="relative mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-          <div className="pointer-events-none absolute right-4 top-10 opacity-[0.12] md:right-10">
-            <Crest slug={club.slug} name={club.name} size={220} />
-          </div>
-          <GlassPanel variant="subtle" className="relative max-w-3xl p-6 md:p-8">
-            <div className="mb-4 flex items-center gap-3">
-              <Crest slug={club.slug} name={club.name} size={48} />
-              <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
-                {multiTeam ? "Multi-sport club" : "Club"}
-              </p>
-            </div>
-            <h1 className="text-5xl font-semibold tracking-tight md:text-7xl">
-              {club.name}
-            </h1>
-            <p className="mt-4 max-w-xl text-lg text-muted">{club.tagline}</p>
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-              {club.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {multiTeam ? (
-                <Button href={`/clubs/${slug}/teams`}>Explore teams</Button>
-              ) : primaryTeam ? (
-                <Button href={`/clubs/${slug}/teams/${primaryTeam.sport}`}>
-                  Open team
-                </Button>
-              ) : null}
-              <Button href="/fans" variant="outline">
-                Fan experience
-              </Button>
-            </div>
-          </GlassPanel>
-        </div>
-      </PhotoBackground>
-
-      <SectionShell atmosphere="tint" innerClassName="mx-auto max-w-7xl space-y-14 px-4 py-14 md:px-6">
-        {multiTeam ? (
-          <section>
-            <SectionHeader
-              eyebrow="Teams"
-              title="One club. Multiple arenas."
-              action={
-                <Button href={`/clubs/${slug}/teams`} variant="outline" size="sm">
-                  All teams
-                </Button>
+      <ClubStoryHero
+        club={club}
+        eyebrow={multiTeam ? "Multi-sport club" : "Club"}
+        primaryCta={
+          multiTeam
+            ? { href: teamsHref, label: "Explore teams" }
+            : {
+                href: teamHref ?? "/fans",
+                label: primaryTeam
+                  ? `Open ${sportLabel(primaryTeam.sport)} team`
+                  : "Join the community",
               }
-            />
-            <div className="grid gap-4 md:grid-cols-3">
-              {clubTeams.map((team) => (
-                <TeamCard
-                  key={team.id}
-                  team={team}
-                  href={`/clubs/${slug}/teams/${team.sport}`}
-                />
-              ))}
-            </div>
-          </section>
-        ) : null}
+        }
+      />
 
-        {highlightPlayers.length > 0 ? (
-          <section>
-            <SectionHeader eyebrow="Players" title="Standouts" />
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {highlightPlayers.map((player) => (
-                <PlayerCard
-                  key={player.id}
-                  player={player}
-                  href={`/clubs/${slug}/players/${player.slug}`}
-                />
-              ))}
-            </div>
-          </section>
-        ) : null}
+      {multiTeam ? (
+        <SectionShell
+          atmosphere="contrast"
+          innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
+        >
+          <ClubTeamsShowcase
+            teams={clubTeams}
+            clubSlug={slug}
+            allTeamsHref={teamsHref}
+          />
+        </SectionShell>
+      ) : null}
+
+      <SectionShell
+        atmosphere="tint"
+        innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
+      >
+        <ClubFeaturedStories articles={clubNews} />
 
         {liveOrUpcoming.length > 0 ? (
           <section>
@@ -161,11 +128,7 @@ export default async function ClubHomePage({
                   match={match}
                   home={getTeamById(match.homeTeamId)!}
                   away={getTeamById(match.awayTeamId)!}
-                  href={
-                    match.id === "match-bayern-dortmund"
-                      ? "/matches/bundesliga/bayern-vs-dortmund"
-                      : undefined
-                  }
+                  href={matchHref(match)}
                 />
               ))}
             </div>
@@ -177,23 +140,48 @@ export default async function ClubHomePage({
             <SectionHeader eyebrow="Results" title="Recent finishes" />
             <div className="grid gap-4 md:grid-cols-2">
               {results.map((match) => (
-                <MatchCard key={match.id} match={match} home={getTeamById(match.homeTeamId)!} away={getTeamById(match.awayTeamId)!} />
+                <MatchCard
+                  key={match.id}
+                  match={match}
+                  home={getTeamById(match.homeTeamId)!}
+                  away={getTeamById(match.awayTeamId)!}
+                />
               ))}
             </div>
           </section>
         ) : null}
+      </SectionShell>
 
-        {clubNews.length > 0 ? (
-          <section>
-            <SectionHeader eyebrow="News" title="Club stories" />
-            <div className="grid gap-4 md:grid-cols-3">
-              {clubNews.map((article) => (
-                <NewsCard key={article.id} article={article} />
-              ))}
-            </div>
-          </section>
-        ) : null}
+      <SectionShell
+        atmosphere="mesh"
+        innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
+      >
+        <ClubShopSection clubName={club.name} products={clubProducts} />
+        <ClubTicketsSection clubName={club.name} matches={upcomingTickets} />
+      </SectionShell>
 
+      {!multiTeam ? (
+        <SectionShell
+          atmosphere="contrast"
+          innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
+        >
+          <ClubRosterSection
+            players={roster}
+            clubSlug={slug}
+            sportLabel={
+              primaryTeam ? sportLabel(primaryTeam.sport) : "Team"
+            }
+            teamHref={teamHref}
+          />
+        </SectionShell>
+      ) : null}
+
+      <ClubCommunityBand clubName={club.name} />
+
+      <SectionShell
+        atmosphere="tint"
+        innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20"
+      >
         {clubVideos.length > 0 ? (
           <section>
             <SectionHeader eyebrow="Video" title="Watch" />
@@ -232,12 +220,7 @@ export default async function ClubHomePage({
             <SectionHeader eyebrow="Achievements" title="Fan milestones" />
             <div className="grid gap-3 md:grid-cols-3">
               {achievements.map((a) => (
-                <GlassPanel key={a.id} className="p-5">
-                  <p className="text-sm font-semibold">{a.name}</p>
-                  <p className="mt-2 text-xs leading-relaxed text-muted">
-                    {a.description}
-                  </p>
-                </GlassPanel>
+                <AchievementBadge key={a.id} achievement={a} />
               ))}
             </div>
           </section>
@@ -245,10 +228,20 @@ export default async function ClubHomePage({
 
         {sponsors.length > 0 ? (
           <section>
-            <SectionHeader eyebrow="Partners" title="Club sponsors" />
+            <SectionHeader
+              eyebrow="Partners"
+              title="Club sponsors"
+              description="Commercial partners by support tier — title, gold and official."
+            />
             <SponsorGrid sponsors={sponsors} />
           </section>
         ) : null}
+
+        <ClubPatronsSection
+          clubName={club.name}
+          topPatrons={topPatrons}
+          recentShoppers={recentShoppers}
+        />
       </SectionShell>
     </div>
   );

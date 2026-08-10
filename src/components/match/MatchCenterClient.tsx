@@ -4,9 +4,9 @@ import { GoalAutomationPanel } from "@/components/match/GoalAutomationPanel";
 import { MatchStatsBars } from "@/components/match/MatchStatsBars";
 import { SocialPostPreview } from "@/components/match/SocialPostPreview";
 import { Timeline } from "@/components/match/Timeline";
+import { LineupBoard } from "@/components/match/lineup/LineupBoard";
 import { NewsCard } from "@/components/event/NewsCard";
 import { VideoCard } from "@/components/event/VideoCard";
-import { PlayerCard } from "@/components/club/PlayerCard";
 import { LiveIndicator } from "@/components/ui/LiveIndicator";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Crest } from "@/components/media/Crest";
@@ -152,31 +152,16 @@ export function MatchCenterClient({
           <SectionHeader
             eyebrow="Squads"
             title="Lineups"
-            description="Same player entities as club and event pages."
+            description="On-pitch positions — same player entities as club and event pages."
           />
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div>
-              <p className="mb-4 flex items-center gap-2 text-sm font-semibold">
-                <Crest slug={home.slug} name={home.name} size={24} />
-                {home.name}
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {homeLineup.map((player) => (
-                  <PlayerCard key={player.id} player={player} />
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="mb-4 flex items-center gap-2 text-sm font-semibold">
-                <Crest slug={away.slug} name={away.name} size={24} />
-                {away.name}
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {awayLineup.map((player) => (
-                  <PlayerCard key={player.id} player={player} />
-                ))}
-              </div>
-            </div>
+          <div className="mt-6 w-full">
+            <LineupBoard
+              match={match}
+              home={home}
+              away={away}
+              homeLineup={homeLineup}
+              awayLineup={awayLineup}
+            />
           </div>
         </section>
 

@@ -1,3 +1,5 @@
+import type { Match } from "@/types";
+
 export function cn(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
 }
@@ -24,4 +26,24 @@ export function sportLabel(sport: string) {
     valorant: "Valorant",
   };
   return map[sport] ?? sport;
+}
+
+/** Match Center / stage detail href for a fixture */
+export function matchHref(
+  match: Pick<Match, "id" | "slug" | "eventId">,
+  eventSlug?: string,
+): string {
+  if (match.id === "match-bayern-dortmund") {
+    return "/matches/bundesliga/bayern-vs-dortmund";
+  }
+  const slug =
+    eventSlug ??
+    (match.eventId === "evt-bundesliga"
+      ? "bundesliga"
+      : match.eventId === "evt-socca-austria-pro"
+        ? "socca-austria-pro"
+        : match.eventId === "evt-the-international"
+          ? "the-international"
+          : "match");
+  return `/matches/${slug}/${match.slug}`;
 }

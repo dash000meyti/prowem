@@ -27,7 +27,8 @@
 
 ### Match
 - `/matches/live`
-- `/matches/bundesliga/bayern-vs-dortmund`
+- `/matches/bundesliga/bayern-vs-dortmund` — interactive Match Center (Goal demo)
+- `/matches/[eventSlug]/[matchSlug]` — sport stage detail (socca / dota / other fixtures)
 
 ## ناوبری زمینه‌ای
 

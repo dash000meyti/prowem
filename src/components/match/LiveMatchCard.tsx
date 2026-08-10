@@ -3,7 +3,7 @@ import { LiveIndicator } from "@/components/ui/LiveIndicator";
 import { Crest } from "@/components/media/Crest";
 import { GlassPanel } from "@/components/media/GlassPanel";
 import { MediaImage } from "@/components/media/MediaImage";
-import { heroMedia } from "@/data/media";
+import { matchThumbForSport } from "@/data/media";
 import type { Match, Team } from "@/types";
 
 export function LiveMatchCard({
@@ -17,11 +17,12 @@ export function LiveMatchCard({
   away: Team;
   href?: string;
 }) {
+  const thumb = matchThumbForSport(match.sport, match.id);
   return (
     <Link href={href} className="block">
       <GlassPanel className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <MediaImage src={heroMedia.matchCenter} alt="" />
+          <MediaImage src={thumb} alt="" />
           <div className="absolute inset-0 photo-scrim-heavy" />
         </div>
         <div className="relative z-10 p-6 md:p-8">
