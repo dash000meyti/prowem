@@ -43,7 +43,7 @@ export function MatchCenterClient({
         scrim="heavy"
         className="border-b border-border"
       >
-        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+        <div className="mx-auto max-w-7xl space-y-6 px-4 py-12 md:space-y-8 md:px-6 md:py-16">
           <GlassPanel className="relative overflow-hidden p-5 md:p-8">
             <div className="pointer-events-none absolute -right-10 top-0 opacity-[0.08]">
               <Crest slug={home.slug} name={home.name} size={220} />
@@ -104,49 +104,45 @@ export function MatchCenterClient({
               </p>
             </div>
           </GlassPanel>
+
+          <section className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+            <GlassPanel className="h-full p-5 md:p-6">
+              <div className="mb-5">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
+                  Match numbers
+                </p>
+                <h2 className="mt-1 text-xl font-semibold md:text-2xl">
+                  Live stats
+                </h2>
+              </div>
+              {match.footballStats ? (
+                <MatchStatsBars
+                  stats={match.footballStats}
+                  homeName={home.shortName}
+                  awayName={away.shortName}
+                />
+              ) : null}
+            </GlassPanel>
+
+            <GlassPanel className="h-full p-5 atmosphere-tint !bg-[color-mix(in_srgb,var(--glass-bg)_88%,var(--brand-tint))] md:p-6">
+              <div className="mb-5">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
+                  Timeline
+                </p>
+                <h2 className="mt-1 text-xl font-semibold md:text-2xl">
+                  Match feed
+                </h2>
+                <p className="mt-1 text-xs text-muted">
+                  Every key moment from the same live match data core.
+                </p>
+              </div>
+              <Timeline events={match.events} />
+            </GlassPanel>
+          </section>
         </div>
       </PhotoBackground>
 
       <div className="mx-auto max-w-7xl space-y-14 px-4 py-12 md:space-y-16 md:px-6 md:py-16">
-        <section className="grid gap-6 lg:grid-cols-2 lg:gap-8">
-          <GlassPanel className="h-full p-5 md:p-6">
-            <div className="mb-5">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
-                Match numbers
-              </p>
-              <h2 className="mt-1 text-xl font-semibold md:text-2xl">
-                Live stats
-              </h2>
-            </div>
-            {match.footballStats ? (
-              <MatchStatsBars
-                stats={match.footballStats}
-                homeName={home.shortName}
-                awayName={away.shortName}
-              />
-            ) : null}
-          </GlassPanel>
-
-          <GlassPanel className="h-full p-5 atmosphere-tint !bg-[color-mix(in_srgb,var(--glass-bg)_88%,var(--brand-tint))] md:p-6">
-            <div className="mb-5">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
-                Timeline
-              </p>
-              <h2 className="mt-1 text-xl font-semibold md:text-2xl">
-                Match feed
-              </h2>
-              <p className="mt-1 text-xs text-muted">
-                Every key moment from the same live match data core.
-              </p>
-            </div>
-            <Timeline events={match.events} />
-          </GlassPanel>
-        </section>
-
-        <section>
-          <PlayerOfTheMatch />
-        </section>
-
         <section className="atmosphere-contrast -mx-4 px-4 py-10 md:-mx-6 md:rounded-[18px] md:px-6">
           <SectionHeader
             eyebrow="Squads"
@@ -175,6 +171,10 @@ export function MatchCenterClient({
               <VideoCard key={video.id} video={video} />
             ))}
           </div>
+        </section>
+
+        <section>
+          <PlayerOfTheMatch />
         </section>
 
         {relatedNews.length > 0 ? (

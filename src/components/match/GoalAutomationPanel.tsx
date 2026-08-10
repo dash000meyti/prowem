@@ -14,6 +14,7 @@ export function GoalAutomationPanel() {
   const { toggleGoal, goalTriggered, match, notifications, liveStandings } =
     useDemo();
   const [previewPulse, setPreviewPulse] = useState(false);
+  const [tableAnimating, setTableAnimating] = useState(false);
 
   return (
     <GlassPanel className="relative overflow-hidden">
@@ -54,7 +55,7 @@ export function GoalAutomationPanel() {
               {match.minute}&apos; · Der Klassiker
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Button onClick={toggleGoal}>
+              <Button onClick={toggleGoal} disabled={tableAnimating}>
                 {goalTriggered ? "Undo Goal" : "Register Goal"}
               </Button>
               <Button
@@ -76,7 +77,7 @@ export function GoalAutomationPanel() {
             ) : null}
           </GlassPanel>
 
-          <GlassPanel variant="strong" className="p-5 md:p-6">
+          <GlassPanel variant="strong" className="overflow-visible p-5 md:p-6">
             <div className="mb-4">
               <p className="text-[10px] uppercase tracking-[0.16em] text-brand">
                 Live table
@@ -86,7 +87,12 @@ export function GoalAutomationPanel() {
                 Register a goal to watch Bayern climb — undo to reverse.
               </p>
             </div>
-            <LiveStandingsTable rows={liveStandings} />
+            <div className="overflow-visible py-1">
+              <LiveStandingsTable
+                rows={liveStandings}
+                onAnimatingChange={setTableAnimating}
+              />
+            </div>
           </GlassPanel>
         </div>
 

@@ -475,6 +475,26 @@ a {
   animation: score-flash 0.8s ease-out;
 }
 
+.standings-row-lift {
+  isolation: isolate;
+}
+
+.standings-row-lift::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    color-mix(in srgb, var(--brand-primary) 28%, transparent) 50%,
+    transparent 80%
+  );
+  opacity: 0.55;
+  z-index: -1;
+}
+
 .editorial-grid {
   background-image:
     linear-gradient(rgba(245, 245, 242, 0.03) 1px, transparent 1px),
