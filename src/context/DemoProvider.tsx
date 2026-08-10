@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -15,11 +16,21 @@ import {
   getRewardById,
   missions as allMissions,
 } from "@/data";
+import {
+  LIVE_GOAL_EVENT_ID,
+  LIVE_GOAL_XP,
+  LIVE_STANDINGS_BASE,
+  MOTM_AFTER_GOAL,
+  MOTM_BASE,
+  applyGoalToStandings,
+} from "@/data/live-match-demo";
 import type {
   FanFollowState,
   Match,
   MatchEventItem,
   Mission,
+  PlayerOfTheMatchStats,
+  StandingRow,
 } from "@/types";
 
 interface SocialPost {
@@ -55,9 +66,13 @@ interface DemoState {
   goalTriggered: boolean;
   lastUnlockedAchievement?: string;
   automationSteps: string[];
+  liveStandings: StandingRow[];
+  playerOfTheMatch: PlayerOfTheMatchStats;
 }
 
 interface DemoContextValue extends DemoState {
+  toggleGoal: () => void;
+  /** @deprecated use toggleGoal */
   triggerGoal: () => void;
   completeMission: (missionId: string) => void;
   redeemReward: (rewardId: string) => boolean;
@@ -89,15 +104,83 @@ const AUTOMATION = [
   "Notify Fans",
 ];
 
+const GOAL_SOCIAL_ID = "social-live-goal";
+
 function toggleId(list: string[], id: string) {
   return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
+}
+
+function cloneMatch(match: Match): Match {
+  return {
+    ...match,
+    events: match.events.map((e) => ({ ...e })),
+    footballStats: match.footballStats
+      ? {
+          possession: [...match.footballStats.possession],
+          shots: [...match.footballStats.shots],
+          shotsOnTarget: [...match.footballStats.shotsOnTarget],
+          corners: [...match.footballStats.corners],
+          fouls: [...match.footballStats.fouls],
+          passAccuracy: [...match.footballStats.passAccuracy],
+        }
+      : undefined,
+    homeLineupIds: [...match.homeLineupIds],
+    awayLineupIds: [...match.awayLineupIds],
+    highlightIds: [...match.highlightIds],
+    newsIds: [...match.newsIds],
+    videoIds: [...match.videoIds],
+  };
+}
+
+function applyGoalToMatch(prev: Match): Match {
+  const goalEvent: MatchEventItem = {
+    id: LIVE_GOAL_EVENT_ID,
+    minute: 72,
+    type: "goal",
+    teamId: "team-bayern-fc",
+    playerId: "player-kane",
+    playerName: "Harry Kane",
+    detail: "Clinical finish inside the box",
+    period: "2H",
+  };
+
+  const footballStats = prev.footballStats
+    ? {
+        ...prev.footballStats,
+        shots: [prev.footballStats.shots[0] + 1, prev.footballStats.shots[1]] as [
+          number,
+          number,
+        ],
+        shotsOnTarget: [
+          prev.footballStats.shotsOnTarget[0] + 1,
+          prev.footballStats.shotsOnTarget[1],
+        ] as [number, number],
+        possession: [
+          Math.min(99, prev.footballStats.possession[0] + 1),
+          Math.max(1, prev.footballStats.possession[1] - 1),
+        ] as [number, number],
+      }
+    : undefined;
+
+  return {
+    ...prev,
+    homeScore: prev.homeScore + 1,
+    minute: 72,
+    events: [...prev.events.filter((e) => e.id !== LIVE_GOAL_EVENT_ID), goalEvent],
+    footballStats,
+  };
 }
 
 export function DemoProvider({ children }: { children: ReactNode }) {
   const baseMatch = getFeaturedMatch();
   const baseFan = getPrimaryFan();
+  const matchSnapshot = useRef(cloneMatch(baseMatch));
+  const standingsSnapshot = useRef(
+    LIVE_STANDINGS_BASE.map((row) => ({ ...row })),
+  );
+  const xpSnapshot = useRef(baseFan.xp);
 
-  const [match, setMatch] = useState<Match>(baseMatch);
+  const [match, setMatch] = useState<Match>(() => cloneMatch(baseMatch));
   const [fanXp, setFanXp] = useState(baseFan.xp);
   const [fanLevel] = useState(baseFan.level);
   const [fanStatus] = useState(baseFan.status);
@@ -120,76 +203,71 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [goalTriggered, setGoalTriggered] = useState(false);
   const [lastUnlockedAchievement, setAchievement] = useState<string>();
   const [automationSteps, setAutomation] = useState<string[]>([]);
+  const [liveStandings, setLiveStandings] = useState<StandingRow[]>(() =>
+    LIVE_STANDINGS_BASE.map((row) => ({ ...row })),
+  );
+  const [playerOfTheMatch, setPlayerOfTheMatch] =
+    useState<PlayerOfTheMatchStats>(MOTM_BASE);
 
   const pushNotify = useCallback((title: string, body: string) => {
     setNotifications((prev) => [
-      { id: `n-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, title, body },
+      {
+        id: `n-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+        title,
+        body,
+      },
       ...prev,
     ]);
   }, []);
 
-  const triggerGoal = useCallback(() => {
-    if (goalTriggered) return;
-
-    const goalEvent: MatchEventItem = {
-      id: "me-bd-goal-72-live",
-      minute: 72,
-      type: "goal",
-      teamId: "team-bayern-fc",
-      playerId: "player-kane",
-      playerName: "Harry Kane",
-      detail: "Clinical finish inside the box",
-      period: "2H",
-    };
-
-    setMatch((prev) => {
-      const alreadyHas72 = prev.events.some(
-        (e) => e.minute === 72 && e.type === "goal",
-      );
-      if (alreadyHas72) {
-        const extra: MatchEventItem = {
-          id: "me-bd-goal-78",
-          minute: 78,
-          type: "goal",
-          teamId: "team-bayern-fc",
-          playerId: "player-olise",
-          playerName: "Michael Olise",
-          detail: "Counter-attack finish — GOAL DETECTED",
-          period: "2H",
-        };
-        return {
-          ...prev,
-          homeScore: prev.homeScore + 1,
-          minute: 78,
-          events: [...prev.events, extra],
-        };
-      }
-      return {
+  const toggleGoal = useCallback(() => {
+    if (goalTriggered) {
+      setMatch(cloneMatch(matchSnapshot.current));
+      setLiveStandings(standingsSnapshot.current.map((row) => ({ ...row })));
+      setPlayerOfTheMatch({ ...MOTM_BASE });
+      setSocialPosts((prev) => prev.filter((p) => p.id !== GOAL_SOCIAL_ID));
+      setFanXp(xpSnapshot.current);
+      setAutomation([]);
+      setGoalTriggered(false);
+      setAchievement(undefined);
+      setNotifications((prev) => [
+        {
+          id: `n-${Date.now()}-undo`,
+          title: "Goal reversed",
+          body: "Live data rolled back — score, table, stats and social draft restored.",
+        },
         ...prev,
-        homeScore: Math.max(prev.homeScore, 2),
-        events: [...prev.events, goalEvent],
-        minute: 72,
-      };
-    });
+      ]);
+      return;
+    }
 
+    xpSnapshot.current = fanXp;
+    matchSnapshot.current = cloneMatch(match);
+    standingsSnapshot.current = liveStandings.map((row) => ({ ...row }));
+
+    setMatch((prev) => applyGoalToMatch(prev));
+    setLiveStandings((prev) => applyGoalToStandings(prev));
+    setPlayerOfTheMatch({ ...MOTM_AFTER_GOAL });
     setSocialPosts((prev) => [
       {
-        id: `social-${Date.now()}`,
+        id: GOAL_SOCIAL_ID,
         headline: "GOAL!",
-        body: "Bayern extend the lead in Der Klassiker.",
+        body: "Harry Kane makes it three — Bayern extend the lead in Der Klassiker.",
         scoreLine: "Bayern Munich 3–1 Borussia Dortmund",
-        minute: 78,
+        minute: 72,
         platform: "X",
       },
-      ...prev,
+      ...prev.filter((p) => p.id !== GOAL_SOCIAL_ID),
     ]);
-
-    pushNotify("Match alert", "GOAL — Bayern Munich score. +150 XP for live watchers.");
-    setFanXp((xp) => xp + 150);
+    pushNotify(
+      "Match alert",
+      "GOAL — Harry Kane scores. +150 XP for live watchers.",
+    );
+    setFanXp((xp) => xp + LIVE_GOAL_XP);
     setAutomation(AUTOMATION);
     setGoalTriggered(true);
     setAchievement("Live Pulse");
-  }, [goalTriggered, pushNotify]);
+  }, [fanXp, goalTriggered, liveStandings, match, pushNotify]);
 
   const completeMission = useCallback(
     (missionId: string) => {
@@ -212,12 +290,18 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       const reward = getRewardById(rewardId);
       if (!reward) return false;
       if (fanXp < reward.xpCost) {
-        pushNotify("Not enough XP", `Need ${reward.xpCost} XP to redeem ${reward.title}.`);
+        pushNotify(
+          "Not enough XP",
+          `Need ${reward.xpCost} XP to redeem ${reward.title}.`,
+        );
         return false;
       }
       setFanXp((xp) => xp - reward.xpCost);
       setRedeemed((ids) => [...ids, rewardId]);
-      pushNotify("Reward unlocked", `${reward.title} redeemed · −${reward.xpCost} XP`);
+      pushNotify(
+        "Reward unlocked",
+        `${reward.title} redeemed · −${reward.xpCost} XP`,
+      );
       return true;
     },
     [fanXp, redeemedRewardIds, pushNotify],
@@ -362,7 +446,10 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       goalTriggered,
       lastUnlockedAchievement,
       automationSteps,
-      triggerGoal,
+      liveStandings,
+      playerOfTheMatch,
+      toggleGoal,
+      triggerGoal: toggleGoal,
       completeMission,
       redeemReward,
       toggleFollowClub,
@@ -398,7 +485,9 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       goalTriggered,
       lastUnlockedAchievement,
       automationSteps,
-      triggerGoal,
+      liveStandings,
+      playerOfTheMatch,
+      toggleGoal,
       completeMission,
       redeemReward,
       toggleFollowClub,

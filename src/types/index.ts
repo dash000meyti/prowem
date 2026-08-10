@@ -173,6 +173,18 @@ export interface StandingRow {
   points: number;
 }
 
+/** Match-level player of the match card (demo / live graphic) */
+export interface PlayerOfTheMatchStats {
+  playerId: string;
+  rating: number;
+  minutes: number;
+  goals: number;
+  keyPasses: number;
+  tackles: number;
+  duelsWon: number;
+  passAccuracy: number;
+}
+
 export interface BracketMatch {
   id: string;
   eventId: string;

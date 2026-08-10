@@ -118,6 +118,11 @@ export function playerPortraitPath(slug: string) {
   return `/images/players/${slug}.jpg`;
 }
 
+/** Transparent player cutout for match graphics (when available) */
+export function playerCutoutPath(slug: string) {
+  return `/images/players/${slug}-cutout.png`;
+}
+
 export function playerPortraitFallback(sport: string) {
   if (sport === "dota2") return mediaCatalog.esportsStage;
   if (sport === "socca") return mediaCatalog.soccaCage;

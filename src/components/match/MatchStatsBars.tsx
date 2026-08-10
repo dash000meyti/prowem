@@ -1,4 +1,5 @@
 import type { FootballStats } from "@/types";
+import { cn } from "@/lib/utils";
 
 const rows: Array<{ key: keyof FootballStats; label: string }> = [
   { key: "possession", label: "Possession" },
@@ -13,48 +14,42 @@ export function MatchStatsBars({
   stats,
   homeName,
   awayName,
+  className,
 }: {
   stats: FootballStats;
   homeName: string;
   awayName: string;
+  className?: string;
 }) {
   return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-muted">
+    <div className={cn("space-y-0", className)}>
+      <div className="mb-4 flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-muted">
         <span>{homeName}</span>
         <span>{awayName}</span>
       </div>
-      {rows.map(({ key, label }) => {
+      {rows.map(({ key, label }, index) => {
         const [home, away] = stats[key];
-        const total = home + away || 1;
-        const homePct = Math.round((home / total) * 100);
         const suffix = key === "possession" || key === "passAccuracy" ? "%" : "";
 
         return (
-          <div key={key}>
-            <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-semibold tabular-nums">
-                {home}
-                {suffix}
-              </span>
-              <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
-                {label}
-              </span>
-              <span className="font-semibold tabular-nums">
-                {away}
-                {suffix}
-              </span>
-            </div>
-            <div className="flex h-1.5 overflow-hidden rounded-full bg-white/5">
-              <div
-                className="h-full bg-[#00C2A8] transition-all duration-500"
-                style={{ width: `${homePct}%` }}
-              />
-              <div
-                className="h-full bg-orange/80 transition-all duration-500"
-                style={{ width: `${100 - homePct}%` }}
-              />
-            </div>
+          <div
+            key={key}
+            className={cn(
+              "grid grid-cols-[1fr_auto_1fr] items-center gap-3 py-3",
+              index < rows.length - 1 && "border-b border-white/10",
+            )}
+          >
+            <span className="text-left text-base font-semibold tabular-nums transition-all duration-500">
+              {home}
+              {suffix}
+            </span>
+            <span className="text-center text-[11px] uppercase tracking-[0.14em] text-muted">
+              {label}
+            </span>
+            <span className="text-right text-base font-semibold tabular-nums transition-all duration-500">
+              {away}
+              {suffix}
+            </span>
           </div>
         );
       })}

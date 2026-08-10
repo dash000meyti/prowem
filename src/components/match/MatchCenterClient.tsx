@@ -2,7 +2,7 @@
 
 import { GoalAutomationPanel } from "@/components/match/GoalAutomationPanel";
 import { MatchStatsBars } from "@/components/match/MatchStatsBars";
-import { SocialPostPreview } from "@/components/match/SocialPostPreview";
+import { PlayerOfTheMatch } from "@/components/match/PlayerOfTheMatch";
 import { Timeline } from "@/components/match/Timeline";
 import { LineupBoard } from "@/components/match/lineup/LineupBoard";
 import { NewsCard } from "@/components/event/NewsCard";
@@ -43,118 +43,117 @@ export function MatchCenterClient({
         scrim="heavy"
         className="border-b border-border"
       >
-        <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 md:py-20">
-          <GlassPanel className="relative overflow-hidden p-6 md:p-10">
-            <div className="pointer-events-none absolute -right-8 top-0 opacity-[0.1]">
-              <Crest slug={home.slug} name={home.name} size={200} />
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-16">
+          <GlassPanel className="relative overflow-hidden p-5 md:p-8">
+            <div className="pointer-events-none absolute -right-10 top-0 opacity-[0.08]">
+              <Crest slug={home.slug} name={home.name} size={220} />
             </div>
-            <div className="relative mb-8 flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-orange">
-                  {match.round}
-                </p>
-                <p className="mt-2 text-sm text-muted">{match.venue}</p>
-              </div>
+
+            <div className="relative mb-6 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-muted md:text-xs">
+                Bundesliga · {match.round}
+              </p>
               <LiveIndicator />
             </div>
 
-            <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8">
-              <div className="flex items-center gap-3">
-                <Crest slug={home.slug} name={home.name} size={52} />
-                <div>
-                  <p className="text-xl font-semibold md:text-4xl">{home.name}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
-                    Home
+            <div className="relative text-center">
+              <p className="text-[10px] uppercase tracking-[0.28em] text-muted">
+                {match.status === "live"
+                  ? `Live · ${match.minute}' · ${match.period}`
+                  : match.status === "finished"
+                    ? "Full-time"
+                    : match.status}
+              </p>
+
+              <div className="mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-8">
+                <div className="flex flex-col items-center gap-2 md:flex-row md:justify-end md:gap-3">
+                  <Crest
+                    slug={home.slug}
+                    name={home.name}
+                    size={48}
+                    className="md:order-2"
+                  />
+                  <p className="text-center text-xs font-semibold uppercase tracking-wide sm:text-sm md:text-right md:text-lg lg:text-2xl">
+                    <span className="md:hidden">{home.shortName}</span>
+                    <span className="hidden md:inline">{home.name}</span>
                   </p>
                 </div>
-              </div>
-              <div className="text-center">
+
                 <p
                   className={cn(
-                    "inline-block rounded-xl px-3 text-5xl font-semibold tabular-nums text-orange md:text-7xl",
+                    "inline-block min-w-[5.5rem] rounded-xl px-2 text-5xl font-semibold tabular-nums md:min-w-[8rem] md:text-7xl",
                     goalTriggered && "score-flash",
                   )}
                 >
                   {match.homeScore}
-                  <span className="mx-2 text-muted md:mx-3">—</span>
+                  <span className="mx-1 text-muted md:mx-2">–</span>
                   {match.awayScore}
                 </p>
-                <p className="mt-3 text-sm uppercase tracking-[0.2em] text-orange">
-                  LIVE · {match.minute}&apos; · {match.period}
-                </p>
-              </div>
-              <div className="flex items-center justify-end gap-3">
-                <div className="text-right">
-                  <p className="text-xl font-semibold md:text-4xl">{away.name}</p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.16em] text-muted">
-                    Away
+
+                <div className="flex flex-col items-center gap-2 md:flex-row md:justify-start md:gap-3">
+                  <Crest slug={away.slug} name={away.name} size={48} />
+                  <p className="text-center text-xs font-semibold uppercase tracking-wide sm:text-sm md:text-left md:text-lg lg:text-2xl">
+                    <span className="md:hidden">{away.shortName}</span>
+                    <span className="hidden md:inline">{away.name}</span>
                   </p>
                 </div>
-                <Crest slug={away.slug} name={away.name} size={52} />
               </div>
+
+              <p className="mt-5 text-[10px] uppercase tracking-[0.2em] text-muted md:text-xs">
+                {match.venue}
+              </p>
             </div>
           </GlassPanel>
         </div>
       </PhotoBackground>
 
-      <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6 md:py-20">
-        <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <GlassPanel className="p-6 atmosphere-tint !bg-[color-mix(in_srgb,var(--glass-bg)_88%,var(--brand-tint))]">
-            <SectionHeader
-              eyebrow="Match feed"
-              title="Timeline"
-              description="Every key moment from the same live match data core."
-            />
+      <div className="mx-auto max-w-7xl space-y-14 px-4 py-12 md:space-y-16 md:px-6 md:py-16">
+        <section className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <GlassPanel className="h-full p-5 md:p-6">
+            <div className="mb-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
+                Match numbers
+              </p>
+              <h2 className="mt-1 text-xl font-semibold md:text-2xl">
+                Live stats
+              </h2>
+            </div>
+            {match.footballStats ? (
+              <MatchStatsBars
+                stats={match.footballStats}
+                homeName={home.shortName}
+                awayName={away.shortName}
+              />
+            ) : null}
+          </GlassPanel>
+
+          <GlassPanel className="h-full p-5 atmosphere-tint !bg-[color-mix(in_srgb,var(--glass-bg)_88%,var(--brand-tint))] md:p-6">
+            <div className="mb-5">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-brand">
+                Timeline
+              </p>
+              <h2 className="mt-1 text-xl font-semibold md:text-2xl">
+                Match feed
+              </h2>
+              <p className="mt-1 text-xs text-muted">
+                Every key moment from the same live match data core.
+              </p>
+            </div>
             <Timeline events={match.events} />
           </GlassPanel>
-          <div className="space-y-6">
-            <GlassPanel className="overflow-hidden p-0">
-              <PhotoBackground
-                src={heroMedia.nightMatch}
-                alt="Live stream"
-                scrim="heavy"
-                className="aspect-video"
-              >
-                <div className="flex h-full flex-col justify-between p-6 md:p-8">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-muted">
-                    Live stream placeholder
-                  </p>
-                  <div>
-                    <p className="text-2xl font-semibold">
-                      {home.shortName} {match.homeScore}–{match.awayScore}{" "}
-                      {away.shortName}
-                    </p>
-                    <p className="mt-2 text-sm text-muted">
-                      Broadcast feed · synced to match events
-                    </p>
-                  </div>
-                </div>
-              </PhotoBackground>
-            </GlassPanel>
-            {match.footballStats ? (
-              <GlassPanel className="p-5 md:p-6">
-                <SectionHeader
-                  eyebrow="Live stats"
-                  title="Match numbers"
-                  className="mb-6"
-                />
-                <MatchStatsBars
-                  stats={match.footballStats}
-                  homeName={home.shortName}
-                  awayName={away.shortName}
-                />
-              </GlassPanel>
-            ) : null}
-          </div>
         </section>
 
-        <section className="atmosphere-contrast -mx-4 px-4 py-10 md:-mx-6 md:px-6 md:rounded-[18px]">
+        <section>
+          <PlayerOfTheMatch />
+        </section>
+
+        <section className="atmosphere-contrast -mx-4 px-4 py-10 md:-mx-6 md:rounded-[18px] md:px-6">
           <SectionHeader
             eyebrow="Squads"
-            title="Lineups"
+            title="Starting XI"
             description="On-pitch positions — same player entities as club and event pages."
           />
-          <div className="mt-6 w-full">
+          <div className="mt-2 w-full">
             <LineupBoard
               match={match}
               home={home}
@@ -165,28 +164,16 @@ export function MatchCenterClient({
           </div>
         </section>
 
-        <GoalAutomationPanel />
-
-        <section className="grid gap-8 lg:grid-cols-2">
-          <div>
-            <SectionHeader
-              eyebrow="Automation"
-              title="Social draft"
-              description="Generated from the live goal event."
-            />
-            <SocialPostPreview />
-          </div>
-          <div>
-            <SectionHeader
-              eyebrow="Media"
-              title="Highlights"
-              description="Clips tagged to this fixture."
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {relatedVideos.map((video) => (
-                <VideoCard key={video.id} video={video} />
-              ))}
-            </div>
+        <section>
+          <SectionHeader
+            eyebrow="Media"
+            title="Highlights"
+            description="Clips tagged to this fixture."
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedVideos.map((video) => (
+              <VideoCard key={video.id} video={video} />
+            ))}
           </div>
         </section>
 
@@ -204,6 +191,8 @@ export function MatchCenterClient({
             </div>
           </section>
         ) : null}
+
+        <GoalAutomationPanel />
       </div>
     </div>
   );

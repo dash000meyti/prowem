@@ -83,6 +83,7 @@ export {
   crestPath,
   eventLogoPath,
   playerPortraitPath,
+  playerCutoutPath,
   playerPortraitFallback,
   matchThumbForSport,
   heroMedia,

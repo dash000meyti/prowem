@@ -14,7 +14,7 @@ export function SocialPostPreview() {
         variant="subtle"
         className="border-dashed p-6 text-sm text-muted"
       >
-        Trigger a live goal to generate social content from match data.
+        Trigger a live goal to generate social content from match data. Undo the goal to clear the draft.
       </GlassPanel>
     );
   }

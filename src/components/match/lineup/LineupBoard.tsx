@@ -45,7 +45,7 @@ export function LineupBoard({
 
   return (
     <LineupBoardShell
-      title="Starting lineup"
+      title="Starting XI"
       home={home}
       away={away}
       homeLabel={sideLabel(match.sport, match.homeFormation)}
