@@ -284,6 +284,8 @@ export interface Mission {
   description: string;
   xp: number;
   category: "watch" | "predict" | "quiz" | "attend" | "sponsor" | "social";
+  /** global = available to every fan; follow = unlocked/prioritised by follows */
+  scope: "global" | "follow";
   sponsorId?: string;
   rewardLabel?: string;
   completed?: boolean;

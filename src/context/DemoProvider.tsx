@@ -71,6 +71,7 @@ interface DemoContextValue extends DemoState {
   isFavoritePlayer: (playerId: string) => boolean;
   follows: FanFollowState;
   missions: Mission[];
+  missionsGlobal: Mission[];
   missionsForYou: Mission[];
   missionsDiscover: Mission[];
   xpToNext: number;
@@ -315,6 +316,15 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     [completedMissionIds],
   );
 
+  const missionsGlobal = useMemo(
+    () =>
+      personalized.global.map((m) => ({
+        ...m,
+        completed: completedMissionIds.includes(m.id) || Boolean(m.completed),
+      })),
+    [personalized.global, completedMissionIds],
+  );
+
   const missionsForYou = useMemo(
     () =>
       personalized.forYou.map((m) => ({
@@ -365,6 +375,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       isFavoritePlayer: (playerId) => favoritePlayerIds.includes(playerId),
       follows,
       missions: liveMissions,
+      missionsGlobal,
       missionsForYou,
       missionsDiscover,
       xpToNext: baseFan.xpToNext,
@@ -396,6 +407,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       toggleFavoritePlayer,
       follows,
       liveMissions,
+      missionsGlobal,
       missionsForYou,
       missionsDiscover,
       baseFan.xpToNext,

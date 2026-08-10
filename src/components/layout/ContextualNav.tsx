@@ -7,8 +7,7 @@ import { DemoAccountChip } from "@/components/fan/DemoAccountChip";
 import { FanAccountMenu } from "@/components/fan/FanAccountMenu";
 
 const fanLinks: PropertyNavItem[] = [
-  { href: "/fans", label: "Dashboard", exact: true },
-  { href: "/fans/profile", label: "Profile" },
+  { href: "/fans", label: "Home", exact: true },
   { href: "/fans/missions", label: "Missions" },
   { href: "/fans/rewards", label: "Rewards" },
   { href: "/fans/passport", label: "Passport" },

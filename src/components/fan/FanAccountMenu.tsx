@@ -7,8 +7,7 @@ import { useDemo } from "@/context/DemoProvider";
 import { cn } from "@/lib/utils";
 
 const accountLinks = [
-  { href: "/fans", label: "Dashboard" },
-  { href: "/fans/profile", label: "Profile" },
+  { href: "/fans", label: "Home" },
   { href: "/fans/missions", label: "Missions" },
   { href: "/fans/passport", label: "Passport" },
   { href: "/fans/shop", label: "Shop" },

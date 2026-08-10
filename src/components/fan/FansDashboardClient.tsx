@@ -3,6 +3,7 @@
 import { MissionCard } from "@/components/fan/MissionCard";
 import { XPProgress } from "@/components/fan/XPProgress";
 import { FollowingRail } from "@/components/fan/FollowingRail";
+import { AchievementBadge } from "@/components/fan/AchievementBadge";
 import { MatchCard } from "@/components/match/MatchCard";
 import { Button } from "@/components/ui/Button";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -11,8 +12,10 @@ import { PhotoBackground } from "@/components/media/PhotoBackground";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { MediaImage } from "@/components/media/MediaImage";
 import {
+  getAchievementById,
   getClubById,
   getFeaturedMatch,
+  getPrimaryFan,
   getProductsForFan,
   getTeamById,
   heroMedia,
@@ -23,7 +26,6 @@ import Link from "next/link";
 import { ProductTile } from "@/components/club/ProductTile";
 
 const sectionLinks = [
-  { href: "/fans/profile", label: "Profile", media: "athletePortrait" as const },
   { href: "/fans/missions", label: "Missions", media: "nightMatch" as const },
   { href: "/fans/rewards", label: "Rewards", media: "trophyCup" as const },
   { href: "/fans/passport", label: "Passport", media: "crowdOrange" as const },
@@ -43,19 +45,23 @@ export function FansDashboardClient() {
     fanStatus,
     fanCity,
     fanXp,
+    missionsGlobal,
     missionsForYou,
     follows,
     notifications,
   } = useDemo();
 
+  const fan = getPrimaryFan();
   const featured = getFeaturedMatch();
   const home = getTeamById(featured.homeTeamId)!;
   const away = getTeamById(featured.awayTeamId)!;
-  const previewMissions = missionsForYou
-    .filter((m) => !m.completed)
-    .slice(0, 3);
+  const previewGlobal = missionsGlobal.filter((m) => !m.completed).slice(0, 2);
+  const previewFollow = missionsForYou.filter((m) => !m.completed).slice(0, 3);
   const shopPreview = getProductsForFan(follows).forYou.slice(0, 4);
   const latest = notifications[0];
+  const achievements = fan.achievementIds
+    .map((id) => getAchievementById(id))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
   return (
     <div>
@@ -69,7 +75,7 @@ export function FansDashboardClient() {
         <div className="mx-auto flex min-h-[42vh] max-w-7xl flex-col justify-end gap-8 px-4 pb-10 pt-16 md:flex-row md:items-end md:justify-between md:gap-12 md:px-6 md:pb-12 md:pt-20">
           <div className="min-w-0 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
-              Fan dashboard
+              Fan home
             </p>
             <h1 className="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">
               {fanName}
@@ -98,35 +104,68 @@ export function FansDashboardClient() {
         atmosphere="tint"
         innerClassName="mx-auto max-w-7xl space-y-16 px-4 py-14 md:px-6"
       >
+        <section className="grid gap-3 sm:grid-cols-3">
+          {[
+            { label: "Matches watched", value: fan.matchesWatched },
+            { label: "Correct predictions", value: fan.predictionsCorrect },
+            { label: "Events attended", value: fan.attendedEventIds.length },
+          ].map((stat) => (
+            <GlassPanel key={stat.label} className="p-5">
+              <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
+                {stat.label}
+              </p>
+              <p className="mt-3 text-3xl font-semibold tabular-nums text-brand">
+                {stat.value}
+              </p>
+            </GlassPanel>
+          ))}
+        </section>
+
         <section>
           <SectionHeader
             eyebrow="Following"
             title="Entities you track"
             description="Teams, events and players — powering For you rails."
-            action={
-              <Button href="/fans/profile" variant="ghost" size="sm">
-                Manage
-              </Button>
-            }
           />
           <FollowingRail />
         </section>
 
         <section>
           <SectionHeader
-            eyebrow="For you"
-            title="Missions"
-            description="Challenges matched to what you follow."
+            eyebrow="Missions"
+            title="Global & for you"
+            description="Platform-wide challenges plus missions from what you follow."
             action={
               <Button href="/fans/missions" variant="outline" size="sm">
                 All missions
               </Button>
             }
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            {previewMissions.map((mission) => (
-              <MissionCard key={mission.id} mission={mission} />
-            ))}
+          <div className="space-y-8">
+            {previewGlobal.length > 0 ? (
+              <div>
+                <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted">
+                  Global
+                </p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {previewGlobal.map((mission) => (
+                    <MissionCard key={mission.id} mission={mission} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            {previewFollow.length > 0 ? (
+              <div>
+                <p className="mb-3 text-[10px] uppercase tracking-[0.18em] text-muted">
+                  From your follows
+                </p>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {previewFollow.map((mission) => (
+                    <MissionCard key={mission.id} mission={mission} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </section>
 
@@ -173,13 +212,31 @@ export function FansDashboardClient() {
           </section>
         ) : null}
 
+        <section>
+          <SectionHeader
+            eyebrow="Unlocked"
+            title="Achievements"
+            description="Badges earned across matchdays and missions."
+            action={
+              <Button href="/fans/passport" variant="ghost" size="sm">
+                Passport
+              </Button>
+            }
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {achievements.map((ach) => (
+              <AchievementBadge key={ach.id} achievement={ach} />
+            ))}
+          </div>
+        </section>
+
         <div>
           <SectionHeader
             eyebrow="Navigate"
             title="Your fan world"
-            description="Jump into profile, missions, rewards, passport and shop."
+            description="Missions, rewards, passport and shop."
           />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {sectionLinks.map((link) => (
               <Link
                 key={link.href}

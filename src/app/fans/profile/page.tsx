@@ -1,5 +1,6 @@
-import { FanProfileClient } from "@/components/fan/FanProfileClient";
+import { redirect } from "next/navigation";
 
+/** Profile merged into `/fans` — keep path for old links. */
 export default function FanProfilePage() {
-  return <FanProfileClient />;
+  redirect("/fans");
 }

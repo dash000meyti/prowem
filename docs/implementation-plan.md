@@ -24,7 +24,7 @@ Next.js App Router + TS strict + Tailwind + Space Grotesk + theme CSS vars + lay
 Featured clubs + تیم‌ها؛ single-team mode (مثلاً Lorient) در معماری پشتیبانی شود
 
 ### Phase 6 — Fan
-Dashboard، profile، missions، rewards، passport، shop + Complete Mission
+Dashboard/home، missions، rewards، passport، shop + Complete Mission
 
 ### Phase 7 — Match
 Matchday + Match Center

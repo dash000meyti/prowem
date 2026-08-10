@@ -20,12 +20,12 @@
 - زیرمسیرهای باشگاه (مثل event): news, videos, shop, tickets, legends, awards, sponsors, supporters
 
 ### Fan
-- `/fans` — dashboard (account menu، Following، For you missions/shop)
-- `/fans/profile` — هویت + follows زنده
+- `/fans` — fan home (هویت، XP، following، missions preview، achievements)
 - `/fans/missions` — For you / All / category + Complete Mission
 - `/fans/rewards` — Redeem شبیه‌سازی‌شده با XP
 - `/fans/passport`
 - `/fans/shop` — For you (فالوها) + Discover
+- `/fans/profile` → redirect به `/fans`
 
 Follow روی صفحات باشگاه / تیم / بازیکن / رویداد؛ شخصی‌سازی مأموریت و شاپ از `DemoProvider`.
 
@@ -45,7 +45,7 @@ Follow روی صفحات باشگاه / تیم / بازیکن / رویداد؛ �
 | Event | Home · Matches (live در بالا) · Standings (bracket در بالا در صورت وجود + stats زیر جدول) · Teams · News · Videos · Heritage · Sponsors · Fan Zone |
 | Club چندتیمی | Home · Teams (dropdown → All teams + sports) · News · Videos · Shop · Tickets · Legends · Awards · Sponsors · Supporters |
 | Club تک‌تیمی (Lorient) | همان بخش‌ها بدون Teams dropdown |
-| Fan | Dashboard, Profile, Missions, Rewards, Passport, Shop · account menu · DemoAccountChip روی club/event/match chrome |
+| Fan | Home, Missions, Rewards, Passport, Shop · account menu · DemoAccountChip روی club/event/match chrome |
 
 ## جریان دمو (خلاصه)
 

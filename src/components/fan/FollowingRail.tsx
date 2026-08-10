@@ -171,7 +171,7 @@ export function FollowingRail() {
                     ? `/clubs/${club.slug}/players/${player.slug}`
                     : club
                       ? `/clubs/${club.slug}`
-                      : "/fans/profile";
+                      : "/fans";
                 const portrait =
                   player.sport === "football"
                     ? playerPortraitPath(player.slug)

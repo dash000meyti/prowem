@@ -1,30 +1,53 @@
 import type { FanFollowState, Mission } from "@/types";
 
 export const missions: Mission[] = [
+  // —— Global (every fan) ——
   {
     id: "mis-watch-opener",
-    title: "Watch Matchday openers",
-    description: "Tune into any Bundesliga Matchday fixture in the opening weekend.",
+    title: "Watch any live fixture",
+    description: "Tune into any live match on PROWEM Matchday for at least 15 minutes.",
     xp: 250,
     category: "watch",
-    eventId: "evt-bundesliga",
+    scope: "global",
     completed: true,
   },
   {
     id: "mis-predict-md",
-    title: "Predict a Matchday result",
-    description: "Lock in a winner before kickoff on any Matchday 10–12 fixture.",
+    title: "Lock in a prediction",
+    description: "Predict a result before kickoff on any scheduled fixture.",
     xp: 400,
     category: "predict",
-    eventId: "evt-bundesliga",
+    scope: "global",
     completed: true,
   },
+  {
+    id: "mis-passport-stamp",
+    title: "Open your fan passport",
+    description: "Visit your PROWEM Fan Passport and review your identity stamps.",
+    xp: 200,
+    category: "social",
+    scope: "global",
+    completed: false,
+  },
+  {
+    id: "mis-adidas-kit",
+    title: "adidas partner scan",
+    description: "Scan an adidas activation code at any PROWEM partner booth.",
+    xp: 450,
+    category: "sponsor",
+    scope: "global",
+    sponsorId: "spn-adidas",
+    rewardLabel: "Kit discount token",
+    completed: false,
+  },
+  // —— Follow-based ——
   {
     id: "mis-quiz-bundesliga",
     title: "Bundesliga knowledge quiz",
     description: "Score at least 4/5 on the league history quiz.",
     xp: 300,
     category: "quiz",
+    scope: "follow",
     eventId: "evt-bundesliga",
     completed: true,
   },
@@ -34,6 +57,7 @@ export const missions: Mission[] = [
     description: "Confirm attendance near Allianz Arena on Klassiker matchday.",
     xp: 500,
     category: "attend",
+    scope: "follow",
     eventId: "evt-bundesliga",
     clubId: "club-bayern",
     teamId: "team-bayern-fc",
@@ -45,6 +69,7 @@ export const missions: Mission[] = [
     description: "Watch at least 60 live minutes of Bayern vs Dortmund.",
     xp: 600,
     category: "watch",
+    scope: "follow",
     eventId: "evt-bundesliga",
     clubId: "club-bayern",
     teamId: "team-bayern-fc",
@@ -57,6 +82,7 @@ export const missions: Mission[] = [
     description: "Predict the final result of Bayern vs Dortmund before the 80th minute.",
     xp: 750,
     category: "predict",
+    scope: "follow",
     eventId: "evt-bundesliga",
     clubId: "club-dortmund",
     teamId: "team-dortmund-fc",
@@ -69,6 +95,7 @@ export const missions: Mission[] = [
       "Complete the partner challenge: react to three live goal moments during Der Klassiker.",
     xp: 1000,
     category: "sponsor",
+    scope: "follow",
     eventId: "evt-bundesliga",
     sponsorId: "spn-telekom",
     rewardLabel: "Connectivity Boost XP ×1.2",
@@ -80,6 +107,7 @@ export const missions: Mission[] = [
     description: "Share a live moment from Bayern vs Dortmund to your fan feed.",
     xp: 350,
     category: "social",
+    scope: "follow",
     eventId: "evt-bundesliga",
     clubId: "club-bayern",
     completed: false,
@@ -90,6 +118,7 @@ export const missions: Mission[] = [
     description: "Answer questions covering football, socca and Dota 2 under Bayern.",
     xp: 400,
     category: "quiz",
+    scope: "follow",
     clubId: "club-bayern",
     completed: false,
   },
@@ -99,6 +128,7 @@ export const missions: Mission[] = [
     description: "Watch a Socca Austria Pro League fixture featuring Lorient or Werder.",
     xp: 450,
     category: "watch",
+    scope: "follow",
     eventId: "evt-socca-austria-pro",
     clubId: "club-lorient",
     completed: false,
@@ -109,20 +139,10 @@ export const missions: Mission[] = [
     description: "Open the Bayern vs Dortmund TI upper-bracket series recap.",
     xp: 550,
     category: "watch",
+    scope: "follow",
     eventId: "evt-the-international",
     clubId: "club-bayern",
     teamId: "team-bayern-dota2",
-    completed: false,
-  },
-  {
-    id: "mis-adidas-kit",
-    title: "adidas kit scan",
-    description: "Scan an adidas activation code at a Bundesliga partner booth.",
-    xp: 450,
-    category: "sponsor",
-    eventId: "evt-bundesliga",
-    sponsorId: "spn-adidas",
-    rewardLabel: "Kit discount token",
     completed: false,
   },
 ];
@@ -140,22 +160,13 @@ export function getMissionsByEventId(eventId: string) {
 }
 
 function missionMatchesFollows(mission: Mission, follows: FanFollowState) {
-  if (
-    mission.clubId &&
-    follows.followedClubIds.includes(mission.clubId)
-  ) {
+  if (mission.clubId && follows.followedClubIds.includes(mission.clubId)) {
     return true;
   }
-  if (
-    mission.teamId &&
-    follows.followedTeamIds.includes(mission.teamId)
-  ) {
+  if (mission.teamId && follows.followedTeamIds.includes(mission.teamId)) {
     return true;
   }
-  if (
-    mission.eventId &&
-    follows.followedEventIds.includes(mission.eventId)
-  ) {
+  if (mission.eventId && follows.followedEventIds.includes(mission.eventId)) {
     return true;
   }
   if (
@@ -168,8 +179,10 @@ function missionMatchesFollows(mission: Mission, follows: FanFollowState) {
 }
 
 export function getMissionsForFan(follows: FanFollowState) {
-  const forYou = missions.filter((m) => missionMatchesFollows(m, follows));
+  const global = missions.filter((m) => m.scope === "global");
+  const followScoped = missions.filter((m) => m.scope === "follow");
+  const forYou = followScoped.filter((m) => missionMatchesFollows(m, follows));
   const forYouIds = new Set(forYou.map((m) => m.id));
-  const discover = missions.filter((m) => !forYouIds.has(m.id));
-  return { forYou, discover, all: missions };
+  const discover = followScoped.filter((m) => !forYouIds.has(m.id));
+  return { global, forYou, discover, all: missions };
 }

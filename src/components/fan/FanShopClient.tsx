@@ -54,7 +54,7 @@ export function FanShopClient() {
                 : "Follow a club or event to unlock a personalised rail."
             }
             action={
-              <Button href="/fans/profile" variant="ghost" size="sm">
+              <Button href="/fans" variant="ghost" size="sm">
                 Following
               </Button>
             }
