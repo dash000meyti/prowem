@@ -4,7 +4,7 @@
 
 1. خواندن docs و رعایت `.cursor/rules`
 2. UI انگلیسی · docs/توضیحات فارسی
-3. بدون نابود کردن کار مفید موجود (الان greenfield)
+3. بدون نابود کردن کار مفید موجود (پروتوتایپ ساخته‌شده؛ فازها تکمیل‌اند)
 
 ## فازها
 
@@ -24,7 +24,7 @@ Next.js App Router + TS strict + Tailwind + Space Grotesk + theme CSS vars + lay
 Featured clubs + تیم‌ها؛ single-team mode (مثلاً Lorient) در معماری پشتیبانی شود
 
 ### Phase 6 — Fan
-Dashboard/home، missions، rewards، passport، shop + Complete Mission
+Fan home (پروفایل در `/fans` ادغام شد؛ `/fans/profile` redirect)، missions (Global / Personalised / Discover)، rewards، passport، shop + Complete Mission
 
 ### Phase 7 — Match
 Matchday + Match Center

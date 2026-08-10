@@ -21,7 +21,7 @@
 
 ### Fan
 - `/fans` — fan home (هویت، XP، following، missions preview، achievements)
-- `/fans/missions` — For you / All / category + Complete Mission
+- `/fans/missions` — Global / Personalised (follows) / Discover (locked) + Complete Mission
 - `/fans/rewards` — Redeem شبیه‌سازی‌شده با XP
 - `/fans/passport`
 - `/fans/shop` — For you (فالوها) + Discover
@@ -42,11 +42,11 @@ Follow روی صفحات باشگاه / تیم / بازیکن / رویداد؛ �
 | Event property | PropertyNav به‌عنوان هدر اصلی (بدون PROWEM SiteHeader) |
 | Club property | ClubNavigation / PropertyNav به‌عنوان هدر اصلی |
 | Fan property | FanNavigation به‌عنوان هدر اصلی + FanAccountMenu |
-| Event | Home · Matches (live در بالا) · Standings (bracket در بالا در صورت وجود + stats زیر جدول) · Teams · News · Videos · Heritage · Sponsors · Fan Zone |
+| Event | Home · Matches · Standings · Teams · News · Videos · Heritage · Sponsors · Fan Zone (live/bracket/stats مسیر redirect؛ محتوا روی Matches/Standings) |
 | Club چندتیمی | Home · Teams (dropdown → All teams + sports) · News · Videos · Shop · Tickets · Legends · Awards · Sponsors · Supporters |
 | Club تک‌تیمی (Lorient) | همان بخش‌ها بدون Teams dropdown |
 | Fan | Home, Missions, Rewards, Passport, Shop · account menu · DemoAccountChip روی club/event/match chrome |
 
 ## جریان دمو (خلاصه)
 
-1. Homepage (پیام خدمات) → 2. See platform / هدر (account chip) → Bundesliga → 3. Teams/Standings/News (+ Follow event) → 4. Bayern Club (+ Follow club) → 5. Dota 2 Team → 6. Fans (account menu + For you) → 7. Complete Mission / Redeem → 8. Matchday → 9. Match Center → 10. Trigger Goal
+1. Homepage (پیام خدمات) → 2. See platform / هدر (account chip) → Bundesliga → 3. Teams/Standings/News (+ Follow event) → 4. Bayern Club (+ Follow club) → 5. Dota 2 Team → 6. Fans (account menu + following + Global/Personalised mission previews) → 7. Complete Mission / Redeem → 8. Matchday → 9. Match Center → 10. Trigger Goal

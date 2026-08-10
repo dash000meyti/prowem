@@ -60,7 +60,8 @@ docker compose up -d --build  # rebuild after git pull
 | `/clubs/bayern-munich` | Club platform |
 | `/clubs/bayern-munich/teams/dota2` | Esports team |
 | `/clubs/fc-lorient` | Single-team club (socca) |
-| `/fans` | Fan dashboard |
+| `/fans` | Fan home (identity, XP, missions) |
+| `/fans/missions` | Global / Personalised / Discover |
 | `/matches/live` | Matchday |
 | `/matches/bundesliga/bayern-vs-dortmund` | Match Center + Trigger Goal |
 

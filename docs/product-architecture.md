@@ -36,7 +36,7 @@
 |--------|--------|------|-------------|
 | Run an Event | Organizer | ساخت و اجرای رقابت، هویت برند، محتوا، جدول، براکت | `/events/*` |
 | Build a Club | Club | خانهٔ دیجیتال باشگاه، چند تیم/چند ورزش، تاریخچه، فروشگاه | `/clubs/*` |
-| Engage Your Fans | Fan | پروفایل، XP، مأموریت، پاداش، پاسپورت، جامعه | `/fans/*` |
+| Engage Your Fans | Fan | fan home (هویت/XP)، مأموریت، پاداش، پاسپورت، جامعه | `/fans/*` |
 | Experience the Match | همه | Matchday چندبازی + Match Center جزئیات کامل | `/matches/*` |
 
 ## هویت بصری جدا (Brand Scopes)
@@ -66,7 +66,7 @@ Score → Standings → Player Stats → Timeline → Website → Social → Vid
 
 ## Sport-Agnostic
 
-معماری از چند ورزش پشتیبانی می‌کند (Football, Socca, Basketball, Dota 2, …). در این پروتوتایپ تمرکز روی **Football** و **Dota 2** است؛ UI باید بتواند آمار ورزش‌محور نشان دهد.
+معماری از چند ورزش پشتیبانی می‌کند (Football, Socca, Basketball, Dota 2, …). در این پروتوتایپ تمرکز روی **Football**، **Socca** و **Dota 2** است؛ UI باید بتواند آمار ورزش‌محور نشان دهد.
 
 ## جهان دمو
 

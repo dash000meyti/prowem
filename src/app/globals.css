@@ -111,7 +111,10 @@ a {
 }
 
 .shadow-brand {
-  box-shadow: 0 0 28px var(--brand-glow);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 0 36px var(--brand-glow),
+    0 0 64px rgba(255, 90, 31, 0.18);
 }
 
 .atmosphere-tint {
@@ -193,7 +196,8 @@ a {
     ),
     rgba(8, 9, 11, 0.52);
   box-shadow:
-    0 20px 56px rgba(0, 0, 0, 0.45),
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(255, 90, 31, 0.08),
     inset 0 1px 0 rgba(245, 245, 242, 0.06);
   backdrop-filter: blur(32px) saturate(1.05);
   -webkit-backdrop-filter: blur(32px) saturate(1.05);
@@ -213,7 +217,8 @@ a {
       rgba(8, 9, 11, 0.82) 100%
     );
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.55),
+    0 32px 80px rgba(0, 0, 0, 0.62),
+    0 0 48px rgba(255, 90, 31, 0.12),
     0 0 0 1px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(245, 245, 242, 0.08),
     inset 0 -1px 0 rgba(0, 0, 0, 0.35);
@@ -248,45 +253,170 @@ a {
   mix-blend-mode: soft-light;
 }
 
-/* Marketing page: minimal glass on soft color gradients */
+/* Marketing page: colored ambient gradients + card halos */
 .marketing-canvas {
   position: relative;
   background:
-    radial-gradient(ellipse 90% 55% at 8% -5%, rgba(255, 90, 31, 0.22), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 95% 12%, rgba(56, 120, 180, 0.16), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 40% 55%, rgba(255, 140, 50, 0.1), transparent 55%),
-    radial-gradient(ellipse 80% 50% at 80% 95%, rgba(255, 90, 31, 0.14), transparent 50%),
+    radial-gradient(ellipse 90% 55% at 8% -5%, rgba(255, 90, 31, 0.32), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 95% 12%, rgba(56, 120, 180, 0.2), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 40% 55%, rgba(255, 140, 50, 0.16), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 80% 95%, rgba(255, 90, 31, 0.22), transparent 50%),
     linear-gradient(180deg, #08090b 0%, #0b1018 35%, #0a0e14 70%, #08090b 100%);
 }
 
 .marketing-theme-ember {
   background:
-    radial-gradient(ellipse 80% 70% at 0% 50%, rgba(255, 90, 31, 0.2), transparent 60%),
-    radial-gradient(ellipse 50% 60% at 100% 40%, rgba(255, 160, 70, 0.1), transparent 55%);
+    radial-gradient(ellipse 80% 70% at 0% 50%, rgba(255, 90, 31, 0.32), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 100% 40%, rgba(255, 160, 70, 0.16), transparent 55%);
 }
 
 .marketing-theme-steel {
   background:
-    radial-gradient(ellipse 70% 65% at 100% 40%, rgba(70, 130, 190, 0.18), transparent 58%),
-    radial-gradient(ellipse 45% 50% at 0% 60%, rgba(255, 90, 31, 0.08), transparent 50%);
+    radial-gradient(ellipse 70% 65% at 100% 40%, rgba(70, 130, 190, 0.26), transparent 58%),
+    radial-gradient(ellipse 45% 50% at 0% 60%, rgba(255, 90, 31, 0.12), transparent 50%);
 }
 
 .marketing-theme-amber {
   background:
-    radial-gradient(ellipse 75% 60% at 15% 30%, rgba(255, 150, 55, 0.16), transparent 55%),
-    radial-gradient(ellipse 55% 50% at 90% 70%, rgba(255, 90, 31, 0.14), transparent 50%);
+    radial-gradient(ellipse 75% 60% at 15% 30%, rgba(255, 150, 55, 0.26), transparent 55%),
+    radial-gradient(ellipse 55% 50% at 90% 70%, rgba(255, 90, 31, 0.2), transparent 50%);
 }
 
 .marketing-theme-night {
   background:
-    radial-gradient(ellipse 65% 55% at 50% 0%, rgba(255, 90, 31, 0.12), transparent 55%),
-    radial-gradient(ellipse 70% 60% at 80% 80%, rgba(50, 100, 160, 0.14), transparent 55%);
+    radial-gradient(ellipse 65% 55% at 50% 0%, rgba(255, 90, 31, 0.2), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 80% 80%, rgba(50, 100, 160, 0.22), transparent 55%);
 }
 
 .marketing-theme-heat {
   background:
-    radial-gradient(ellipse 90% 70% at 50% 100%, rgba(255, 90, 31, 0.28), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 20% 20%, rgba(255, 140, 60, 0.12), transparent 50%);
+    radial-gradient(ellipse 90% 70% at 50% 100%, rgba(255, 90, 31, 0.4), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 20% 20%, rgba(255, 140, 60, 0.2), transparent 50%);
+}
+
+/* Glow halo behind/beside marketing cards (orange charcoal palette) */
+.marketing-card-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.marketing-card-glow::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  inset: -12% -8%;
+  border-radius: 32px;
+  background:
+    radial-gradient(
+      ellipse 70% 65% at 15% 40%,
+      rgba(255, 90, 31, 0.38),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 50% at 90% 70%,
+      rgba(255, 140, 50, 0.22),
+      transparent 58%
+    );
+  filter: blur(28px);
+  opacity: 0.9;
+}
+
+.marketing-card-glow--ember::before {
+  background:
+    radial-gradient(
+      ellipse 75% 70% at 8% 45%,
+      rgba(255, 90, 31, 0.42),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 55% at 95% 55%,
+      rgba(255, 160, 70, 0.2),
+      transparent 55%
+    );
+}
+
+.marketing-card-glow--steel::before {
+  background:
+    radial-gradient(
+      ellipse 70% 65% at 92% 40%,
+      rgba(70, 130, 190, 0.36),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 5% 65%,
+      rgba(255, 90, 31, 0.18),
+      transparent 55%
+    );
+}
+
+.marketing-card-glow--amber::before {
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 12% 30%,
+      rgba(255, 150, 55, 0.4),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 55% at 88% 75%,
+      rgba(255, 90, 31, 0.26),
+      transparent 55%
+    );
+}
+
+.marketing-card-glow--night::before {
+  background:
+    radial-gradient(
+      ellipse 65% 55% at 50% 0%,
+      rgba(255, 90, 31, 0.28),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 85% 85%,
+      rgba(50, 100, 160, 0.32),
+      transparent 55%
+    );
+}
+
+.marketing-card-glow--heat::before {
+  background:
+    radial-gradient(
+      ellipse 80% 70% at 50% 100%,
+      rgba(255, 90, 31, 0.48),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 20% 15%,
+      rgba(255, 140, 60, 0.28),
+      transparent 50%
+    );
+}
+
+.marketing-hero-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.marketing-hero-glow::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  inset: -6% -4%;
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      ellipse 80% 70% at 20% 20%,
+      rgba(255, 90, 31, 0.35),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 85% 80%,
+      rgba(255, 120, 40, 0.22),
+      transparent 50%
+    );
+  filter: blur(36px);
+  opacity: 0.85;
 }
 
 .photo-scrim {

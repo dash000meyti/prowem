@@ -11,7 +11,7 @@ export function PlatformCtaBand() {
     <section className="relative px-4 py-20 md:px-6 md:py-28">
       <div className="marketing-theme-heat pointer-events-none absolute inset-0" aria-hidden />
       <motion.div
-        className="relative z-10 mx-auto max-w-3xl"
+        className="marketing-card-glow marketing-card-glow--heat relative z-10 mx-auto max-w-3xl"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}

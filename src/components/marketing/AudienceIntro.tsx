@@ -44,12 +44,16 @@ export function AudienceIntro() {
           </h2>
         </motion.div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8">
           {audiences.map((item, index) => (
             <motion.a
               key={item.id}
               href={item.href}
-              className="group block"
+              className={
+                index === 0
+                  ? "marketing-card-glow marketing-card-glow--ember group block"
+                  : "marketing-card-glow marketing-card-glow--steel group block"
+              }
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}

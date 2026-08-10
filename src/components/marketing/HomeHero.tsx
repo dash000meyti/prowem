@@ -37,16 +37,17 @@ export function HomeHero() {
       </motion.div>
 
       <div
-        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,11,0.35)_0%,rgba(8,9,11,0.48)_40%,rgba(8,9,11,0.82)_100%)]"
+        className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,9,11,0.32)_0%,rgba(8,9,11,0.45)_40%,rgba(8,9,11,0.84)_100%)]"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_10%,rgba(255,90,31,0.18),transparent_50%),radial-gradient(ellipse_at_85%_70%,rgba(255,90,31,0.08),transparent_45%)]"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_10%,rgba(255,90,31,0.28),transparent_50%),radial-gradient(ellipse_at_85%_70%,rgba(255,90,31,0.14),transparent_45%),radial-gradient(ellipse_at_50%_100%,rgba(255,120,40,0.12),transparent_40%)]"
         aria-hidden
       />
 
       <div className="relative z-10 mx-auto flex min-h-0 w-full max-w-7xl flex-1 flex-col justify-center px-4 py-5 md:px-6 md:py-8">
         <motion.div
+          className="marketing-hero-glow"
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}

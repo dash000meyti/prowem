@@ -14,7 +14,7 @@ description: Guides building and extending the PROWEM 2.0 sports digital infrast
 - Events: Bundesliga · Socca Austria Pro League · The International
 - Featured clubs: Bayern Munich (football/socca/dota2) · Borussia Dortmund (football/socca/dota2) · Werder Bremen (football/socca) · FC Lorient (socca)
 - Live match: Bayern Munich 2–1 Borussia Dortmund, 72'
-- Fan: Alex Morgan, L18, 12840 XP, SUPER FAN
+- Fan: Alex Morgan, L18, 12840 XP, SUPER FAN — home at `/fans` (profile redirects); missions Global / Personalised / Discover
 - Media: local only under `public/images/` (`npm run fetch-media`)
 
 ## تعاملات اجباری

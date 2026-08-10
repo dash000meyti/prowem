@@ -16,6 +16,13 @@ const themeClass: Record<ServiceTheme, string> = {
   night: "marketing-theme-night",
 };
 
+const glowClass: Record<ServiceTheme, string> = {
+  ember: "marketing-card-glow marketing-card-glow--ember",
+  steel: "marketing-card-glow marketing-card-glow--steel",
+  amber: "marketing-card-glow marketing-card-glow--amber",
+  night: "marketing-card-glow marketing-card-glow--night",
+};
+
 export type ServiceFeatureProps = {
   id: string;
   index: string;
@@ -49,7 +56,7 @@ export function ServiceFeature({
         aria-hidden
       />
       <motion.div
-        className="relative z-10 mx-auto max-w-5xl"
+        className={cn("relative z-10 mx-auto max-w-5xl", glowClass[theme])}
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}

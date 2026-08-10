@@ -8,17 +8,19 @@ PROWEM Platform  ≠  Event Property  ≠  Club Property
 
 | Scope | مسیرها | هویت |
 |-------|--------|------|
-| `platform` | `/` | PROWEM orange + charcoal |
-| `event` | `/events/*` | تم Event از داده (Bundesliga / SAPL / TI) |
-| `club` | `/clubs/*` | تم Club از داده (Bayern / Dortmund / …) |
+| `platform` | `/` · `/events` · `/clubs` · `/matches` layout + live hub | PROWEM orange + charcoal |
+| `event` | `/events/[slug]/*` | تم Event از داده (Bundesliga / SAPL / TI) |
+| `club` | `/clubs/[slug]/*` | تم Club از داده (Bayern / Dortmund / …) |
 | `fan` | `/fans/*` | hybrid platform |
-| `match` | `/matches/*` | تم Event میزبان |
+| `match` | Match Center `/matches/[eventSlug]/[matchSlug]` | تم Event میزبان (`matchTheme`) |
 
 پیاده‌سازی: `BrandScope` + `src/lib/theme.ts` → CSS vars `--brand-primary/secondary/accent/tint/glow/surface`.
 
 داخل property صفحات از `text-brand` / `bg-brand` / `Button variant="brand"` استفاده کن — نه hard-code نارنجی/teal.
 
 LIVE سیستم سراسری می‌تواند `--orange` بماند؛ CTA و nav فعال از `--brand-*` می‌آید.
+
+**Match nuance:** hub زنده (`/matches/live`) و layout فهرست مسابقات از `platformTheme` استفاده می‌کنند؛ صفحهٔ Match Center از تم رویداد میزبان.
 
 ## اتمسفر سکشن
 
@@ -30,17 +32,13 @@ LIVE سیستم سراسری می‌تواند `--orange` بماند؛ CTA و na
 
 ## Marketing homepage (`/`)
 
-ریتم: Hero full-bleed → Audience (tint) → Service features متناوب (contrast / mesh / tint) → Platform CTA (band).
-
-قوانین هیرو:
-
-- فقط برند PROWEM + یک headline + یک جمله + گروه CTA + تصویر غالب edge-to-edge
-- بدون کارت، بدون glass panel، بدون badge/overlay شناور روی رسانه
-- بدون entity دمو (اسکور زنده، باشگاه، فن)
+ریتم: Hero full-bleed → Audience → Service features متناوب → Platform CTA.
 
 کامپوننت‌ها: `src/components/marketing/*` (`HomeHero`, `ServiceMarquee`, `AudienceIntro`, `ServiceFeature`, `PlatformCtaBand`).
 
-حس بصری: سینمایی و editorial (Ken Burns هیرو، line-reveal تایپوگرافی، پنل‌های full-bleed مخاطب، watermark شماره خدمات، CTA با عکس زمینه) — بدون کارت هیرو و بدون badge شناور.
+حس بصری: charcoal + PROWEM orange؛ گرادینت‌های رنگی قوی‌تر در `.marketing-canvas` / `.marketing-theme-*`؛ هاله و سایهٔ رنگی پشت/کنار کارت‌ها با `.marketing-card-glow` و `.marketing-card-glow--*` (بدون پالت سبز/بنفش/آبی برند خارجی).
+
+وضعیت فعلی هیرو: `GlassPanel` variant `display` روی عکس استادیوم (console) + ambient orange wash — بدون entity دمو. هدف بلندمدت design docs همچنان هیرو سینمایی بدون کارت است؛ تا redesign جداگانه، glow/shadow polish روی همین ساختار اعمال می‌شود.
 
 ## رنگ پایه Platform
 
@@ -53,6 +51,8 @@ LIVE سیستم سراسری می‌تواند `--orange` بماند؛ CTA و na
 ## Glass + تصویر
 
 `GlassPanel`, `PhotoBackground`, `MediaImage`, `Crest` — مطابق ارتقای قبلی.
+
+Marketing cards: `glass-panel-marketing` + optional glow wrapper utilities در `globals.css`.
 
 ## ممنوع
 

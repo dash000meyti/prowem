@@ -23,7 +23,7 @@
 | Award / Legend | جوایز و افسانه‌ها |
 | Sponsor | حامی |
 | Fan | پروفایل فن |
-| Mission / Reward / Achievement | گیمیفیکیشن |
+| Mission / Reward / Achievement | گیمیفیکیشن؛ `Mission.scope`: `"global"` \| `"follow"` (+ `eventId` / `clubId` / `teamId` / `playerId` برای شخصی‌سازی) |
 | Product / Ticket | فروشگاه / بلیت |
 
 ## روابط مفهومی
@@ -56,15 +56,20 @@ src/data/
   teams.ts
   players.ts
   matches.ts
+  standings.ts
+  bracket.ts
   news.ts
   videos.ts
   awards.ts
   legends.ts
   sponsors.ts
+  club-patrons.ts
   fans.ts
   missions.ts
   rewards.ts
+  achievements.ts
   products.ts
+  media.ts
   index.ts          # selectors و joinها
 ```
 

@@ -46,13 +46,13 @@
 
 ## Step 6 — Fans
 
-`/fans` — Alex Morgan dashboard با account menu در هدر FAN، ریل Following، For you missions/shop.
+`/fans` — Alex Morgan **home** با account menu در هدر FAN، ریل Following، پیش‌نمایش مأموریت‌های Global / Personalised، و shop preview.
 
 روی صفحات باشگاه/رویداد: **Follow** + چیپ حساب در PropertyNav.
 
 ## Step 7 — Complete Mission
 
-`/fans/missions` (فیلتر For you) — تکمیل مأموریت باز → XP و نوتیفیکیشن. اختیاری: Redeem در `/fans/rewards`.
+`/fans/missions` (سکشن‌های Global / Personalised / Discover) — تکمیل مأموریت باز → XP و نوتیفیکیشن. اختیاری: Redeem در `/fans/rewards`.
 
 ## Step 8 — Matchday
 
